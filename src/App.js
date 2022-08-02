@@ -5,7 +5,9 @@ import Footer from "./components/Footer";
 import Header from "./components/Header/Header";
 import HeroPage from "./components/Landing/HeroPage";
 import LandingPage from "./components/Landing/LandingPage";
+import Portal from "./components/Postal/Portal";
 import Register from "./components/Register/Register";
+import SignIn from "./components/Register/SignIn";
 import ScrollToTop from "./components/ToTop";
 
 const App = () => {
@@ -17,6 +19,8 @@ const App = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/portal" element={<Portal />} />
         </Routes>
         <Footer />
       </ScrollToTop>

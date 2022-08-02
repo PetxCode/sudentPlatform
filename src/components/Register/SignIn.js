@@ -6,12 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import logo from "./logo.png";
 
-const Register = () => {
+const SignIn = () => {
   const yupSchema = yup.object({
-    code: yup.string().required("Field must be filled"),
     email: yup.string().email().required("Field must be filled"),
     password: yup.string().required("Field must be filled"),
-    confirm: yup.string().oneOf([yup.ref("password"), null], "doesn't match"),
   });
 
   const {
@@ -22,23 +20,20 @@ const Register = () => {
     resolver: yupResolver(yupSchema),
   });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <Container>
       <Wrapper>
         <Card>
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Image src={logo} />
 
+            {/* <TextStart>Students Registeration Portal</TextStart> */}
             {/* <br /> */}
             {/* <br /> */}
-            <InputHolder>
-              <Blocker>Secret Code</Blocker>
-              <Input placeholder="Enter secret Code" {...register("code")} />
-            </InputHolder>
-            <Error>{errors.code?.message}</Error>
-
             <InputHolder>
               <Blocker>Enter Email</Blocker>
               <Input placeholder="Enter Email" {...register("email")} />
@@ -50,23 +45,12 @@ const Register = () => {
               <Input placeholder="Enter Password" {...register("password")} />
             </InputHolder>
             <Error>{errors.password?.message}</Error>
-
-            <InputHolder>
-              <Blocker>Confirm Password</Blocker>
-              <Input
-                placeholder="Enter Confirm Password"
-                {...register("confirm")}
-              />
-            </InputHolder>
-            <Error>{errors.confirm?.message}</Error>
             <br />
-            <Button type="submit">Register</Button>
-
+            <Button type="submit">Sign in</Button>
             <br />
-
             <Text>
-              Already have an Account
-              <Span to="/signin">Log in </Span> Here
+              Don't have an Account
+              <Span to="/register">Register</Span> Here
             </Text>
           </Form>
         </Card>
@@ -75,11 +59,12 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignIn;
 
 const Image = styled.img`
   height: 150px;
 `;
+
 const Error = styled.p`
   margin: 0;
   color: red;
@@ -87,7 +72,7 @@ const Error = styled.p`
   justify-content: flex-end;
   width: 80%;
   font-size: 12px;
-  margin-top: -15px;
+  margin-top: -10px;
   margin-right: 5px;
 `;
 

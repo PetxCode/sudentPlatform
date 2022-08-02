@@ -25,15 +25,15 @@ const Header = () => {
               <Nav to="/about">
                 <span>About</span>
               </Nav>
-              <Nav to="/start">
-                <span>Start</span>
+              <Nav to="/portal">
+                <span>Portal</span>
               </Nav>
             </Navigation>
           </Holder>
 
           <ProfileHolder>
             <Profile />
-            <Button>Register</Button>
+            <Button to="/register">Register</Button>
           </ProfileHolder>
         </Wrapper>
       </Container>
@@ -43,7 +43,9 @@ const Header = () => {
 
 export default Header;
 
-const Button = styled.div`
+const Button = styled(Link)`
+  color: white;
+  text-decoration: none;
   padding: 10px 20px;
   background-color: darkorange;
   font-size: 11px;
