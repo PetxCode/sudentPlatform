@@ -15,48 +15,56 @@ const Tracks = () => {
             title="FrontEnd Track (Desktop/Mobile/Web)"
             desc="Increase the value of your business with technology."
             bg="/assets/11.jpg"
+            bg1="rgb(137, 45, 142, .8)"
           />
           <NewCard
             title="BackEnd Track"
             desc="Increase the value of your business with technology."
             bg="/assets/12.jpg"
+            bg1="rgba(0, 0, 0, 0.7)"
           />
           <NewCard
             title="AI/ML Track"
             desc="Increase the value of your business with technology."
             bg="/assets/dis3.jpg"
+            bg1="rgb(214, 96, 169, 0.8)"
           />
           <NewCard
             title="Algorithm/Data Structure Track"
             desc="Increase the value of your business with technology."
             bg="/assets/13.jpg"
+            bg1="rgba(147, 115, 32, 0.8)"
           />
           <NewCard
             title="Web RTC Track"
             desc="Increase the value of your business with technology."
             bg="/assets/14.jpg"
+            bg1="rgb(147, 47, 32, .8)"
           />
           <NewCard
             title="Transformational Leadership Track"
             desc="Increase the value of your business with technology."
             bg="/assets/p.jpg"
+            bg1="rgb(61, 32, 147, 0.8)"
           />
           <NewCard
             title="Design Thinking Track"
             desc="Increase the value of your business with technology."
             bg="/assets/3q.jpg"
+            bg1="rgb(147, 32, 82, .8)"
           />
           <NewCard
             title="UI/UX Track"
             desc="Increase the value of your business with technology."
             bg="/assets/1e.jpg"
+            bg1="rgb(16, 79, 19, .8)"
           />
         </Bottom>
       </Wrapper>
     </Container>
   );
 
-  function NewCard({ title, desc, bg }) {
+  function NewCard({ title, desc, bg, bg1 }) {
     return (
       <Card bg={bg}>
         <Holder>
@@ -66,7 +74,7 @@ const Tracks = () => {
             <Button>Know More</Button>
           </Know>
         </Holder>
-        <BG />
+        <BG bg={bg1} />
       </Card>
     );
   }
@@ -114,7 +122,7 @@ const Holder = styled.div`
 
 const BG = styled.div`
   position: absolute;
-  background: rgba(0, 0, 0, 0.7);
+  background: ${({ bg }) => bg};
   width: 100%;
   height: 100%;
   top: 0;
