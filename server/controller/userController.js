@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../model/userModel");
 
-const memberModel = require("../model/memberModel");
+// const memberModel = require("../model/memberModel");
 
 const cloudinary = require("../utils/cloudinary");
 const crypto = require("crypto");
@@ -12,7 +12,7 @@ const {
   verifiedSignUser,
 } = require("../utils/email");
 
-const viewAdmins = async (req, res) => {
+const viewUsers = async (req, res) => {
   try {
     const view = await userModel.find();
     res.status(200).json({
@@ -24,7 +24,7 @@ const viewAdmins = async (req, res) => {
   }
 };
 
-const viewAdminMembers = async (req, res) => {
+const viewUserMembers = async (req, res) => {
   try {
     const view = await userModel
       .findById(req.params.id)
@@ -38,21 +38,21 @@ const viewAdminMembers = async (req, res) => {
   }
 };
 
-const deleteMember = async (req, res) => {
-  try {
-    const getUser = await userModel.findById(req.params.id);
-    const content = await memberModel.findByIdAndRemove(req.params.member);
+// const deleteMember = async (req, res) => {
+//   try {
+//     const getUser = await userModel.findById(req.params.id);
+//     // const content = await memberModel.findByIdAndRemove(req.params.member);
 
-    getUser.member.pull(content);
-    getUser.save();
+//     getUser.member.pull(content);
+//     getUser.save();
 
-    res.status(201).json({ message: "member deleted" });
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
+//     res.status(201).json({ message: "member deleted" });
+//   } catch (error) {
+//     res.status(404).json({ message: error.message });
+//   }
+// };
 
-const viewAdmin = async (req, res) => {
+const viewUser = async (req, res) => {
   try {
     const view = await userModel.findById(req.params.id);
     res.status(200).json({
@@ -64,7 +64,7 @@ const viewAdmin = async (req, res) => {
   }
 };
 
-const deleteAdmin = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     await userModel.findByIdAndRemove(req.params.id);
     res.status(200).json({
@@ -75,12 +75,12 @@ const deleteAdmin = async (req, res) => {
   }
 };
 
-const updateAdminImage = async (req, res) => {
+const updateUserImage = async (req, res) => {
   try {
     const image = await cloudinary.uploader.upload(req.file.path);
     console.log(req.file.path, image);
 
-    const viewAdmin = await userModel.findByIdAndUpdate(
+    const viewUser = await userModel.findByIdAndUpdate(
       req.params.id,
       {
         avatar: image.secure_url,
@@ -90,19 +90,19 @@ const updateAdminImage = async (req, res) => {
     );
     res.status(200).json({
       message: "church updated",
-      data: viewAdmin,
+      data: viewUser,
     });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
-const updateAdminLogo = async (req, res) => {
+const updateUserLogo = async (req, res) => {
   try {
     const image = await cloudinary.uploader.upload(req.file.path);
     console.log(req.file.path, image);
 
-    const viewAdmin = await userModel.findByIdAndUpdate(
+    const viewUser = await userModel.findByIdAndUpdate(
       req.params.id,
       {
         logo: image.secure_url,
@@ -112,20 +112,20 @@ const updateAdminLogo = async (req, res) => {
     );
     res.status(200).json({
       message: "church Logo updated",
-      data: viewAdmin,
+      data: viewUser,
     });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
-const updateAdminInfo = async (req, res) => {
+const updateUserInfo = async (req, res) => {
   try {
     const { fullName, displayName, careLine } = req.body;
     const user = await userModel.findById(req.params.id);
 
     if (user) {
-      const viewAdmin = await userModel.findByIdAndUpdate(
+      const viewUser = await userModel.findByIdAndUpdate(
         user._id,
         {
           fullName,
@@ -136,7 +136,7 @@ const updateAdminInfo = async (req, res) => {
       );
       res.status(200).json({
         message: "church updated",
-        data: viewAdmin,
+        data: viewUser,
       });
     }
   } catch (error) {
@@ -144,44 +144,45 @@ const updateAdminInfo = async (req, res) => {
   }
 };
 
-const createAdmin = async (req, res) => {
+const createUser = async (req, res) => {
   try {
-    const { status, email, password, churchName, fullName } = req.body;
+    const { secret, email, password, code } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
 
-    const token = crypto.randomBytes(5).toString("hex");
-    const coded = await bcrypt.hash(token, salt);
+    const token = crypto.randomBytes(2).toString("hex");
     const accessToken = jwt.sign({ token }, "ThisisOneChurchProject");
 
-    const user = await userModel.create({
-      email,
-      password: hashed,
-      churchName,
-      fullName,
-      churchCode: token,
-      token: accessToken,
-      status: "admin",
-    });
-
-    verifiedUser(email, user._id, accessToken)
-      .then((result) => {
-        console.log("sent: ", result);
-      })
-      .catch((error) => {
-        console.log(error);
+    if (code === "CodeLab@2022") {
+      const user = await userModel.create({
+        code,
+        email,
+        password: hashed,
+        secret: token,
+        token: accessToken,
       });
 
-    res.status(200).json({
-      message: "check you email",
-      data: viewAdmin,
-    });
+      verifiedUser(email, user._id, accessToken)
+        .then((result) => {
+          console.log("sent: ", result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      res.status(200).json({
+        message: "check you email",
+        data: viewUser,
+      });
+    } else {
+      res.status(404).json({ message: "You code pass isn't correct" });
+    }
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 
-const verifyAdmin = async (req, res) => {
+const verifyUser = async (req, res) => {
   try {
     const user = await userModel.findById(req.params.id);
 
@@ -208,7 +209,7 @@ const verifyAdmin = async (req, res) => {
   }
 };
 
-const signinAdmin = async (req, res) => {
+const signinUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -326,15 +327,15 @@ const changePassword = async (req, res) => {
 module.exports = {
   changePassword,
   resetPassword,
-  deleteAdmin,
-  updateAdminInfo,
-  updateAdminImage,
-  viewAdmins,
-  verifyAdmin,
-  createAdmin,
-  viewAdmin,
-  signinAdmin,
-  deleteMember,
-  viewAdminMembers,
-  updateAdminLogo,
+  deleteUser,
+  updateUserInfo,
+  updateUserImage,
+  viewUsers,
+  verifyUser,
+  createUser,
+  viewUser,
+  signinUser,
+  //   deleteMember,
+  viewUserMembers,
+  updateUserLogo,
 };

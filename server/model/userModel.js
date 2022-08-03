@@ -2,6 +2,15 @@ const mongoose = require("mongoose");
 
 const userModel = mongoose.Schema(
   {
+    code: {
+      type: String,
+    },
+    secret: {
+      type: String,
+    },
+    token: {
+      type: String,
+    },
     userName: {
       type: String,
     },
@@ -20,7 +29,7 @@ const userModel = mongoose.Schema(
       type: String,
     },
 
-    interse: [
+    interest: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "interests",

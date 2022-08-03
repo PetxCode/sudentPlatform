@@ -1,19 +1,18 @@
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 
-const GOOGLE_SECRET = "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";
+const GOOGLE_SECRET = "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";
 const GOOGLE_ID =
-  "717654860266-4jdicf1esea6bemik2s1duf52dh3tc76.apps.googleusercontent.com";
+  "922981826695-rviuikdrd4rk1kbsake7iusml8qb2ibc.apps.googleusercontent.com";
 const GOOGLE_REFRESHTOKEN =
-  "1//04Px4yxSiBhMyCgYIARAAGAQSNwF-L9IrrIyoTWoDyjIGyPVkgzSVVSILDZWg4OzXbbcH7B-7bOohKsTPhz1CXZfY-1oDtbpXF4M";
+  "1//04C7dWmo7YblKCgYIARAAGAQSNwF-L9IrEt7Td5GJtrIEB-g_xad5nm-lvt6tP-RxNPBAoaHu0q1jNXf8c20Bsv89GRyec94Gri4";
 const GOOGLE_REDIRECT = "https://developers.google.com/oauthplayground";
 
 const oAuth = new google.auth.OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 
 oAuth.setCredentials({ refresh_token: GOOGLE_REFRESHTOKEN });
-const url = "https://onechurchnetwork.herokuapp.com";
-// const mainURL = "http://localhost:2233"
-// const url = localURL;
+
+const url = "http://localhost:3002";
 
 const verifiedUser = async (email, user, value) => {
   try {
@@ -22,7 +21,7 @@ const verifiedUser = async (email, user, value) => {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "d1churchnetwork@gmail.com",
+        user: "skuulkude@gmail.com",
         refreshToken: accessToken.token,
         clientId: GOOGLE_ID,
         clientSecret: GOOGLE_SECRET,
@@ -31,11 +30,21 @@ const verifiedUser = async (email, user, value) => {
     });
 
     const mailOptions = {
-      from: "no-reply✉️  <d1churchnetwork@gmail.com>",
+      from: "no-reply✉️  <newstudentsportal2@gmail.com>",
       to: email,
       subject: "Account Verification",
       html: ` <h3>
-            This mail, is for account verification... Please use the <a
+            Hello... 
+            <br/>
+            <br/>
+
+            This mail is to acknowledge that you are about to create an account as a student in CodeLab, please follow the link below to finish up your Registration.
+              <br/>
+              <br/>
+            Thanks!
+             <br/>
+             <br/>
+            Use this <a
             href="${url}/api/admin/${user}/${value}"
             >Link to Finish</a> up your account creation 
         </h3>`,
@@ -55,7 +64,7 @@ const verifiedSignUser = async (email, user, value) => {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "d1churchnetwork@gmail.com",
+        user: "skuulkude@gmail.com",
         refreshToken: accessToken.token,
         clientId: GOOGLE_ID,
         clientSecret: GOOGLE_SECRET,
@@ -64,14 +73,26 @@ const verifiedSignUser = async (email, user, value) => {
     });
 
     const mailOptions = {
-      from: "no-reply✉️  <d1churchnetwork@gmail.com>",
+      from: "no-reply✉️  <skuulkude@gmail.com>",
       to: email,
       subject: "Account re-Verification",
-      html: ` <h3>
-            This mail, is for account verification... Please use the <a
-            href="${url}/api/admin/${user}/${value}"
+      html: `     
+         <h3>
+            Hello... 
+            <br/>
+            <br/>
+
+            This mail is to acknowledge that you are trying to sign-in without complete account verification, as a student in CodeLab, please follow the link below to completely finish up your Registration.
+              <br/>
+              <br/>
+            Thanks!
+             <br/>
+             <br/>
+            Use this <a
+            href="${url}/api/user/${user}/${value}"
             >Link to Finish</a> up your account creation 
-        </h3>`,
+        </h3>
+        `,
     };
 
     const result = transporter.sendMail(mailOptions);
@@ -88,7 +109,7 @@ const resetUserPassword = async (email, user, value) => {
       service: "gmail",
       auth: {
         type: "OAuth2",
-        user: "d1churchnetwork@gmail.com",
+        user: "skuulkude@gmail.com",
         refreshToken: accessToken.token,
         clientId: GOOGLE_ID,
         clientSecret: GOOGLE_SECRET,
@@ -97,112 +118,23 @@ const resetUserPassword = async (email, user, value) => {
     });
 
     const mailOptions = {
-      from: "no-reply✉️  <d1churchnetwork@gmail.com>",
+      from: "no-reply✉️  <skuulkude@gmail.com>",
       to: email,
       subject: "Password Reset Request",
       html: ` <h3>
-            This mail, is for account verification... Please use the <a
-            href="${url}/api/admin/change/${user}/${value}"
-            >Link to Finish</a> up your account creation 
-        </h3>`,
-    };
+            There is an attent to change your password, 
+            
+            
+            <br/>
+            <br/>
+            
+            if this is not comming from you, then there are high chances that you're being attacked... so, please ignore this mail else use the link below to finish up the process!
 
-    const result = transporter.sendMail(mailOptions);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-const verifiedMember = async (email, user, value) => {
-  try {
-    const accessToken = await oAuth.getAccessToken();
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        type: "OAuth2",
-        user: "d1churchnetwork@gmail.com",
-        refreshToken: accessToken.token,
-        clientId: GOOGLE_ID,
-        clientSecret: GOOGLE_SECRET,
-        accessToken: GOOGLE_REFRESHTOKEN,
-      },
-    });
-
-    const mailOptions = {
-      from: "no-reply✉️  <d1churchnetwork@gmail.com>",
-      to: email,
-      subject: "Account Verification",
-      html: ` <h3>
-            This mail, is for account verification... Please use the <a
-            href="${url}/api/member/${user}/${value}"
-            >Link to Finish</a> up your account creation 
-        </h3>`,
-    };
-
-    const result = transporter.sendMail(mailOptions);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-const verifiedSignMember = async (email, user, value) => {
-  try {
-    const accessToken = await oAuth.getAccessToken();
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        type: "OAuth2",
-        user: "d1churchnetwork@gmail.com",
-        refreshToken: accessToken.token,
-        clientId: GOOGLE_ID,
-        clientSecret: GOOGLE_SECRET,
-        accessToken: GOOGLE_REFRESHTOKEN,
-      },
-    });
-
-    const mailOptions = {
-      from: "no-reply✉️  <d1churchnetwork@gmail.com>",
-      to: email,
-      subject: "Account re-Verification",
-      html: ` <h3>
-            This mail, is for account verification... Please use the <a
-            href="${url}/api/member/${user}/${value}"
-            >Link to Finish</a> up your account creation 
-        </h3>`,
-    };
-
-    const result = transporter.sendMail(mailOptions);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-const resetMemberPassword = async (email, user, value) => {
-  try {
-    const accessToken = await oAuth.getAccessToken();
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        type: "OAuth2",
-        user: "d1churchnetwork@gmail.com",
-        refreshToken: accessToken.token,
-        clientId: GOOGLE_ID,
-        clientSecret: GOOGLE_SECRET,
-        accessToken: GOOGLE_REFRESHTOKEN,
-      },
-    });
-
-    const mailOptions = {
-      from: "no-reply✉️  <d1churchnetwork@gmail.com>",
-      to: email,
-      subject: "Password Reset Request",
-      html: ` <h3>
-            This mail, is for account verification... Please use the <a
-            href="${url}/api/member/change/${user}/${value}"
-            >Link to Finish</a> up your account creation 
+            <br/>
+            <br/> 
+            Use this<a
+            href="${url}/api/user/change/${user}/${value}"
+            >Link to </a>completely change your account password 
         </h3>`,
     };
 
@@ -214,9 +146,6 @@ const resetMemberPassword = async (email, user, value) => {
 };
 
 module.exports = {
-  resetMemberPassword,
-  verifiedSignMember,
-  verifiedMember,
   resetUserPassword,
   verifiedUser,
   verifiedSignUser,
