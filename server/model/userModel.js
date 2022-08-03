@@ -5,6 +5,12 @@ const userModel = mongoose.Schema(
     code: {
       type: String,
     },
+    verified: {
+      type: Boolean,
+    },
+    online: {
+      type: Boolean,
+    },
     secret: {
       type: String,
     },
@@ -39,6 +45,12 @@ const userModel = mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "softwares",
+      },
+    ],
+    project: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "projects",
       },
     ],
   },

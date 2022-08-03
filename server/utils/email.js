@@ -12,7 +12,7 @@ const oAuth = new google.auth.OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 
 oAuth.setCredentials({ refresh_token: GOOGLE_REFRESHTOKEN });
 
-const url = "http://localhost:3002";
+const url = "http://localhost:2400";
 
 const verifiedUser = async (email, user, value) => {
   try {
@@ -45,7 +45,7 @@ const verifiedUser = async (email, user, value) => {
              <br/>
              <br/>
             Use this <a
-            href="${url}/api/admin/${user}/${value}"
+            href="${url}/api/user/${user}/${value}"
             >Link to Finish</a> up your account creation 
         </h3>`,
     };
@@ -132,9 +132,9 @@ const resetUserPassword = async (email, user, value) => {
 
             <br/>
             <br/> 
-            Use this<a
+            Use this <a
             href="${url}/api/user/change/${user}/${value}"
-            >Link to </a>completely change your account password 
+            >Link to</a> completely change your account password 
         </h3>`,
     };
 

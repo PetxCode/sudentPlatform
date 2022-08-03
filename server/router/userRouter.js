@@ -5,16 +5,13 @@ const {
   changePassword,
   resetPassword,
   deleteUser,
-  updateUserInfo,
+  onlineInfo,
   updateUserImage,
   viewUsers,
   verifyUser,
   createUser,
   viewUser,
   signinUser,
-  //   deleteMember,
-  viewUserMembers,
-  //   updateUserLogo,
 } = require("../controller/userController");
 const router = express.Router();
 
@@ -25,15 +22,13 @@ router.route("/signin").post(signinUser);
 
 router.route("/:id/:token").get(verifyUser);
 
-router.route("/:id/").get(viewUserMembers);
-
 router.route("/reset").post(resetPassword);
 router.route("/change/:id/:token").post(changePassword);
 
 router.route("/:id/image").patch(upload, updateUserImage);
-// router.route("/:id/logo").patch(upload, updateUserLogo);
 
-router.route("/:id").get(viewUser).patch(updateUserInfo).delete(deleteUser);
-// router.route("/:id/:member").delete(deleteMember);
+router.route("/:id/online").patch(onlineInfo);
+router.route("/:id").get(viewUser).delete(deleteUser);
+router.route("/:id").get(viewUser).delete(deleteUser);
 
 module.exports = router;
