@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -6,21 +6,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import logo from "./logo.png";
 import axios from "axios";
-import Swal from "sweetalert2";
 import LoadingState from "../LoadingState";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const url = "https://studentbe1.herokuapp.com";
 
-const Register = () => {
+const ResetScreen = () => {
+  const { id, token } = useParams();
+
+  console.log(id, token);
+  const [loading, setLoading] = useState();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   const yupSchema = yup.object({
-    code: yup.string().required("Field must be filled"),
     email: yup.string().email().required("Field must be filled"),
-    password: yup.string().required("Field must be filled"),
-    confirm: yup.string().oneOf([yup.ref("password"), null], "doesn't match"),
   });
 
   const {
@@ -35,18 +35,18 @@ const Register = () => {
     console.log(data);
     setLoading(true);
     await axios
-      .post(`${url}/api/user/register`, data)
+      .post(`${url}/api/user/reset`, data)
       .then((res) => {
         console.log(res.data.data);
 
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Your account has been created successfully",
+          title: "Check your mail for confirmation",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
-          navigate("/confirm");
+          navigate("/confirm-reset");
         });
         setLoading(false);
       })
@@ -63,21 +63,19 @@ const Register = () => {
       });
   });
 
+  useEffect(() => {
+    if (id && token) {
+      axios.get(`${url}/api/user/${id}/${token}`);
+    }
+  }, []);
+
   return (
     <Container>
       {loading ? <LoadingState /> : null}
       <Wrapper>
         <Card>
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Image src={logo} />
-
-            {/* <br /> */}
-            {/* <br /> */}
-            <InputHolder>
-              <Blocker>Secret Code</Blocker>
-              <Input placeholder="Enter secret Code" {...register("code")} />
-            </InputHolder>
-            <Error>{errors.code?.message}</Error>
 
             <InputHolder>
               <Blocker>Enter Email</Blocker>
@@ -85,33 +83,12 @@ const Register = () => {
             </InputHolder>
             <Error>{errors.email?.message}</Error>
 
-            <InputHolder>
-              <Blocker>Enter Password</Blocker>
-              <Input
-                type="password"
-                placeholder="Enter Password"
-                {...register("password")}
-              />
-            </InputHolder>
-            <Error>{errors.password?.message}</Error>
-
-            <InputHolder>
-              <Blocker>Confirm Password</Blocker>
-              <Input
-                type="password"
-                placeholder="Enter Confirm Password"
-                {...register("confirm")}
-              />
-            </InputHolder>
-            <Error>{errors.confirm?.message}</Error>
             <br />
-            <Button type="submit">Register</Button>
-
+            <Button type="submit">Reset Password</Button>
             <br />
-
             <Text>
-              Already have an Account
-              <Span to="/signin">Log in </Span> Here
+              hmmm i think, i now remember
+              <Span to="/signin">Let me try again</Span>
             </Text>
           </Form>
         </Card>
@@ -120,11 +97,28 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ResetScreen;
+
+const TextHolderFile = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  width: 100%;
+  margin-right: 15px;
+  /* margin-top: 15px; */
+`;
+
+const Nav = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin-left: 5px;
+`;
 
 const Image = styled.img`
   height: 150px;
 `;
+
 const Error = styled.p`
   margin: 0;
   color: red;
@@ -132,7 +126,7 @@ const Error = styled.p`
   justify-content: flex-end;
   width: 80%;
   font-size: 12px;
-  margin-top: -15px;
+  margin-top: -10px;
   margin-right: 5px;
 `;
 
@@ -174,6 +168,7 @@ const Text = styled.div`
   display: flex;
   font-size: 12px;
   text-transform: uppercase;
+  margin-right: 20px;
 `;
 
 const Button = styled.button`
@@ -220,10 +215,11 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  padding-left: 15px;
 `;
 
 const Card = styled.div`
-  width: 400px;
+  width: 380px;
   min-height: 400px;
   border-radius: 5px;
   box-shadow: rgba(255, 255, 255, 0.02) 0px 1px 3px 0px,

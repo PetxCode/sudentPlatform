@@ -1,34 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import OurStacks from "../Landing/OurStacks";
 import pix from "./6.jpg";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+const url = "https://studentbe1.herokuapp.com";
 
 const Portal = () => {
+  const [stateData, setStateData] = useState([]);
+  const [loading, setLoading] = useState();
+
+  const fetchData = async () => {
+    await axios.get(`${url}/api/user`).then((res) => {
+      setStateData(res.data.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
         <Text>Present Students</Text>
 
         <Students>
-          <Card>
-            <Dot />
-            <Image src={pix} />
-            <Name>Peter Oti</Name>
+          {stateData &&
+            stateData?.map((props, i) => (
+              <Card to="/detail" key={props._id}>
+                <ImageHolder>
+                  <Dot />
+                  <Image src={props.avatar} />
+                </ImageHolder>
+                <Name>{props.userName}</Name>
 
-            <NewText>Choice Interest Area:</NewText>
-            <Interest>
-              <Interested bg="#EFFFF3">FullStack</Interested>
-              <Interested bg="#EFF6FF">BackEnd</Interested>
-              <Interested bg="#FFFAEF">FrontEnd</Interested>
-            </Interest>
+                <NewText>Choice Interest Area:</NewText>
+                <Interest>
+                  {props.interest.map((props) => (
+                    <Interested bg="#EFFFF3">FullStack</Interested>
+                  ))}
+                </Interest>
 
-            <NewText>Most preferred Software:</NewText>
-            <Interest>
-              <Interested bg="#EFFFF3">Miro</Interested>
-              <Interested bg="#EFF6FF">SocketIO</Interested>
-              <Interested bg="#FFFAEF">VScode</Interested>
-            </Interest>
-          </Card>
+                <NewText>Most preferred Software:</NewText>
+                <Interest>
+                  {props.software.map((props) => (
+                    <Interested bg="#EFFFF3">FullStack</Interested>
+                  ))}
+                  {/* <Interested bg="#EFFFF3">Miro</Interested>
+                  <Interested bg="#EFF6FF">SocketIO</Interested>
+                  <Interested bg="#FFFAEF">VScode</Interested> */}
+                </Interest>
+              </Card>
+            ))}
         </Students>
 
         <OurStacks />
@@ -39,6 +65,12 @@ const Portal = () => {
 
 export default Portal;
 
+const ImageHolder = styled.div`
+  position: relative;
+  width: 100%;
+  height: 290px;
+`;
+
 const Dot = styled.div`
   width: 15px;
   height: 15px;
@@ -46,7 +78,7 @@ const Dot = styled.div`
   background: red;
   position: absolute;
   right: 5px;
-  bottom: 163px;
+  bottom: -8px;
   border: 1px solid white;
 `;
 
@@ -91,11 +123,13 @@ const Name = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 80%;
+  height: 290px;
   object-fit: cover;
 `;
 
-const Card = styled.div`
+const Card = styled(Link)`
+  text-decoration: none;
+  color: black;
   width: 250px;
   min-height: 350px;
   border-radius: 15px 15px 0 0;
@@ -107,6 +141,12 @@ const Card = styled.div`
   flex-direction: column;
   position: relative;
   margin: 10px;
+  transition: all 350ms;
+
+  :hover {
+    cursor: pointer;
+    transform: scale(1.01);
+  }
 `;
 
 const Students = styled.div`

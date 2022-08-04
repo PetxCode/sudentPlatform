@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
+import { AiFillSetting } from "react-icons/ai";
+
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../State/GlobalState";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const show = () => {
     document.getElementById("sidebar").style.right = "0";
   };
   const vanish = () => {
     document.getElementById("sidebar").style.right = "-100%";
   };
+
+  const [auth, setAuth] = useState(true);
+
   return (
     <div>
       <Container>
@@ -32,8 +42,29 @@ const Header = () => {
           </Holder>
 
           <ProfileHolder>
-            <Profile />
-            <Button to="/register">Register</Button>
+            {user ? (
+              <Div>
+                <div>
+                  {user.avatar ? (
+                    <Profile src={user.avatar} />
+                  ) : (
+                    <AvatarText>{user.email.charAt(0)}</AvatarText>
+                  )}
+                </div>
+                <Setting to="/setting">
+                  <AiFillSetting />
+                </Setting>
+                <ButtonNav
+                  onClick={() => {
+                    dispatch(removeUser());
+                  }}
+                >
+                  Log out
+                </ButtonNav>{" "}
+              </Div>
+            ) : (
+              <Button to="/register">Register</Button>
+            )}
           </ProfileHolder>
         </Wrapper>
       </Container>
@@ -42,6 +73,25 @@ const Header = () => {
 };
 
 export default Header;
+
+const Div = styled.div`
+  display: flex;
+`;
+
+const Setting = styled(Link)`
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+  transition: all 350ms;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  :hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    cursor: pointer;
+    transform: scale(1.03);
+  }
+`;
 
 const Button = styled(Link)`
   color: white;
@@ -60,18 +110,55 @@ const Button = styled(Link)`
   }
 `;
 
-const Profile = styled.div`
+const ButtonNav = styled.div`
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: darkorange;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 900;
+  transition: all 350ms;
+  margin: 0 5px;
+  :hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    cursor: pointer;
+    transform: scale(1.03);
+  }
+`;
+
+const AvatarText = styled.div`
   width: 35px;
   height: 35px;
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   margin: 0 5px;
+  border: 1px solid white;
+  background: darkorange;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const Profile = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  margin: 0 5px;
+  border: 1px solid white;
 `;
 
 const ProfileHolder = styled.div`
   display: flex;
   align-items: center;
+  height: 100%;
 `;
 
 const Holder = styled.div`

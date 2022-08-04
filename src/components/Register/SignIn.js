@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import logo from "./logo.png";
+import axios from "axios";
+import LoadingState from "../LoadingState";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { createUser } from "../State/GlobalState";
+
+const url = "https://studentbe1.herokuapp.com";
 
 const SignIn = () => {
+  const { id, token } = useParams();
+  const dispatch = useDispatch();
+
+  console.log(id, token);
+  const [loading, setLoading] = useState();
+  const navigate = useNavigate();
+
   const yupSchema = yup.object({
     email: yup.string().email().required("Field must be filled"),
     password: yup.string().required("Field must be filled"),
+    secret: yup.string().required("Field must be filled"),
   });
 
   const {
@@ -20,20 +36,58 @@ const SignIn = () => {
     resolver: yupResolver(yupSchema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = handleSubmit(async (data) => {
     console.log(data);
-  };
+    setLoading(true);
+    await axios
+      .post(`${url}/api/user/signin`, data)
+      .then((res) => {
+        dispatch(createUser(res.data.data));
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Welcome Back on board",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate("/");
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please check and fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        }).then(() => {
+          setLoading(false);
+        });
+      });
+  });
+
+  useEffect(() => {
+    if (id && token) {
+      axios.get(`${url}/api/user/${id}/${token}`);
+    }
+  }, []);
 
   return (
     <Container>
+      {loading ? <LoadingState /> : null}
       <Wrapper>
         <Card>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Image src={logo} />
 
-            {/* <TextStart>Students Registeration Portal</TextStart> */}
-            {/* <br /> */}
-            {/* <br /> */}
+            <InputHolder>
+              <Blocker>Enter Your Secret</Blocker>
+              <Input placeholder="Enter Your Secret" {...register("secret")} />
+            </InputHolder>
+
+            <Error>{errors.secret?.message}</Error>
             <InputHolder>
               <Blocker>Enter Email</Blocker>
               <Input placeholder="Enter Email" {...register("email")} />
@@ -42,9 +96,16 @@ const SignIn = () => {
 
             <InputHolder>
               <Blocker>Enter Password</Blocker>
-              <Input placeholder="Enter Password" {...register("password")} />
+              <Input
+                type="password"
+                placeholder="Enter Password"
+                {...register("password")}
+              />
             </InputHolder>
             <Error>{errors.password?.message}</Error>
+            <TextHolderFile>
+              Can't remember your PASSWORD <Nav to="/reset">Reset it here</Nav>
+            </TextHolderFile>
             <br />
             <Button type="submit">Sign in</Button>
             <br />
@@ -60,6 +121,22 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+const TextHolderFile = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  width: 100%;
+  margin-right: 15px;
+  /* margin-top: 15px; */
+`;
+
+const Nav = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin-left: 5px;
+`;
 
 const Image = styled.img`
   height: 150px;
@@ -160,10 +237,11 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  padding-left: 15px;
 `;
 
 const Card = styled.div`
-  width: 400px;
+  width: 380px;
   min-height: 400px;
   border-radius: 5px;
   box-shadow: rgba(255, 255, 255, 0.02) 0px 1px 3px 0px,

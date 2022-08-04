@@ -1,32 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import data from "./studentData.json";
-import HireProps from "./HireProps";
-import HireTop from "./HireTop";
-import img1 from "./assets/cup.svg";
+// import data from "./studentData.json";
+// import HireProps from "./HireProps";
+import img1 from "./cup.svg";
 import { AiFillHome, AiFillAppstore, AiFillContacts } from "react-icons/ai";
 import { MdContactless } from "react-icons/md";
 import { BsCup } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import arr from "./assets/arr.png";
-import { app } from "./../../base";
+import arr from "./cup.svg";
+import DetailedInfo from "./DetailedInfo";
 
 const StudentDetail = () => {
   const { id } = useParams();
   const [myData, setMyData] = React.useState([]);
 
-  const fetchDataDetail = async (id) => {
-    await app
-      .firestore()
-      .collection("hire")
-      .doc(id)
-      .get()
-      .then((file) => {
-        setMyData(file.data());
-        console.log("firebase data: ", myData);
-      });
-  };
+  const fetchDataDetail = async (id) => {};
 
   React.useEffect(() => {
     fetchDataDetail(id);
@@ -37,16 +26,7 @@ const StudentDetail = () => {
     <Container>
       <Wrapper>
         <Info>{myData?.firstName}'s Detail Page</Info>
-        {/* <HireProps /> */}
-        <HireTop
-          bg
-          img={img1}
-          bg1="#F9AF2F"
-          title="Work With the Best"
-          text="The most brilliant minds in React engineering are choosen from a vetted and rigoius process here at CodeLab. And with good reason. Our meticulous vetting process proves that we are serious about drawing in only the best talent and ascertaining the best-fit  match for your company."
-          text2="
-          Today, many of our successful candidates are in key leadership roles and driving the success of their front-end development strategies. Their globally diverse experiences provide the multi-angular perspective necessary for understanding complex customer workflows and designing insightful solutions adapted to specific customer requirements."
-        />
+        <DetailedInfo />
         <Detail>
           <Card1>
             <Proj>Projects Done</Proj>
@@ -210,17 +190,6 @@ const StudentDetail = () => {
           </Card2>
         </Detail2>
       </Wrapper>
-      <HireTop
-        img={arr}
-        bg1="#F9AF2F"
-        // bg
-        title="Join The World’s Leading Brands and Companies Working With CodeLab"
-        text="Partner with us for your React.js talent needs and be in the company
-        of hundreds of best-in-class corporations, institutions, and
-        organizations from a diverse set of industries. Years of long-standing
-        collaboration with them attest to our firm commitment to deliver
-        results."
-      />
     </Container>
   );
 };
@@ -526,7 +495,7 @@ const Card3 = styled.div`
 `;
 
 const Container = styled.div`
-  padding-top: 100px;
+  padding-top: 70px;
   height: 100%;
   min-height: 100vh;
   width: 100%;
