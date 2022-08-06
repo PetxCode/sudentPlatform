@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import img1 from "./cup.svg";
 import img2 from "./cup.svg";
 import arr from "./cup.svg";
 import InfoProps from "./InfoProps";
+import axios from "axios";
 
-const DetailedInfo = () => {
+const url = "https://studentbe1.herokuapp.com";
+
+const DetailedInfo = ({ props }) => {
+  const id = props._id;
+  const [myData, setMyData] = useState([]);
+  const fetchDataDetail = async (id) => {
+    await axios.get(`${url}/api/user/${id}`).then((res) => {
+      setMyData(res.data.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchDataDetail(id);
+  }, []);
+
   return (
     <Container>
       <Wrapper>
@@ -13,10 +28,10 @@ const DetailedInfo = () => {
           img={img1}
           bg1="#F9AF2F"
           bg
-          title="Work With the Best"
-          text="The most brilliant minds in React engineering choose Andela. And with good reason. Our meticulous vetting process proves that we are serious about drawing in only the best talent and ascertaining the best-fit company matches."
-          text2="
-          Today, many of our successful candidates are in key leadership roles and driving the success of their front-end development strategies. Their globally diverse experiences provide the multi-angular perspective necessary for understanding complex customer workflows and designing insightful solutions adapted to specific customer requirements."
+          title="What Motivate me"
+          text={myData.motivation}
+          title2="My Ambition in 5 years"
+          text2={myData.futureAmbition}
         />
       </Wrapper>
     </Container>

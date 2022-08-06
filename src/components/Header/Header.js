@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { AiFillSetting } from "react-icons/ai";
 
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../State/GlobalState";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const url = "https://studentbe1.herokuapp.com";
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -17,7 +21,18 @@ const Header = () => {
     document.getElementById("sidebar").style.right = "-100%";
   };
 
-  const [auth, setAuth] = useState(true);
+  const [userData, setUserData] = useState({});
+
+  const getUserData = async () => {
+    await axios.get(`${url}/api/user/${user?._id}`).then((res) => {
+      setUserData(res.data.data);
+      console.log(userData);
+    });
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
 
   return (
     <div>
@@ -44,9 +59,9 @@ const Header = () => {
           <ProfileHolder>
             {user ? (
               <Div>
-                <div>
-                  {user.avatar ? (
-                    <Profile src={user.avatar} />
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  {userData.avatar ? (
+                    <Profile src={userData.avatar} />
                   ) : (
                     <AvatarText>{user.email.charAt(0)}</AvatarText>
                   )}
@@ -55,8 +70,11 @@ const Header = () => {
                   <AiFillSetting />
                 </Setting>
                 <ButtonNav
-                  onClick={() => {
+                  onClick={async () => {
                     dispatch(removeUser());
+                    await axios.patch(`${url}/api/user/${user._id}/offline`);
+                    window.location.reload();
+                    navigate("/");
                   }}
                 >
                   Log out
@@ -76,6 +94,8 @@ export default Header;
 
 const Div = styled.div`
   display: flex;
+  align-items: center;
+  height: 100%;
 `;
 
 const Setting = styled(Link)`
@@ -153,6 +173,7 @@ const Profile = styled.img`
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   margin: 0 5px;
   border: 1px solid white;
+  object-fit: cover;
 `;
 
 const ProfileHolder = styled.div`

@@ -5,11 +5,21 @@ import pix from "./6.jpg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import PortalInterest from "./PortalInterest";
+import SoftwareCourse from "./SettingsInfo/SoftwarePortal";
+import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
+import isOnline from "is-online";
 
 const url = "https://studentbe1.herokuapp.com";
 
+const socket = io("https://studentbe1.herokuapp.com");
+
 const Portal = () => {
+  console.log("check: ", navigator.onLine);
+  const user = useSelector((state) => state.user);
   const [stateData, setStateData] = useState([]);
+
   const [loading, setLoading] = useState();
 
   const fetchData = async () => {
@@ -18,40 +28,47 @@ const Portal = () => {
     });
   };
 
+  const onlineUser = async () => {
+    if (isOnline) {
+      await axios.patch(`${url}/api/user/${user._id}/online`);
+    } else {
+      await axios.patch(`${url}/api/user/${user._id}/offline`);
+    }
+  };
+
   useEffect(() => {
+    onlineUser();
     fetchData();
+
+    socket.on("online", (online) => {
+      fetchData();
+    });
   }, []);
 
   return (
     <Container>
       <Wrapper>
-        <Text>Present Students</Text>
+        <Text>Our Present Students</Text>
 
         <Students>
           {stateData &&
             stateData?.map((props, i) => (
-              <Card to="/detail" key={props._id}>
+              <Card to={`/detail/${props._id}`} key={props._id}>
                 <ImageHolder>
-                  <Dot />
+                  {props.online && props.online ? <OnlineDot /> : <Dot />}
+
                   <Image src={props.avatar} />
                 </ImageHolder>
                 <Name>{props.userName}</Name>
-
-                <NewText>Choice Interest Area:</NewText>
+                <NewText>My Choice Interest Area:</NewText>
+                <PortalInterest key={props._id} props={props} bg="#EFF6FF" />
+                <NewText>My Most preferred Software:</NewText>
                 <Interest>
-                  {props.interest.map((props) => (
-                    <Interested bg="#EFFFF3">FullStack</Interested>
-                  ))}
+                  <SoftwareCourse key={props._id} props={props} bg="#EFFFF3" />
                 </Interest>
-
-                <NewText>Most preferred Software:</NewText>
+                <NewText>My Sponsor(s):</NewText>
                 <Interest>
-                  {props.software.map((props) => (
-                    <Interested bg="#EFFFF3">FullStack</Interested>
-                  ))}
-                  {/* <Interested bg="#EFFFF3">Miro</Interested>
-                  <Interested bg="#EFF6FF">SocketIO</Interested>
-                  <Interested bg="#FFFAEF">VScode</Interested> */}
+                  <Interested bg="#FFFAEF">{props?.sponor}</Interested>
                 </Interest>
               </Card>
             ))}
@@ -69,6 +86,17 @@ const ImageHolder = styled.div`
   position: relative;
   width: 100%;
   height: 290px;
+`;
+
+const OnlineDot = styled.div`
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #57b642;
+  position: absolute;
+  right: 5px;
+  bottom: -8px;
+  border: 1px solid white;
 `;
 
 const Dot = styled.div`
@@ -150,14 +178,18 @@ const Card = styled(Link)`
 `;
 
 const Students = styled.div`
-  margin-top: 60px;
+  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 30px;
+`;
 
 const Wrapper = styled.div`
   width: 90%;

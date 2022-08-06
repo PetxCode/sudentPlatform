@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
+const url = "https://studentbe1.herokuapp.com";
 const HeroPage = () => {
+  const user = useSelector((state) => state.user);
+
+  const newPatch = async () => {
+    await axios.patch(`${url}/api/user/${user?._id}/online`);
+  };
+
+  useEffect(() => {
+    newPatch();
+  }, []);
+
   return (
     <Container>
       <Wrapper>

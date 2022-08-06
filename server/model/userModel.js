@@ -5,11 +5,35 @@ const userModel = mongoose.Schema(
     code: {
       type: String,
     },
+    sponor: {
+      type: String,
+    },
+    promise: {
+      type: String,
+    },
+    video: {
+      type: String,
+    },
     verified: {
       type: Boolean,
     },
     online: {
       type: Boolean,
+    },
+    experience: {
+      type: Number,
+    },
+    phone: {
+      type: Number,
+    },
+    motivation: {
+      type: String,
+    },
+    futureAmbition: {
+      type: String,
+    },
+    aboutYou: {
+      type: String,
     },
     secret: {
       type: String,
@@ -45,6 +69,12 @@ const userModel = mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "softwares",
+      },
+    ],
+    learning: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "learnings",
       },
     ],
     project: [

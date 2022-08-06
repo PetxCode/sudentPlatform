@@ -1,24 +1,27 @@
 const userModel = require("../model/userModel");
-const interestModel = require("../model/interestModel");
+const interestModel = require("../model/learningModel");
 const mongoose = require("mongoose");
 
-const createInterest = async (req, res) => {
+const createLearning = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, useCase, desc, course } = req.body;
 
     const getUser = await userModel.findById(req.params.id);
     const interested = new interestModel({
       title,
+      useCase,
+      desc,
+      course,
     });
 
     interested.user = getUser;
     interested.save();
 
-    getUser.interest.push(mongoose.Types.ObjectId(interested._id));
+    getUser.learning.push(mongoose.Types.ObjectId(interested._id));
     getUser.save();
 
     res.status(201).json({
-      status: "interest created successfully",
+      status: "learning created successfully",
       data: interested,
     });
   } catch (err) {
@@ -28,10 +31,10 @@ const createInterest = async (req, res) => {
   }
 };
 
-const showInterest = async (req, res) => {
+const showLearning = async (req, res) => {
   try {
     const getUser = await userModel.findById(req.params.id).populate({
-      path: "interest",
+      path: "learning",
       options: {
         limit: 3,
         sort: { createdAt: -1 },
@@ -49,10 +52,10 @@ const showInterest = async (req, res) => {
   }
 };
 
-const showAllInterest = async (req, res) => {
+const showAllLearning = async (req, res) => {
   try {
     const getUser = await userModel.findById(req.params.id).populate({
-      path: "interest",
+      path: "learning",
       options: {
         sort: { createdAt: -1 },
       },
@@ -69,14 +72,14 @@ const showAllInterest = async (req, res) => {
   }
 };
 
-const deleteInterest = async (req, res) => {
+const deleteLearning = async (req, res) => {
   try {
     const getUser = await userModel.findById(req.params.id);
     const deleteData = await interestModel.findByIdAndRemove(
       req.params.interest
     );
 
-    getUser.interest.pull(deleteData);
+    getUser.learning.pull(deleteData);
     getUser.save();
 
     res.status(200).json({
@@ -91,8 +94,8 @@ const deleteInterest = async (req, res) => {
 };
 
 module.exports = {
-  showAllInterest,
-  createInterest,
-  showInterest,
-  deleteInterest,
+  showAllLearning,
+  createLearning,
+  showLearning,
+  deleteLearning,
 };

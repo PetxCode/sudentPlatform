@@ -71,8 +71,6 @@ const Register = () => {
           <Form onSubmit={onSubmit}>
             <Image src={logo} />
 
-            {/* <br /> */}
-            {/* <br /> */}
             <InputHolder>
               <Blocker>Secret Code</Blocker>
               <Input placeholder="Enter secret Code" {...register("code")} />

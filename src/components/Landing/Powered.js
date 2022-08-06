@@ -9,11 +9,12 @@ const Powered = () => {
     <Container>
       <Wrapper>
         <TextHolder>
-          <Text>We power ambitious brands.</Text>
+          <Text>We power ambitious Youths.</Text>
           <Sub>
-            From startups in need of MVP to large corporations and government in
-            need of technical firepower, we exist for you. See how we have
-            helped others…
+            From Youths in need of Technical and Leadership skill to youth who
+            are ambitious of building Global tools or Youths that needs to
+            become technical firepower house for Global relience, we exist for
+            them. See how we are helping them become Tech Giants!
           </Sub>
         </TextHolder>
 

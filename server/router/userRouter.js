@@ -12,6 +12,8 @@ const {
   createUser,
   viewUser,
   signinUser,
+  updateInfo,
+  offlineInfo,
 } = require("../controller/userController");
 const router = express.Router();
 
@@ -28,6 +30,8 @@ router.route("/change/:id/:token").post(changePassword);
 router.route("/:id/image").patch(upload, updateUserImage);
 
 router.route("/:id/online").patch(onlineInfo);
+router.route("/:id/offline").patch(offlineInfo);
+router.route("/:id/update").patch(updateInfo);
 router.route("/:id").get(viewUser).delete(deleteUser);
 router.route("/:id").get(viewUser).delete(deleteUser);
 

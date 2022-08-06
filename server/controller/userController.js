@@ -67,23 +67,23 @@ const updateUserImage = async (req, res) => {
   }
 };
 
-const updateUserLogo = async (req, res) => {
+const offlineInfo = async (req, res) => {
   try {
-    const image = await cloudinary.uploader.upload(req.file.path);
-    console.log(req.file.path, image);
+    const user = await userModel.findById(req.params.id);
 
-    const viewUser = await userModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        logo: image.secure_url,
-        logoID: image.public_id,
-      },
-      { new: true }
-    );
-    res.status(200).json({
-      message: "church Logo updated",
-      data: viewUser,
-    });
+    if (user) {
+      const viewUser = await userModel.findByIdAndUpdate(
+        user._id,
+        {
+          online: false,
+        },
+        { new: true }
+      );
+      res.status(200).json({
+        message: "user is online",
+        data: viewUser,
+      });
+    }
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -111,6 +111,47 @@ const onlineInfo = async (req, res) => {
   }
 };
 
+const updateInfo = async (req, res) => {
+  try {
+    const {
+      experience,
+      phone,
+      userName,
+      motivation,
+      futureAmbition,
+      aboutYou,
+      sponor,
+      video,
+      promise,
+    } = req.body;
+    const user = await userModel.findById(req.params.id);
+
+    if (user) {
+      const viewUser = await userModel.findByIdAndUpdate(
+        user._id,
+        {
+          userName,
+          motivation,
+          futureAmbition,
+          aboutYou,
+          experience,
+          phone,
+          sponor,
+          video,
+          promise,
+        },
+        { new: true }
+      );
+      res.status(200).json({
+        message: "user info updated",
+        data: viewUser,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
     const { secret, email, password, code } = req.body;
@@ -129,7 +170,7 @@ const createUser = async (req, res) => {
         token: accessToken,
       });
 
-      verifiedUser(email, user._id, accessToken)
+      verifiedUser(email, user._id, accessToken, token)
         .then((result) => {
           console.log("sent: ", result);
         })
@@ -306,5 +347,6 @@ module.exports = {
   createUser,
   viewUser,
   signinUser,
-  updateUserLogo,
+  updateInfo,
+  offlineInfo,
 };
