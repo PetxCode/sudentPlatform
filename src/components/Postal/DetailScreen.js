@@ -19,6 +19,9 @@ import open from "../Landing/Logo/open.svg";
 import save from "../Landing/Logo/save.png";
 import ibm from "../Landing/Logo/ibm.png";
 import moment from "moment";
+import { io } from "socket.io-client";
+import Swal from "sweetalert2";
+import LoadingState from "../LoadingState";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -28,6 +31,7 @@ const StudentDetail = () => {
   const [myData, setMyData] = React.useState([]);
 
   const [toggled, setToggled] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [stacked, setStacked] = useState("");
 
@@ -38,9 +42,32 @@ const StudentDetail = () => {
   };
 
   const stackCreated = async (newID) => {
-    await axios.post(`${url}/api/project/${id}/${newID}/stack/create`, {
-      title: stacked,
-    });
+    await axios
+      .post(`${url}/api/project/${id}/${newID}/stack/create`, {
+        title: stacked,
+      })
+
+      .then((res) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Stack added to this Project successfully",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {});
+        setLoading(false);
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please check and fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        }).then(() => {
+          setLoading(false);
+        });
+      });
     setStacked("");
   };
 
@@ -50,6 +77,7 @@ const StudentDetail = () => {
 
   return (
     <Container>
+      {loading ? <LoadingState /> : null}
       <Wrapper>
         <Info>{myData?.userName}'s Detail Page</Info>
         <DetailedInfo props={myData} />

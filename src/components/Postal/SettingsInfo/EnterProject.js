@@ -23,6 +23,7 @@ const EnterProject = () => {
     title: yup.string().required("Field must be filled"),
     newURL: yup.string().required("Field must be filled"),
     desc: yup.string().required("Field must be filled"),
+    // capture: yup.string().required("Field must be filled"),
   });
 
   const {
@@ -36,15 +37,17 @@ const EnterProject = () => {
   const [userData, setUserData] = useState([]);
 
   const onSubmit = handleSubmit(async (data) => {
-    const { title, dec, newURL } = data;
+    const { title, desc, newURL } = data;
+
     setLoading(true);
     await axios
       .post(`${url}/api/project/${user._id}/create`, {
         title,
-        dec,
+        desc,
         url: newURL,
-        capture: builtFor,
+        // capture: builtFor,
       })
+
       .then((res) => {
         console.log(res.data.data);
 
@@ -96,19 +99,20 @@ const EnterProject = () => {
           </InputHolder>
           <Error>{errors.title?.message}</Error>
 
-          <InputHolder>
+          {/* <InputHolder>
             <Blocker>Built for</Blocker>
             <Select
               value={builtFor}
               onChange={(e) => {
                 setBuiltFor(e.target.value);
               }}
+              // {...register("capture")}
             >
               <Option value="desktop">desktop</Option>
               <Option value="mobile">mobile</Option>
               <Option value="web">web</Option>
             </Select>
-          </InputHolder>
+          </InputHolder> */}
 
           <InputHolder>
             <Blocker>Brief description</Blocker>

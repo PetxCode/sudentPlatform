@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
 
+const socket = io("https://studentbe1.herokuapp.com");
 const url = "https://studentbe1.herokuapp.com";
 
 const StackView = ({ props }) => {
   const [stateData, setStateData] = useState({});
-  console.log("stack view: ", props);
 
   const fetchData = async () => {
     await axios
       .get(`${url}/api/project/${props._id}/${props._id}/stack`)
       .then((res) => {
         setStateData(res.data.data);
-        console.log("stack: ", stateData);
       });
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+
+    socket.on("newData", (newData) => {
+      fetchData();
+    });
+  }, [stateData]);
   return (
     <Stack>
       {stateData.stack?.map((props, i) => (
