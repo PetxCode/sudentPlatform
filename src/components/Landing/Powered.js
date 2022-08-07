@@ -9,7 +9,7 @@ const Powered = () => {
     <Container>
       <Wrapper>
         <TextHolder>
-          <Text>We power ambitious Youths.</Text>
+          <Text>We Power Ambitious Youth.</Text>
           <Sub>
             From Youths in need of Technical and Leadership skill to youth who
             are ambitious of building Global tools or Youths that needs to
@@ -22,19 +22,19 @@ const Powered = () => {
           <NewCard
             bg="#FFFAEF"
             title="Mobile Development"
-            title2=" firepower, we exist for you. See how we have helped others…"
+            title2="We power talents to build tools and application for mobile phones and more..."
             pix={pix}
           />
           <NewCard
             bg="#EFF6FF"
             title="PWA"
-            title2=" firepower, we exist for you. See how we have helped others…"
+            title2="Since there is a great demand for PWA Apps, our talents are trained on this!"
             pix={pix2}
           />
           <NewCard
             bg="#EFFFF3"
             title="Responsive Development"
-            title2=" firepower, we exist for you. See how we have helped others…"
+            title2="All application built by our talents are built with the consciousness of Mobile first!"
             pix={pix3}
           />
         </CardHolder>
@@ -106,6 +106,9 @@ const Sub = styled.div`
   font-size: 15px;
   text-align: center;
   margin-bottom: 30px;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 const Text = styled.div`

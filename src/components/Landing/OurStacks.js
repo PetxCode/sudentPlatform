@@ -26,10 +26,10 @@ const OurStacks = () => {
   return (
     <Container>
       <Wrapper>
-        <TopText>CodeLab Mission</TopText>
+        <TopText>CodeLab Audacious Commission</TopText>
         <DownText>
-          … To empower people with the technology to save time, do more, grow
-          and <span>make an impact</span>.
+          …To Empower Young people with Technological Skills,
+          <span> here are the Tools we USE</span>.
         </DownText>
         <TopT>Some of the Technology we train on</TopT>
         <CardHolder>

@@ -20,11 +20,12 @@ const HeroPage = () => {
       <Wrapper>
         <Holder>
           <Top>
-            Your <span>Technology</span> Partner<span>!</span>
+            Your Sure <span> Path</span> to becoming a{" "}
+            <span> Global Talent!</span>
           </Top>
           <Sub>
-            We build and ship digital experiences that make life & business
-            easier and faster.
+            We Build Apps, Train Youths and Deploy Talents to join Thriving
+            Company that is solving Global Issues!.
           </Sub>
         </Holder>
       </Wrapper>{" "}
@@ -40,16 +41,18 @@ const Sub = styled.div`
 
 const Top = styled.div`
   font-size: 70px;
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.05;
   margin-bottom: 50px;
 
-  @media screen and (max-width: 700px) {
-    font-size: 50px;
+  @media screen and (max-width: 768px) {
+    font-size: 40px;
+    font-weight: 700;
   }
 
   span {
     color: darkorange;
+    text-transform: uppercase;
   }
 `;
 

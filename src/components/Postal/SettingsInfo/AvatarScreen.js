@@ -171,6 +171,11 @@ const ImageInput = styled.input`
 const Container = styled.div`
   width: 70%;
   height: 100%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -227,6 +232,10 @@ const Card = styled.div`
   width: 400px;
   min-height: 300px;
   border-radius: 5px;
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 const Span = styled(Link)`
@@ -247,6 +256,7 @@ const Text = styled.div`
   margin-top: 50px;
   margin-bottom: 20px;
   font-weight: 700;
+  text-align: center;
 `;
 
 const Image = styled.img`

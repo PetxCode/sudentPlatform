@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { AiFillSetting } from "react-icons/ai";
-
+import logo from "./logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../State/GlobalState";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaRegWindowClose } from "react-icons/fa";
+import SiderBar from "./SiderBar";
+
 const url = "https://studentbe1.herokuapp.com";
 
 const Header = () => {
@@ -14,11 +18,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-  const show = () => {
-    document.getElementById("sidebar").style.right = "0";
-  };
-  const vanish = () => {
-    document.getElementById("sidebar").style.right = "-100%";
+  const [toggled, setToggled] = useState();
+
+  const onToggled = () => {
+    setToggled(!toggled);
   };
 
   const [userData, setUserData] = useState({});
@@ -39,8 +42,8 @@ const Header = () => {
       <Container>
         <Wrapper>
           <Holder>
-            <LogoHolder>
-              <Logo>CodeLab</Logo>
+            <LogoHolder to="/">
+              <Logo src={logo} />
             </LogoHolder>
 
             <Navigation>
@@ -84,13 +87,87 @@ const Header = () => {
               <Button to="/register">Register</Button>
             )}
           </ProfileHolder>
+          {toggled ? (
+            <IconClose
+              onClick={() => {
+                onToggled();
+              }}
+            />
+          ) : (
+            <Icon
+              onClick={() => {
+                onToggled();
+              }}
+            />
+          )}
         </Wrapper>
+
+        {toggled ? (
+          <SiderBar
+            toggled={toggled}
+            setToggled={setToggled}
+            onToggled={onToggled}
+          />
+        ) : null}
       </Container>
     </div>
   );
 };
 
 export default Header;
+
+const MySideBar = styled.div`
+  width: 0;
+  height: 100%;
+  background: #f4f5fa;
+  backdrop-filter: blur(2px);
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  bottom: 0;
+  border-radius: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  color: white;
+  transition: all 350ms ease-in-out;
+  overflow: hidden;
+`;
+
+const IconClose = styled(FaRegWindowClose)`
+  font-size: 40px;
+  color: white;
+  display: none;
+
+  @media screen and (max-width: 600px) {
+    display: flex;
+    transition: all 350ms;
+    margin: 0 5px;
+    :hover {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      cursor: pointer;
+      transform: scale(1.03);
+    }
+  }
+`;
+
+const Icon = styled(GiHamburgerMenu)`
+  font-size: 40px;
+  color: white;
+  display: none;
+
+  @media screen and (max-width: 600px) {
+    display: flex;
+    transition: all 350ms;
+    margin: 0 5px;
+    :hover {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      cursor: pointer;
+      transform: scale(1.03);
+    }
+  }
+`;
 
 const Div = styled.div`
   display: flex;
@@ -180,6 +257,10 @@ const ProfileHolder = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Holder = styled.div`
@@ -231,11 +312,17 @@ const Nav = styled(NavLink)`
 
 const Navigation = styled.div`
   display: flex;
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
-const Logo = styled.div``;
+const Logo = styled.img`
+  height: 28px;
+`;
 
-const LogoHolder = styled.div`
+const LogoHolder = styled(Link)`
   display: flex;
   margin-right: 30px;
   transition: all 350ms;

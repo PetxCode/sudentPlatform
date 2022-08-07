@@ -104,6 +104,11 @@ export default InterestedCourse;
 const Container = styled.div`
   width: 70%;
   height: 100%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const CardWrapper = styled.div`

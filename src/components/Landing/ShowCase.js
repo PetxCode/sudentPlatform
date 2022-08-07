@@ -6,7 +6,7 @@ import pix1 from "./log/prod1.png";
 const ShowCase = () => {
   return (
     <Container>
-      <Text>We build digital experiences, so you would.</Text>
+      <Text>We Train Young people to build digital experiences.</Text>
       <NewBuild
         pix={pix}
         title="Build tools for the Cloud, just like"

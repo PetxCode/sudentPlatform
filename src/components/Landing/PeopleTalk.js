@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import pix from "./log/phone2.png";
-import pix2 from "./log/phone3.png";
-import pix3 from "./log/phone11.png";
 
 const PeopleTalks = () => {
   return (
@@ -15,24 +12,24 @@ const PeopleTalks = () => {
         <CardHolder>
           <NewCard
             brand="NIIT:"
-            desc=" Festac Management "
+            desc=" Festac Center"
             bg="#FFFAEF"
             title="Student's Performance"
-            title2=" firepower, we exist for you. See how we have helped others…"
+            title2="Building an Application from scratch to finish within an hour, is something i can but imagine BUT that's a chicken feed for your student, Mhen, This is awesome!!!"
           />
           <NewCard
             brand="Adania Lab:"
             desc="Nigeria Management"
             bg="#EFF6FF"
-            title="PWA"
-            title2=" firepower, we exist for you. See how we have helped others…"
+            title="Hackathon"
+            title2="Your students came for our Hackathon challenge and grab 95% the winning awards, to be honest their performance, was really phenomenal"
           />
           <NewCard
             brand="Insigna Media:"
             desc="Ikeja Branch"
             bg="#EFFFF3"
             title="Responsive Development"
-            title2=" firepower, we exist for you. See how we have helped others…"
+            title2="Your talents are really professional, from their attitude to work, work deliverables everything is well coordinated, we enjoy working with your talents "
           />
         </CardHolder>
       </Wrapper>
@@ -77,7 +74,7 @@ const Title = styled.div`
   width: 200px;
   text-align: left;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   margin-bottom: 30px;
   flex: 1;
@@ -126,6 +123,7 @@ const Text = styled.div`
   font-size: 20px;
   text-transform: uppercase;
   color: #004080;
+  text-align: center;
 `;
 
 const TextHolder = styled.div`

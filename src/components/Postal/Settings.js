@@ -15,6 +15,7 @@ import InterestedCourse from "./SettingsInfo/InterestScreen";
 import EnterSoftware from "./SettingsInfo/EnterSoftware";
 import EnterProject from "./SettingsInfo/EnterProject";
 import LearningScreen from "./SettingsInfo/LearningScreen";
+import { BsArrowDownSquare } from "react-icons/bs";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -28,111 +29,199 @@ const Settings = () => {
   const [software, setSoftware] = useState(false);
   const [assign, setAssign] = useState(true);
 
+  const [toggled, setToggled] = useState(false);
+
   return (
     <Container>
       <Wrapper>
-        <Holder>
-          <TextCode>Your Secret: {user.secret}</TextCode>
-          <Button
-            bg={assign ? "darkorange" : "#09386d"}
-            onClick={() => {
-              setAssign(true);
-              setAvatar(false);
-              setPersonal(false);
-              setProject(false);
-              setInterest(false);
-              setSoftware(false);
-            }}
-          >
-            Update your Learnings
-          </Button>
-          <Button
-            bg={avatar ? "darkorange" : "#09386d"}
-            onClick={() => {
-              setAvatar(true);
-              setAssign(false);
-              setPersonal(false);
-              setProject(false);
-              setInterest(false);
-              setSoftware(false);
-            }}
-          >
-            Update Avatar
-          </Button>
-          <Button
-            bg={personal ? "darkorange" : "#09386d"}
-            onClick={() => {
-              setAvatar(false);
-              setAssign(false);
-              setPersonal(true);
-              setProject(false);
-              setInterest(false);
-              setSoftware(false);
-            }}
-          >
-            Update Personal Info
-          </Button>
-          <Button
-            bg={project ? "darkorange" : "#09386d"}
-            onClick={() => {
-              setAvatar(false);
-              setPersonal(false);
-              setAssign(false);
-              setProject(true);
-              setInterest(false);
-              setSoftware(false);
-            }}
-          >
-            Update Project
-          </Button>
-          <Button
-            bg={interest ? "darkorange" : "#09386d"}
-            onClick={() => {
-              setAvatar(false);
-              setPersonal(false);
-              setAssign(false);
-              setProject(false);
-              setInterest(true);
-              setSoftware(false);
-            }}
-          >
-            Update Course Interest
-          </Button>
-          <Button
-            bg={software ? "darkorange" : "#09386d"}
-            onClick={() => {
-              setAvatar(false);
-              setPersonal(false);
-              setAssign(false);
-              setProject(false);
-              setInterest(false);
-              setSoftware(true);
-            }}
-          >
-            Update Most used Software
-          </Button>
-        </Holder>
-        <CardWrapper>
-          {avatar ? (
-            <AvatarScreen />
-          ) : personal ? (
-            <PersonalInfo />
-          ) : interest ? (
-            <InterestedCourse />
-          ) : software ? (
-            <EnterSoftware />
-          ) : project ? (
-            <EnterProject />
-          ) : assign ? (
-            <LearningScreen />
-          ) : null}
-        </CardWrapper>
+        <Full>
+          <MenuPath />
+        </Full>
+
+        <Mobile>{toggled ? <MenuPath /> : null}</Mobile>
+
+        <PointedHolder>
+          <CardWrapper>
+            {toggled ? null : (
+              <Pointed
+                onClick={() => {
+                  setToggled(true);
+                }}
+              >
+                <Icon />
+                View Menu
+              </Pointed>
+            )}
+            {avatar ? (
+              <AvatarScreen />
+            ) : personal ? (
+              <PersonalInfo />
+            ) : interest ? (
+              <InterestedCourse />
+            ) : software ? (
+              <EnterSoftware />
+            ) : project ? (
+              <EnterProject />
+            ) : assign ? (
+              <LearningScreen />
+            ) : null}
+          </CardWrapper>
+        </PointedHolder>
       </Wrapper>
     </Container>
   );
+
+  function MenuPath() {
+    return (
+      <Holder>
+        <TextCode>Your Secret: {user.secret}</TextCode>
+        <Button
+          bg={assign ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAssign(true);
+            setAvatar(false);
+            setPersonal(false);
+            setProject(false);
+            setInterest(false);
+            setSoftware(false);
+            setToggled(false);
+          }}
+        >
+          Update your Learnings
+        </Button>
+        <Button
+          bg={avatar ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAvatar(true);
+            setAssign(false);
+            setPersonal(false);
+            setProject(false);
+            setInterest(false);
+            setSoftware(false);
+            setToggled(false);
+          }}
+        >
+          Update Avatar
+        </Button>
+        <Button
+          bg={personal ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAvatar(false);
+            setAssign(false);
+            setPersonal(true);
+            setProject(false);
+            setInterest(false);
+            setSoftware(false);
+            setToggled(false);
+          }}
+        >
+          Update Personal Info
+        </Button>
+        <Button
+          bg={project ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAvatar(false);
+            setPersonal(false);
+            setAssign(false);
+            setProject(true);
+            setInterest(false);
+            setSoftware(false);
+            setToggled(false);
+          }}
+        >
+          Update Project
+        </Button>
+        <Button
+          bg={interest ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAvatar(false);
+            setPersonal(false);
+            setAssign(false);
+            setProject(false);
+            setInterest(true);
+            setSoftware(false);
+            setToggled(false);
+          }}
+        >
+          Update Course Interest
+        </Button>
+        <Button
+          bg={software ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAvatar(false);
+            setPersonal(false);
+            setAssign(false);
+            setProject(false);
+            setInterest(false);
+            setSoftware(true);
+            setToggled(false);
+          }}
+        >
+          Update Most used Software
+        </Button>
+      </Holder>
+    );
+  }
 };
 // ? "#55a350" : "#09386d")
 export default Settings;
+
+const Icon = styled(BsArrowDownSquare)`
+  font-size: 30px;
+  margin: 0 10px;
+`;
+const PointedHolder = styled.div`
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+`;
+const Pointed = styled.div`
+  display: none;
+  @media screen and (max-width: 600px) {
+    display: flex;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    font-weight: 700;
+    align-items: center;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0 10px;
+    transition: all 350ms;
+
+    :hover {
+      cursor: pointer;
+      transform: scale(1.02);
+    }
+  }
+`;
+
+const Mobile = styled.div`
+  @media screen and (max-width: 600px) {
+    display: flex;
+    position: fixed;
+    z-index: 10;
+
+    background: rgba(99, 220, 254, 0.37);
+    border-radius: 0px 0 10px 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.3px);
+    -webkit-backdrop-filter: blur(4.3px);
+    border: 1px solid rgba(24, 23, 23, 0.2);
+    overflow: hidden;
+    z-index: 10;
+  }
+`;
+
+const Full = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+`;
 
 const TextCode = styled.div`
   display: flex;
@@ -143,9 +232,13 @@ const TextCode = styled.div`
 const CardWrapper = styled.div`
   justify-content: center;
   display: flex;
-  width: 70%;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  width: 100%;
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    justify-content: center;
+    display: flex;
+  }
 `;
 
 const Input = styled.input`

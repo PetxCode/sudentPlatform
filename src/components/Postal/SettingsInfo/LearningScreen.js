@@ -130,8 +130,15 @@ const LearningScreen = () => {
 export default LearningScreen;
 
 const Container = styled.div`
-  width: 70%;
+  /* width: 100%; */
   height: 100%;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -179,8 +186,6 @@ const Form = styled.form`
   align-items: center;
   margin-bottom: 20px;
   background: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `;
 
 const Card = styled.div`
@@ -188,6 +193,10 @@ const Card = styled.div`
   width: 400px;
   min-height: 300px;
   border-radius: 5px;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const Span = styled(Link)`
@@ -208,6 +217,7 @@ const Text = styled.div`
   margin-top: 50px;
   margin-bottom: 20px;
   font-weight: 700;
+  text-align: center;
 `;
 
 const Image = styled.img`

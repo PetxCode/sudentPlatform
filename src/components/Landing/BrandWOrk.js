@@ -12,8 +12,8 @@ const BrandWOrk = () => {
     <Contianer>
       <Wrapper>
         <Text>
-          We have built solutions that affect over <span>100,000</span> people,
-          globally.
+          We wish to have trained over <span>1,000</span> Youths, to become
+          FullStack Engineers that are Global Talents.
         </Text>
 
         <Brands>
@@ -48,7 +48,7 @@ const Brands = styled.div`
 `;
 
 const Text = styled.div`
-  width: 350px;
+  width: 60%;
   text-align: center;
   font-size: 28px;
   font-weight: 600;
@@ -56,6 +56,9 @@ const Text = styled.div`
   span {
     margin: 0 5px;
     color: darkorange;
+  }
+  @media screen and (max-width: 600px) {
+    width: 90%;
   }
 `;
 

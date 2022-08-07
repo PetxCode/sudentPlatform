@@ -1,17 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import pix from "./pix.jpg";
+import pix1 from "./p.jpg";
+import pix2 from "./3q.jpg";
+import pix3 from "./12.jpg";
+import pix4 from "./11.jpg";
 
 const ConnectPage = () => {
   return (
     <Container>
       <Wrapper>
         <TopText>
-          We connect you with technology to <span>grow</span>.
+          We're Building a Software Training <span>Infrastructure</span>.
         </TopText>
         <SubText>
-          We exist to connect you with scalable innovation so you can focus on
-          the the things that matter in your business.
+          For us at CodeLab, we are committed to creating software training
+          infrastructure within these Rural communities, that would scout and
+          train these brilliance for the numerious Opportunities scattered
+          across the world.
         </SubText>
         <br />
         <Image src={pix} />
@@ -19,51 +25,50 @@ const ConnectPage = () => {
         <br />
         <br />
         <TopText fs>
-          Our <span>process</span>.
+          Our Core <span>Process</span>.
         </TopText>
         <SubText>
           Because every project is distinct, there’s no one-size-fits-all
           process, however, we have narrowed down all of it to three major
           phases.
         </SubText>
-
-        <HolderView
-          title="Learning the"
-          title2="FUNDAMENTALS"
-          desc="We meet you to discuss and understand your idea. Then we outline
-            your business objectives, the market needs and align them with the
-            overall product goals."
-          desc2="We go further to research the target user, how they would interact
-            with your solution as well as the best platforms and infrastructure
-            to deliver your solution to them."
-          pix={pix}
-        />
         <br />
         <br />
         <HolderView
-          title="Testing your feets in the"
-          title2="WATERS"
-          desc="We meet you to discuss and understand your idea. Then we outline
-            your business objectives, the market needs and align them with the
-            overall product goals."
-          desc2="We go further to research the target user, how they would interact
-            with your solution as well as the best platforms and infrastructure
-            to deliver your solution to them."
-          pix={pix}
+          title="Skill"
+          title2="SOFT"
+          desc="Softskills are collections of productive personality that characterizes ones relationship in a social environment. you will learn softskills such as critical thinking, problem solving , public speaking, teamwork, leadership, professional attitude, work ethics and you will learn these skill by implementation"
+          // desc2="In this program, you will gain hands-on experience with cloud platforms, understand how cloud resources are allocated and paid for and learn how to shorten the systems development life-cycle."
+          pix={pix1}
           f
         />
         <br />
         <br />
         <HolderView
-          title="Diving deep into"
-          title2="CODING"
-          desc="We meet you to discuss and understand your idea. Then we outline
-            your business objectives, the market needs and align them with the
-            overall product goals."
-          desc2="We go further to research the target user, how they would interact
-            with your solution as well as the best platforms and infrastructure
-            to deliver your solution to them."
-          pix={pix}
+          title="Engineering"
+          title2="FRONTEND"
+          desc="Frontend Engineers are some of the most sought-after Software Engineers. This program is designed to provide you with in-depth knowledge on how to create functional websites by implementing web designs through the use of various programming languages. "
+          desc2="You will be exposed to best practices while executing projects with guidance from some of our faculty members comprised of top senior engineers."
+          pix={pix4}
+        />
+        <br />
+        <br />
+        <HolderView
+          title="Engineering"
+          title2="BACKEND"
+          desc="Backend engineering is an exciting career track. Like the name suggests, backend engineering deals with the part of a website or a software application that the users do not see or interact with. As a backend engineer, you are responsible for building the structure of a software application. "
+          desc2="In this program, you will learn how to program servers, client-side interfaces and design databases using the various programming languages."
+          pix={pix2}
+          f
+        />
+        <br />
+        <br />
+        <HolderView
+          title="Engineering"
+          title2="Cloud"
+          desc="Cloud Engineering combines software development and IT operations to build and maintain cloud infrastructure. Cloud Engineers are in high demand, as more companies continue to move critical business processes and applications to cloud infrastructures."
+          desc2="In this program, you will gain hands-on experience with cloud platforms, understand how cloud resources are allocated and paid for and learn how to shorten the systems development life-cycle."
+          pix={pix3}
         />
       </Wrapper>
     </Container>
@@ -74,8 +79,7 @@ const ConnectPage = () => {
       <Holder f={f}>
         <TextHolder>
           <Title>
-            {title}
-            <span>{title2}</span>
+            <span>{title2}</span> {title}
           </Title>
           <TextView>{desc}</TextView>
           <br />
@@ -97,9 +101,10 @@ const ImageHold = styled.img`
   width: 100%;
   height: 300px;
   border-radius: 10px;
-
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   @media screen and (min-width: 1000px) {
     height: 400px;
+    margin: 0;
   }
 `;
 
@@ -111,6 +116,7 @@ const ImageCheck = styled.div`
     margin-top: 30px;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 0;
   }
 `;
 
@@ -122,6 +128,7 @@ const TextView = styled.div`
 const Title = styled.div`
   font-weight: 600;
   margin-bottom: 20px;
+  font-size: 20px;
   span {
     margin: 0 5px;
     color: darkorange;
@@ -142,7 +149,7 @@ const Holder = styled.div`
   justify-content: space-between;
   min-height: 300px;
   flex-direction: ${({ f }) => (f ? "row-reverse" : "row")};
-  margin: 40px 0;
+  margin: 5px 0;
 
   @media screen and (max-width: 700px) {
     display: flex;
@@ -168,7 +175,7 @@ const SubText = styled.div`
 `;
 
 const TopText = styled.div`
-  width: 40%;
+  width: 60%;
   font-size: ${({ fs }) => (fs ? "30px" : "50px")};
   font-weight: 700;
   text-align: center;
@@ -181,6 +188,7 @@ const TopText = styled.div`
 
   @media screen and (max-width: 700px) {
     width: 80%;
+    font-size: 35px;
   }
 `;
 

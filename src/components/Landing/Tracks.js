@@ -6,56 +6,56 @@ const Tracks = () => {
     <Container>
       <Wrapper>
         <Top>
-          <Text>See how we can help you.</Text>
-          <Sub>What do you want to achieve?</Sub>
+          <Text>View our Tracks.</Text>
+          <Sub>Check out the Tracks we used to build Global Talents!</Sub>
         </Top>
 
         <Bottom>
           <NewCard
             title="FrontEnd Track (Desktop/Mobile/Web)"
-            desc="Increase the value of your business with technology."
+            desc="This track takes you through frontend development with full focus in Desktop, Mobile and Web "
             bg="/assets/11.jpg"
             bg1="rgb(137, 45, 142, .8)"
           />
           <NewCard
             title="BackEnd Track"
-            desc="Increase the value of your business with technology."
+            desc="This track focuses on creating servers for simple and complex Restful API in Development"
             bg="/assets/12.jpg"
             bg1="rgba(0, 0, 0, 0.7)"
           />
           <NewCard
             title="AI/ML Track"
-            desc="Increase the value of your business with technology."
+            desc="Building models and intellience that powers a simple application is the fucus in this track"
             bg="/assets/dis3.jpg"
             bg1="rgb(214, 96, 169, 0.8)"
           />
           <NewCard
             title="Algorithm/Data Structure Track"
-            desc="Increase the value of your business with technology."
+            desc="Understanding how coding are structured for proficiency and efficiency is the key focus for this track."
             bg="/assets/13.jpg"
             bg1="rgba(147, 115, 32, 0.8)"
           />
           <NewCard
             title="Web RTC Track"
-            desc="Increase the value of your business with technology."
+            desc="This track focuses on how peer to peer communication are been established between two or more devices for Real Time Communication"
             bg="/assets/14.jpg"
             bg1="rgb(147, 47, 32, .8)"
           />
           <NewCard
             title="Transformational Leadership Track"
-            desc="Increase the value of your business with technology."
+            desc="This track is one of our most valuable track because it focuses on training leaders, people that will build solutions for solve promiennt problems facing our communities raither than being part of the problems"
             bg="/assets/p.jpg"
             bg1="rgb(61, 32, 147, 0.8)"
           />
           <NewCard
             title="Design Thinking Track"
-            desc="Increase the value of your business with technology."
+            desc="This track focuses on building the creative aspect of our students mind, building their minds for creative and critical thinking and brainstorming"
             bg="/assets/3q.jpg"
             bg1="rgb(147, 32, 82, .8)"
           />
           <NewCard
             title="UI/UX Track"
-            desc="Increase the value of your business with technology."
+            desc="This track teaches our students how build the skeletal part of a project(web or mobile) for easy Development"
             bg="/assets/1e.jpg"
             bg1="rgb(16, 79, 19, .8)"
           />
@@ -66,7 +66,12 @@ const Tracks = () => {
 
   function NewCard({ title, desc, bg, bg1 }) {
     return (
-      <Card bg={bg}>
+      <Card
+        bg={bg}
+        href="https://codelab-home.web.app/course"
+        rel="noreferrer"
+        target="_blank"
+      >
         <Holder>
           <Title>{title}</Title>
           <Description>{desc}</Description>
@@ -100,6 +105,7 @@ const Description = styled.div`
   margin-top: 30px;
   font-weight: 200;
   font-size: 20px;
+  font-size: 15px;
 `;
 
 const Title = styled.div`
@@ -108,6 +114,7 @@ const Title = styled.div`
   font-weight: 500;
   text-transform: uppercase;
   font-weight: 500;
+  line-height: 1;
 `;
 
 const Holder = styled.div`
@@ -128,7 +135,8 @@ const BG = styled.div`
   top: 0;
 `;
 
-const Card = styled.div`
+const Card = styled.a`
+  text-decoration: none;
   margin: 10px;
   color: white;
   position: relative;

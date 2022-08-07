@@ -10,6 +10,7 @@ import SoftwareCourse from "./SettingsInfo/SoftwarePortal";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import isOnline from "is-online";
+import DoorDashFavorite from "./NetworkLoading";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -50,6 +51,12 @@ const Portal = () => {
       <Wrapper>
         <Text>Our Present Students</Text>
 
+        {stateData ? null : (
+          <div>
+            <DoorDashFavorite />
+          </div>
+        )}
+        {stateData.userName}
         <Students>
           {stateData &&
             stateData?.map((props, i) => (

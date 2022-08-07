@@ -7,12 +7,12 @@ const HeroPage = () => {
       <Wrapper>
         <Holder>
           <Top>
-            Ship apps fast, within <span>Budgeted</span> <br />
-            plan<span>!</span>
+            We Train, We Build and we <span>Develop </span>
+            Talent across <span>Nigeria!</span>
           </Top>
           <Sub>
-            We work with ambitious teams to design, build and maintain digital
-            products that make news.
+            We Software infrastructural training Program designed to arm young
+            people with the skills and knowledge
           </Sub>
         </Holder>
       </Wrapper>{" "}
@@ -26,6 +26,10 @@ const Sub = styled.div`
   font-weight: 500;
   color: black;
   font-size: 20px;
+
+  @media screen and (max-width: 700px) {
+    font-size: 15px;
+  }
 `;
 
 const Top = styled.div`
@@ -36,8 +40,9 @@ const Top = styled.div`
   margin-top: 70px;
   color: black;
 
-  @media screen and (max-width: 700px) {
-    font-size: 50px;
+  @media screen and (max-width: 768px) {
+    font-size: 40px;
+    font-weight: 700;
   }
 
   span {
@@ -47,10 +52,10 @@ const Top = styled.div`
 `;
 
 const Holder = styled.div`
-  width: 400px;
+  width: 60%;
   margin-left: 150px;
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 768px) {
     margin-left: 50px;
   }
 `;

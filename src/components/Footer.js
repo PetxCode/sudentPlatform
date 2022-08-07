@@ -29,28 +29,28 @@ const Footer = () => {
             <Icon />
           </Move>
           <Move
-            href="https://codelab-home.web.app"
+            href="https://web.facebook.com/groups/brighterdayscodelab"
             rel="noreferrer"
             target="_blank"
           >
             <FaIcon />
           </Move>
-          <Move
+          {/* <Move
             href="https://codelab-home.web.app"
             rel="noreferrer"
             target="_blank"
           >
             <LiIcon />
-          </Move>
+          </Move> */}
           <Move
-            href="https://codelab-home.web.app"
+            href="https://twitter.com/CodeOti"
             rel="noreferrer"
             target="_blank"
           >
             <TwIcon />
           </Move>
           <Move
-            href="https://codelab-home.web.app"
+            href="https://www.instagram.com/peter_oti_code/"
             rel="noreferrer"
             target="_blank"
           >
@@ -188,6 +188,6 @@ const Container = styled.div`
   color: white;
   display: flex;
   justify-content: center;
-  z-index: 100;
+  z-index: 0;
   position: relative;
 `;
