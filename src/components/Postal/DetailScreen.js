@@ -18,6 +18,7 @@ import azura from "../Landing/Logo/AZ.jpg";
 import open from "../Landing/Logo/open.svg";
 import save from "../Landing/Logo/save.png";
 import ibm from "../Landing/Logo/ibm.png";
+import moment from "moment";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -100,16 +101,27 @@ const StudentDetail = () => {
           <Card2>
             <About>Know me Better</About>
             <VideoContent>
-              <Video
-                src={`https://www.youtube.com/embed/${
-                  myData.video?.split("/")[3]
-                }`}
-                controls
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                title="video"
-              />
+              {myData.video ? (
+                <Video
+                  src={`https://www.youtube.com/embed/${
+                    myData.video?.split("/")[3]
+                  }`}
+                  controls
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                  title="video"
+                />
+              ) : (
+                <Video
+                  src="https://www.youtube.com/embed/8ISwMYS_KkA"
+                  controls
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                  title="video"
+                />
+              )}
 
               <AboutMe>{myData.aboutYou}</AboutMe>
             </VideoContent>
@@ -189,9 +201,12 @@ const StudentDetail = () => {
               </Label>
 
               <Label>
-                <LabelTitle>Months of Experience:</LabelTitle>
+                <LabelTitle>Started Coding:</LabelTitle>
                 <LabelData>
-                  {myData.experence ? myData.experience : 0} month(s)
+                  {moment(
+                    `${myData?.createdAt?.split("T")[0].replace(/-/g, "")}`,
+                    "YYYYMMDD"
+                  ).fromNow()}
                 </LabelData>
               </Label>
 
@@ -261,9 +276,12 @@ const StudentDetail = () => {
                 </Label>
 
                 <Label>
-                  <LabelTitle>Months of Experience:</LabelTitle>
+                  <LabelTitle>Started Coding:</LabelTitle>
                   <LabelData>
-                    {myData.experence ? myData.experience : 0} month(s)
+                    {moment(
+                      `${myData?.createdAt?.split("T")[0].replace(/-/g, "")}`,
+                      "YYYYMMDD"
+                    ).fromNow()}
                   </LabelData>
                 </Label>
 
@@ -357,17 +375,27 @@ const StudentDetail = () => {
           <Card2>
             <About>Know me Better</About>
             <VideoContent>
-              <Video
-                src={`https://www.youtube.com/embed/${
-                  myData.video?.split("/")[3]
-                }`}
-                controls
-                frameborder="0"
-                allow="autoplay; encrypted-media"
-                allowfullscreen
-                title="video"
-              />
-
+              {myData.video ? (
+                <Video
+                  src={`https://www.youtube.com/embed/${
+                    myData.video?.split("/")[3]
+                  }`}
+                  controls
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                  title="video"
+                />
+              ) : (
+                <Video
+                  src="https://www.youtube.com/embed/8ISwMYS_KkA"
+                  controls
+                  frameborder="0"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                  title="video"
+                />
+              )}
               <AboutMe>{myData.aboutYou}</AboutMe>
             </VideoContent>
             <Profile>{myData.desc}</Profile>

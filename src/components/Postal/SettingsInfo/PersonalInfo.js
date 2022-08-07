@@ -25,7 +25,7 @@ const PersonalInfo = () => {
     futureAmbition: yup.string().required("Field must be filled"),
     aboutYou: yup.string().required("Field must be filled"),
     userName: yup.string().required("Field must be filled"),
-    experience: yup.number().required("Field must be filled"),
+    // experience: yup.number().required("Field must be filled"),
     phone: yup.number().required("Field must be filled"),
   });
 
@@ -119,15 +119,15 @@ const PersonalInfo = () => {
           </InputHolder>
           <Error>{errors.video?.message}</Error>
 
-          <InputHolder>
+          {/* <InputHolder>
             <Blocker>Experience</Blocker>
             <Input
               defaultValue={userData.experience}
               placeholder="Enter Your Experience"
               {...register("experience")}
-            />
-          </InputHolder>
-          <Error>{errors.experience?.message}</Error>
+            /> */}
+          {/* </InputHolder>
+          <Error>{errors.experience?.message}</Error> */}
 
           <InputHolder>
             <Blocker>Phone Number</Blocker>

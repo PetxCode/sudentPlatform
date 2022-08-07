@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Powered from "../Landing/Powered";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -40,6 +41,10 @@ const LearningScreen = () => {
             <Focus>{props.desc}</Focus>
             <SubT>Learning use case</SubT>
             <Focus>{props.useCase}</Focus>
+
+            <Div>
+              {moment(props.createdAt).format("MMMM Do YYYY | h:mm:ss a")}
+            </Div>
           </Card>
         ))}
       </Wrapper>
@@ -49,6 +54,13 @@ const LearningScreen = () => {
 };
 
 export default LearningScreen;
+
+const Div = styled.div`
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #004080;
+  font-weight: 700;
+`;
 
 const SubT = styled.div`
   font-size: 12px;
