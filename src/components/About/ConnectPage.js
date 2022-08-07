@@ -87,6 +87,7 @@ const ConnectPage = () => {
         </TextHolder>
 
         <ImageCheck>
+          <BG />
           <ImageHold src={pix} />
         </ImageCheck>
       </Holder>
@@ -96,12 +97,28 @@ const ConnectPage = () => {
 
 export default ConnectPage;
 
+const BG = styled.div`
+  width: 100%;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  left: 0;
+  border-radius: 10px;
+
+  @media screen and (min-width: 1000px) {
+    height: 400px;
+    margin: 0;
+  }
+`;
+
 const ImageHold = styled.img`
   object-fit: cover;
   width: 100%;
   height: 300px;
   border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
   @media screen and (min-width: 1000px) {
     height: 400px;
     margin: 0;
@@ -111,6 +128,7 @@ const ImageHold = styled.img`
 const ImageCheck = styled.div`
   flex: 0.5;
   height: 100%;
+  position: relative;
 
   @media screen and (max-width: 700px) {
     margin-top: 30px;
