@@ -12,7 +12,8 @@ const oAuth = new google.auth.OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 
 oAuth.setCredentials({ refresh_token: GOOGLE_REFRESHTOKEN });
 
-const url = "http://localhost:3000";
+// const url = "http://localhost:3000";
+const url = "https://codelab-student.web.app";
 
 const verifiedUser = async (email, user, value, token) => {
   try {
@@ -33,23 +34,23 @@ const verifiedUser = async (email, user, value, token) => {
       from: "no-reply✉️  <newstudentsportal2@gmail.com>",
       to: email,
       subject: "Account Verification",
-      html: ` <h3>
-            Hello... 
+      html: ` <p>
+            Hello  <strong>${user.email}</strong>!
             <br/>
             <br/>
 
             This mail is to acknowledge that you are about to create an account as a student in CodeLab, please follow the link below to finish up your Registration.
               <br/>
               <br/>
-And here is your Secret Code "${token}" for Logging in, Please keep it safe and save as you'd be needing it to login successfully!
+And here is your Secret Code "<strong>${token}</strong>" for Logging in, Please keep it safe and save as you'd be needing it to login successfully!
 
             Thanks!
              <br/>
              <br/>
-            Use this <a
-            href="${url}/api/user/${user}/${value}"
-            >Link to Finish</a> up your account creation 
-        </h3>`,
+            Use this <strong><a
+            href="${url}/api/user/${user._id}/${value}"
+            >Link to Finish</a> </strong> up your account creation 
+        </p>`,
     };
 
     const result = transporter.sendMail(mailOptions);
@@ -90,9 +91,9 @@ const verifiedSignUser = async (email, user, value) => {
             Thanks!
              <br/>
              <br/>
-            Use this <a
+            Use this <strong><a
             href="${url}/api/user/${user}/${value}"
-            >Link to Finish</a> up your account creation 
+            >Link to Finish</a></strong> up your account creation 
         </h3>
         `,
     };
@@ -134,9 +135,9 @@ const resetUserPassword = async (email, user, value) => {
 
             <br/>
             <br/> 
-            Use this <a
+            Use this <strong><a
             href="${url}/api/user/change/${user}/${value}"
-            >Link to</a> completely change your account password 
+            >Link to</a></strong> completely change your account password 
         </h3>`,
     };
 

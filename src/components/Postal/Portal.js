@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import OurStacks from "../Landing/OurStacks";
 import pix from "./6.jpg";
+import pix1 from "./logo.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -64,11 +65,19 @@ const Portal = () => {
                 <ImageHolder>
                   {props.online && props.online ? <OnlineDot /> : <Dot />}
 
-                  <Image src={props.avatar} />
+                  {props.avatar ? (
+                    <Image src={props.avatar} />
+                  ) : (
+                    <Image src={pix1} />
+                  )}
                 </ImageHolder>
                 <Name>{props.userName}</Name>
                 <NewText>My Choice Interest Area:</NewText>
-                <PortalInterest key={props._id} props={props} bg="#EFF6FF" />
+                {props.interest ? (
+                  <PortalInterest key={props._id} props={props} bg="#EFF6FF" />
+                ) : (
+                  <div>no</div>
+                )}
                 <NewText>My Most preferred Software:</NewText>
                 <Interest>
                   <SoftwareCourse key={props._id} props={props} bg="#EFFFF3" />

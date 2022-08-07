@@ -6,7 +6,7 @@ const url = "https://studentbe1.herokuapp.com";
 
 const PortalInterest = ({ props, bg, color }) => {
   const [stateData, setStateData] = useState({});
-
+  console.log(props);
   const fetchData = async () => {
     await axios.get(`${url}/api/interest/${props._id}/limit`).then((res) => {
       setStateData(res.data.data);
@@ -17,15 +17,19 @@ const PortalInterest = ({ props, bg, color }) => {
     fetchData();
   }, [props._id]);
   return (
-    <div>
-      <Interest>
-        {stateData?.interest?.map((props) => (
-          <Interested bg={bg} color={color} key={props._id}>
-            {props.title}
-          </Interested>
-        ))}
-      </Interest>
-    </div>
+    <Interest>
+      {stateData?.interest?.map((props) => (
+        <div>
+          {props.title ? (
+            <Interested bg={bg} color={color} key={props._id}>
+              {props.title}
+            </Interested>
+          ) : (
+            <div>no skill yet</div>
+          )}
+        </div>
+      ))}
+    </Interest>
   );
 };
 
