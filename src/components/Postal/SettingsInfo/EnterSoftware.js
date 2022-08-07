@@ -79,11 +79,11 @@ const EnterSoftware = () => {
       {loading ? <LoadingState /> : null}
       <Card>
         <Form onSubmit={onSubmit}>
-          <Text>Add New Software</Text>
+          <Text>Add New Technology Learnt</Text>
           <InputHolder>
-            <Blocker>Most Interested Course</Blocker>
+            <Blocker>Most Interested Technology</Blocker>
             <Input
-              placeholder="Enter Your Most Interested Course"
+              placeholder="Enter Your Most Interesting Technology"
               {...register("title")}
             />
           </InputHolder>

@@ -74,6 +74,7 @@ const Header = () => {
                 </Setting>
                 <ButtonNav
                   onClick={async () => {
+                    navigate("/");
                     dispatch(removeUser());
                     await axios.patch(`${url}/api/user/${user._id}/offline`);
                     window.location.reload();

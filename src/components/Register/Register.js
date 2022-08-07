@@ -66,7 +66,8 @@ const Register = () => {
   return (
     <Container>
       {loading ? <LoadingState /> : null}
-      <Wrapper>
+      <Wrapper></Wrapper>
+      <NewCard>
         <Card>
           <Form onSubmit={onSubmit}>
             <Image src={logo} />
@@ -113,12 +114,29 @@ const Register = () => {
             </Text>
           </Form>
         </Card>
-      </Wrapper>
+      </NewCard>
     </Container>
   );
 };
 
 export default Register;
+
+const NewCard = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: 600px;
+  min-height: 300px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    margin: 20px 0;
+  }
+`;
 
 const Image = styled.img`
   height: 150px;
@@ -222,11 +240,16 @@ const Form = styled.form`
 
 const Card = styled.div`
   width: 400px;
-  min-height: 400px;
+  min-height: 550px;
   border-radius: 5px;
   box-shadow: rgba(255, 255, 255, 0.02) 0px 1px 3px 0px,
     rgba(255, 255, 255, 0.15) 0px 0px 0px 1px;
   background: white;
+  z-index: 1;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -234,6 +257,8 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 50px;
+  flex-direction: column;
+  background: red;
 `;
 
 const Container = styled.div`
@@ -243,4 +268,11 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 `;

@@ -78,7 +78,7 @@ const SignIn = () => {
   return (
     <Container>
       {loading ? <LoadingState /> : null}
-      <Wrapper>
+      <NewCard>
         <Card>
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Image src={logo} />
@@ -116,20 +116,39 @@ const SignIn = () => {
             </Text>
           </Form>
         </Card>
-      </Wrapper>
+      </NewCard>
     </Container>
   );
 };
 
 export default SignIn;
 
+const NewCard = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  width: 600px;
+  min-height: 300px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    margin: 20px 0;
+  }
+`;
 const TextHolderFile = styled.div`
   display: flex;
   justify-content: center;
   font-size: 12px;
   width: 100%;
   margin-right: 15px;
-  /* margin-top: 15px; */
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const Nav = styled(Link)`
@@ -239,6 +258,13 @@ const Form = styled.form`
   align-items: center;
   margin-bottom: 20px;
   padding-left: 15px;
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Card = styled.div`
@@ -248,6 +274,12 @@ const Card = styled.div`
   box-shadow: rgba(255, 255, 255, 0.02) 0px 1px 3px 0px,
     rgba(255, 255, 255, 0.15) 0px 0px 0px 1px;
   background: white;
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -264,4 +296,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
