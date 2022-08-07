@@ -59,9 +59,9 @@ const Text = styled.div`
   }
   @media screen and (max-width: 600px) {
     width: 90%;
-    line-height: 1;
-    margin-top: 40px;
-    font-size: 20px;
+    line-height: 1.2;
+    /* margin-top: 40px; */
+    font-size: 22px;
   }
 `;
 

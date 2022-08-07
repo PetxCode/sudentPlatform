@@ -72,8 +72,11 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url("/assets/bg.svg");
-  /* background-position: center; */
   color: white;
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media screen and (max-width: 768px) {
+    height: 80vh;
+  }
 `;
