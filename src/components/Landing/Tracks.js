@@ -125,6 +125,12 @@ const Holder = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 400px) {
+    width: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 `;
 
 const BG = styled.div`
@@ -167,12 +173,15 @@ const Bottom = styled.div`
   margin: 30px 0;
 `;
 
-const Sub = styled.div``;
+const Sub = styled.div`
+  text-align: center;
+`;
 
 const Text = styled.div`
   font-size: 30px;
   font-weight: bold;
   margin-top: 60px;
+  text-align: center;
 `;
 
 const Top = styled.div`

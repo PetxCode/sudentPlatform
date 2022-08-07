@@ -79,6 +79,7 @@ const TopT = styled.div`
   text-transform: uppercase;
   font-weight: 200;
   margin-top: 40px;
+  text-align: center;
 `;
 
 const Image = styled.img`

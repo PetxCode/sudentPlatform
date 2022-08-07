@@ -70,7 +70,7 @@ const Wrapper = styled.div`
 
 const Contianer = styled.div`
   width: 100%;
-  height: 300px;
+  min-height: 300px;
   background-color: #1e1f21;
   color: white;
   display: flex;

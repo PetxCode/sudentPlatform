@@ -115,6 +115,9 @@ const Text = styled.div`
   margin-top: 50px;
   font-weight: 700;
   font-size: 30px;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 30px;
 `;
 
 const TextHolder = styled.div`
