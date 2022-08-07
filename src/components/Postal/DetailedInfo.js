@@ -19,7 +19,7 @@ const DetailedInfo = ({ props }) => {
 
   useEffect(() => {
     fetchDataDetail(id);
-  }, []);
+  }, [id]);
 
   return (
     <Container>
