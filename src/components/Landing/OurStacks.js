@@ -138,7 +138,7 @@ const DownText = styled.div`
   width: 50%;
   text-align: center;
   font-size: 28px;
-  line-height: 1.2;
+  line-height: 1.1;
   margin-bottom: 20px;
   span {
     color: darkorange;
@@ -148,6 +148,11 @@ const DownText = styled.div`
 
   @media screen and (max-width: 786px) {
     width: 90%;
+    font-size: 23px;
+
+    span {
+      font-size: 23px;
+    }
   }
 `;
 

@@ -97,6 +97,11 @@ const Text = styled.div`
   text-align: center;
   margin-left: 30px;
   margin-right: 30px;
+  line-height: 1;
+
+  @media screen and (max-width: 468px) {
+    font-size: 25px;
+  }
 `;
 
 const Container = styled.div`

@@ -87,7 +87,7 @@ const Settings = () => {
             setToggled(false);
           }}
         >
-          Update your Learnings
+          Add your Learnings
         </Button>
         <Button
           bg={avatar ? "darkorange" : "#09386d"}
@@ -129,7 +129,7 @@ const Settings = () => {
             setToggled(false);
           }}
         >
-          Update Project
+          Add Project
         </Button>
         <Button
           bg={interest ? "darkorange" : "#09386d"}
@@ -143,7 +143,7 @@ const Settings = () => {
             setToggled(false);
           }}
         >
-          Update Course Interest
+          Add Course Interest
         </Button>
         <Button
           bg={software ? "darkorange" : "#09386d"}
@@ -157,7 +157,7 @@ const Settings = () => {
             setToggled(false);
           }}
         >
-          Update Most used Software
+          Add Most used Software
         </Button>
       </Holder>
     );

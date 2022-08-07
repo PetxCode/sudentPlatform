@@ -32,9 +32,9 @@ const Portal = () => {
 
   const onlineUser = async () => {
     if (isOnline) {
-      await axios.patch(`${url}/api/user/${user._id}/online`);
+      await axios.patch(`${url}/api/user/${user?._id}/online`);
     } else {
-      await axios.patch(`${url}/api/user/${user._id}/offline`);
+      await axios.patch(`${url}/api/user/${user?._id}/offline`);
     }
   };
 
@@ -45,7 +45,7 @@ const Portal = () => {
     socket.on("online", (online) => {
       fetchData();
     });
-  }, []);
+  }, [navigator.onLine]);
 
   return (
     <Container>

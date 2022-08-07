@@ -52,6 +52,7 @@ const SignIn = () => {
           timer: 2500,
         }).then(() => {
           navigate("/");
+          window.location.reload();
         });
         setLoading(false);
       })
