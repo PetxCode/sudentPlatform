@@ -88,7 +88,7 @@ const EnterProject = () => {
       {loading ? <LoadingState /> : null}
       <Card>
         <Form onSubmit={onSubmit}>
-          <Text>Add New Software</Text>
+          <Text>Add New Project</Text>
 
           <InputHolder>
             <Blocker>Project Title</Blocker>
@@ -111,9 +111,9 @@ const EnterProject = () => {
           </InputHolder>
 
           <InputHolder>
-            <Blocker>Brife description</Blocker>
+            <Blocker>Brief description</Blocker>
             <InputArea
-              placeholder="Enter Brife description about the project"
+              placeholder="Enter a Brief description about this project"
               {...register("desc")}
             />
           </InputHolder>
@@ -127,7 +127,7 @@ const EnterProject = () => {
 
           <br />
           <Button type="submit" bg="darkorange">
-            REcord this Project
+            Record this Project
           </Button>
         </Form>
       </Card>
