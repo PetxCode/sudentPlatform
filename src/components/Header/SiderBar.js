@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { removeUser } from "../State/GlobalState";
 
 const url = "https://studentbe1.herokuapp.com";
 
 const SiderBar = ({ setToggled }) => {
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({});
@@ -81,9 +82,13 @@ const SiderBar = ({ setToggled }) => {
                 <AvatarText>{user.email.charAt(0)}</AvatarText>
               )}
               <ButtonLog
-                onClick={() => {
+                onClick={async () => {
                   setToggled(false);
+                  navigate("/");
                   dispatch(removeUser());
+                  await axios.patch(`${url}/api/user/${user._id}/offline`);
+                  window.location.reload();
+                  navigate("/");
                 }}
               >
                 Log Out
