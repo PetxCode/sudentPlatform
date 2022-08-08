@@ -13,27 +13,33 @@ const Tracks = () => {
         <Bottom>
           <NewCard
             title="FrontEnd Track (Desktop/Mobile/Web)"
-            desc="This track takes you through frontend development with full focus in Desktop, Mobile and Web "
+            desc="This track takes you through frontend development with full focus in Desktop, Mobile and Web."
             bg="/assets/11.jpg"
             bg1="rgb(137, 45, 142, .8)"
           />
           <NewCard
             title="BackEnd Track"
-            desc="This track focuses on creating servers for simple and complex Restful API in Development"
+            desc="This track focuses on creating server side applications for simple and complex production, Restful API in Development and lot more."
             bg="/assets/12.jpg"
             bg1="rgba(0, 0, 0, 0.7)"
           />
           <NewCard
             title="AI/ML Track"
-            desc="Building models and intellience that powers a simple application is the fucus in this track"
+            desc="Building models and intellience that powers a simple and complex application in this modern world, is the main fucus in this track"
             bg="/assets/dis3.jpg"
             bg1="rgb(214, 96, 169, 0.8)"
           />
           <NewCard
             title="Algorithm/Data Structure Track"
-            desc="Understanding how coding are structured for proficiency and efficiency is the key focus for this track."
+            desc="Understanding how codes are structured for proficiency and efficiency both from the server and client sides in order to save production COST, is the key focus for this track."
             bg="/assets/13.jpg"
             bg1="rgba(147, 115, 32, 0.8)"
+          />
+          <NewCard
+            title="Design Patterns Track"
+            desc="Understanding how reusable solutions applied to commonly occurring problems in writing JavaScript  applications is what this track is all about."
+            bg="/assets/11.jpg"
+            bg1="rgb(16, 79, 19, .7)"
           />
           <NewCard
             title="Web RTC Track"

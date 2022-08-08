@@ -91,7 +91,7 @@ const StudentDetail = () => {
                 <Cont>
                   <Name>
                     {props.title}
-                    <span>({props.capture})</span>
+                    <span>(web)</span>
                   </Name>
                   <Abt>{props.desc}</Abt>
 
@@ -354,7 +354,7 @@ const StudentDetail = () => {
                   <Cont>
                     <Name>
                       {props.title}
-                      <span>({props.capture})</span>
+                      <span>(web)</span>
                     </Name>
                     <Abt>{props.desc}</Abt>
                     <MyButtonLink2

@@ -36,6 +36,7 @@ const StackView = ({ props }) => {
 export default StackView;
 
 const StackFile = styled.div`
+  text-transform: capitalize;
   padding: 5px 10px;
   background-color: darkorange;
   color: white;
