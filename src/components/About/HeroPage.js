@@ -7,12 +7,13 @@ const HeroPage = () => {
       <Wrapper>
         <Holder>
           <Top>
-            We Train, We Build and we <span>Develop </span>
-            Talent across <span>Nigeria!</span>
+            We Train, We Build and We <span>Develop </span>
+            Talents Across <span>Nigeria!</span>
           </Top>
           <Sub>
-            We Software infrastructural training Program designed to arm young
-            people with the skills and knowledge
+            We are a Software infrastructural training Program, that is
+            established to arm young people with the skills and knowledge needed
+            to become SOFTWARE ENGINEERS
           </Sub>
         </Holder>
       </Wrapper>{" "}

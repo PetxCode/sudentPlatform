@@ -11,13 +11,14 @@ const ConnectPage = () => {
     <Container>
       <Wrapper>
         <TopText>
-          We're Building a Software Training <span>Infrastructure</span>.
+          We're Building Software Training <span>Infrastructure</span> Across{" "}
+          <span>Slum Communities</span>.
         </TopText>
         <SubText>
           For us at CodeLab, we are committed to creating software training
-          infrastructure within these Rural communities, that would scout and
-          train these brilliance for the numerious Opportunities scattered
-          across the world.
+          infrastructure within Rural communities across Lagos Nigeria, that
+          will scout and train brilliant minds in these communities for the
+          numerious TECH Opportunities scattered across the Country/World.
         </SubText>
         <br />
         <Image src={pix} />
@@ -28,9 +29,10 @@ const ConnectPage = () => {
           Our Core <span>Process</span>.
         </TopText>
         <SubText>
-          Because every project is distinct, there’s no one-size-fits-all
-          process, however, we have narrowed down all of it to three major
-          phases.
+          Because every student is distinct, there’s no one-size-fits-all
+          process, however, we have narrowed down all of our teaching process to
+          perfectly fit for every student, this has made us create great talents
+          over the years.
         </SubText>
         <br />
         <br />

@@ -345,60 +345,64 @@ const StudentDetail = () => {
                 </Button>
               </FileHolder>
             </Card3>
-            <Card1>
-              <Proj>Projects Done</Proj>
 
-              {myData.project?.map((props, i) => (
-                <Holder key={i}>
-                  <Box>{i}</Box>
-                  <Cont>
-                    <Name>
-                      {props.title}
-                      <span>(web)</span>
-                    </Name>
-                    <Abt>{props.desc}</Abt>
-                    <MyButtonLink2
-                      bg="#09386d"
-                      rel="noreferrer"
-                      target="_blank"
-                      href={`${props.url}`}
-                    >
-                      view project
-                    </MyButtonLink2>
-                    <Line />
-                    {user ? (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                        }}
+            {/* Work on */}
+            <Hide>
+              <Card1>
+                <Proj>Projects Done</Proj>
+
+                {myData.project?.map((props, i) => (
+                  <Holder key={i}>
+                    <Box>{i}</Box>
+                    <Cont>
+                      <Name>
+                        {props.title}
+                        <span>(web)</span>
+                      </Name>
+                      <Abt>{props.desc}</Abt>
+                      <MyButtonLink2
+                        bg="#09386d"
+                        rel="noreferrer"
+                        target="_blank"
+                        href={`${props.url}`}
                       >
-                        <Input
-                          placeholder="Enter Stack used"
-                          value={stacked}
-                          onChange={(e) => {
-                            setStacked(e.target.value);
-                          }}
-                        />
-                        <MyButton
-                          bg="darkorange"
-                          onClick={() => {
-                            stackCreated(props._id);
+                        view project
+                      </MyButtonLink2>
+                      <Line />
+                      {user ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
                           }}
                         >
-                          Add Stack
-                        </MyButton>
-                      </div>
-                    ) : null}
-                    {user ? <Line /> : null}
+                          <Input
+                            placeholder="Enter Stack used"
+                            value={stacked}
+                            onChange={(e) => {
+                              setStacked(e.target.value);
+                            }}
+                          />
+                          <MyButton
+                            bg="darkorange"
+                            onClick={() => {
+                              stackCreated(props._id);
+                            }}
+                          >
+                            Add Stack
+                          </MyButton>
+                        </div>
+                      ) : null}
+                      {user ? <Line /> : null}
 
-                    <AbText>Technologies used on this project</AbText>
-                    <StackView props={props} />
-                  </Cont>
-                </Holder>
-              ))}
-            </Card1>
+                      <AbText>Technologies used on this project</AbText>
+                      <StackView props={props} />
+                    </Cont>
+                  </Holder>
+                ))}
+              </Card1>
+            </Hide>
           </Card>
           <Card2>
             <About>Know me Better</About>
@@ -467,6 +471,62 @@ const StudentDetail = () => {
               </CertContent>
             </VideoContent>
           </Card2>
+          <View>
+            <Card1>
+              <Proj>Projects Done</Proj>
+
+              {myData.project?.map((props, i) => (
+                <Holder key={i}>
+                  <Box>{i}</Box>
+                  <Cont>
+                    <Name>
+                      {props.title}
+                      <span>(web)</span>
+                    </Name>
+                    <Abt>{props.desc}</Abt>
+                    <MyButtonLink2
+                      bg="#09386d"
+                      rel="noreferrer"
+                      target="_blank"
+                      href={`${props.url}`}
+                    >
+                      view project
+                    </MyButtonLink2>
+                    <Line />
+                    {user ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Input
+                          placeholder="Enter Stack used"
+                          value={stacked}
+                          onChange={(e) => {
+                            setStacked(e.target.value);
+                          }}
+                        />
+                        <MyButton
+                          bg="darkorange"
+                          onClick={() => {
+                            stackCreated(props._id);
+                          }}
+                        >
+                          Add Stack
+                        </MyButton>
+                      </div>
+                    ) : null}
+                    {user ? <Line /> : null}
+
+                    <AbText>Technologies used on this project</AbText>
+                    <StackView props={props} />
+                  </Cont>
+                </Holder>
+              ))}
+            </Card1>
+          </View>
         </Detail2>
       </Wrapper>
     </Container>
@@ -474,6 +534,19 @@ const StudentDetail = () => {
 };
 
 export default StudentDetail;
+
+const Hide = styled.div`
+  /* display: none; */
+  @media screen and (max-width: 981px) {
+    display: none;
+  }
+`;
+const View = styled.div`
+  display: none;
+  @media screen and (max-width: 981px) {
+    display: flex;
+  }
+`;
 
 const TextNow = styled.div`
   margin-left: 0px;
