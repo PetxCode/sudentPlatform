@@ -19,7 +19,6 @@ const LearningScreen = () => {
   };
   useEffect(() => {
     viewLearning();
-    console.log(learn);
   }, []);
 
   return (

@@ -16,6 +16,7 @@ import EnterSoftware from "./SettingsInfo/EnterSoftware";
 import EnterProject from "./SettingsInfo/EnterProject";
 import LearningScreen from "./SettingsInfo/LearningScreen";
 import { BsArrowDownSquare } from "react-icons/bs";
+import GallaryScreen from "./SettingsInfo/GallaryScreen";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -28,6 +29,7 @@ const Settings = () => {
   const [interest, setInterest] = useState(false);
   const [software, setSoftware] = useState(false);
   const [assign, setAssign] = useState(true);
+  const [gallary, setGallary] = useState(false);
 
   const [toggled, setToggled] = useState(false);
 
@@ -64,6 +66,8 @@ const Settings = () => {
               <EnterProject />
             ) : assign ? (
               <LearningScreen />
+            ) : gallary ? (
+              <GallaryScreen />
             ) : null}
           </CardWrapper>
         </PointedHolder>
@@ -85,10 +89,28 @@ const Settings = () => {
             setInterest(false);
             setSoftware(false);
             setToggled(false);
+            setGallary(false);
           }}
         >
           Add your Learnings
         </Button>
+
+        <Button
+          bg={gallary ? "darkorange" : "#09386d"}
+          onClick={() => {
+            setAvatar(false);
+            setAssign(false);
+            setPersonal(false);
+            setProject(false);
+            setInterest(false);
+            setSoftware(false);
+            setToggled(false);
+            setGallary(true);
+          }}
+        >
+          Share a Memory
+        </Button>
+
         <Button
           bg={avatar ? "darkorange" : "#09386d"}
           onClick={() => {
@@ -99,6 +121,7 @@ const Settings = () => {
             setInterest(false);
             setSoftware(false);
             setToggled(false);
+            setGallary(false);
           }}
         >
           Update Avatar
@@ -113,6 +136,7 @@ const Settings = () => {
             setInterest(false);
             setSoftware(false);
             setToggled(false);
+            setGallary(false);
           }}
         >
           Update Personal Info
@@ -127,6 +151,7 @@ const Settings = () => {
             setInterest(false);
             setSoftware(false);
             setToggled(false);
+            setGallary(false);
           }}
         >
           Add Project
@@ -141,6 +166,7 @@ const Settings = () => {
             setInterest(true);
             setSoftware(false);
             setToggled(false);
+            setGallary(false);
           }}
         >
           Add Course Interest
@@ -155,6 +181,7 @@ const Settings = () => {
             setInterest(false);
             setSoftware(true);
             setToggled(false);
+            setGallary(false);
           }}
         >
           Add Most used Software
