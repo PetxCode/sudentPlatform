@@ -29,7 +29,7 @@ import { FiSettings } from "react-icons/fi";
 import { MdSlowMotionVideo } from "react-icons/md";
 
 const url = "https://studentbe1.herokuapp.com";
-const socket = io("http://localhost:2400");
+const socket = io("https://studentbe1.herokuapp.com");
 
 const StudentDetail = () => {
   const user = useSelector((state) => state.user);
