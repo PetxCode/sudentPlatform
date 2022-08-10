@@ -169,7 +169,7 @@ const Settings = () => {
             setGallary(false);
           }}
         >
-          Add Course Interest
+          Add Soft Skill
         </Button>
         <Button
           bg={software ? "darkorange" : "#09386d"}
@@ -184,7 +184,7 @@ const Settings = () => {
             setGallary(false);
           }}
         >
-          Add Most used Software
+          Add Core Skill
         </Button>
       </Holder>
     );

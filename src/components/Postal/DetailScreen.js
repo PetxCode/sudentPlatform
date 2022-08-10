@@ -23,12 +23,13 @@ import moment from "moment";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
 import LoadingState from "../LoadingState";
-
+import { AiFillCloseCircle } from "react-icons/ai";
 import { BsGrid3X3, BsBookmark, BsPersonBoundingBox } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import { MdSlowMotionVideo } from "react-icons/md";
 
 const url = "https://studentbe1.herokuapp.com";
+const socket = io("http://localhost:2400");
 
 const StudentDetail = () => {
   const user = useSelector((state) => state.user);
@@ -51,6 +52,33 @@ const StudentDetail = () => {
     await axios.get(`${url}/api/gallary/${id}`).then((res) => {
       setMyGallaryData(res.data.data);
     });
+  };
+
+  const DeleteDetail = async (del) => {
+    await axios
+      .delete(`${url}/api/gallary/${id}/${del}`)
+
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Memory Deleted",
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {});
+        setLoading(false);
+      })
+      .catch((error) => {
+        new Swal({
+          title: error.response.data.message,
+          text: `Please check and fix this ERROR`,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 3500,
+        }).then(() => {
+          setLoading(false);
+        });
+      });
   };
 
   const stackCreated = async (newID) => {
@@ -89,7 +117,19 @@ const StudentDetail = () => {
   useEffect(() => {
     fetchDataDetail(id);
     fetchGallaryataDetail(id);
-  }, []);
+
+    socket.on("addGallary", (newData) => {
+      fetchGallaryataDetail(id);
+    });
+
+    socket.on("online", (newData) => {
+      fetchDataDetail(id);
+    });
+
+    socket.on("delete", (deleteData) => {
+      fetchGallaryataDetail(id);
+    });
+  }, [id, myGallaryData]);
 
   return (
     <Container>
@@ -247,7 +287,14 @@ const StudentDetail = () => {
               <div>
                 <PostImages>
                   {myGallaryData?.gallary?.map((props) => (
-                    <ImagePost src={props.image} key={props._id} />
+                    <DivaVA>
+                      <ImagePost src={props.image} key={props._id} />
+                      <CloseIcon
+                        onClick={() => {
+                          DeleteDetail(props._id);
+                        }}
+                      />
+                    </DivaVA>
                   ))}
                 </PostImages>
               </div>
@@ -568,7 +615,15 @@ const StudentDetail = () => {
               <div>
                 <PostImages>
                   {myGallaryData?.gallary?.map((props) => (
-                    <ImagePost src={props.image} key={props._id} />
+                    <DivaVA>
+                      <ImagePost src={props.image} key={props._id} />
+                      <CloseIcon
+                        onClick={() => {
+                          DeleteDetail(props._id);
+                        }}
+                      />
+                    </DivaVA>
+
                     // <div>New</div>
                   ))}
                 </PostImages>
@@ -638,6 +693,34 @@ const StudentDetail = () => {
 };
 
 export default StudentDetail;
+const DivaVA = styled.div`
+  position: relative;
+  width: 175px;
+  height: 175px;
+  object-fit: cover;
+  margin: 5px;
+  @media screen and (max-width: 450px) {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin: 5px;
+  }
+`;
+
+const CloseIcon = styled(AiFillCloseCircle)`
+  position: absolute;
+  right: -3px;
+  top: 8px;
+  z-index: 200;
+  font-size: 20px;
+  color: red;
+  transition: all 350ms;
+
+  :hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+`;
 
 const ImagePost = styled.img`
   width: 175px;
@@ -657,6 +740,7 @@ const PostImages = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   display: flex;
+  padding-bottom: 20px;
 `;
 
 const Title = styled.div`

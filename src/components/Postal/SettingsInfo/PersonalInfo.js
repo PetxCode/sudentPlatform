@@ -112,22 +112,12 @@ const PersonalInfo = () => {
             <Blocker>Enter your Video URL</Blocker>
             <Input
               type="url"
-              defaultValue={userData.sponor}
+              defaultValue={userData.video}
               placeholder="Enter your Video URL"
               {...register("video")}
             />
           </InputHolder>
           <Error>{errors.video?.message}</Error>
-
-          {/* <InputHolder>
-            <Blocker>Experience</Blocker>
-            <Input
-              defaultValue={userData.experience}
-              placeholder="Enter Your Experience"
-              {...register("experience")}
-            /> */}
-          {/* </InputHolder>
-          <Error>{errors.experience?.message}</Error> */}
 
           <InputHolder>
             <Blocker>Phone Number</Blocker>
