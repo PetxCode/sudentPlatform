@@ -465,71 +465,115 @@ const StudentDetail = () => {
             </Hide>
           </Card>
           <Card2>
-            <About>Know me Better</About>
-            <VideoContent>
-              {myData.video ? (
-                <Video
-                  src={`https://www.youtube.com/embed/${
-                    myData.video?.split("/")[3]
-                  }`}
-                  controls
-                  frameborder="0"
-                  allow="autoplay; encrypted-media"
-                  allowfullscreen
-                  title="video"
-                />
-              ) : (
-                <Video
-                  src="https://www.youtube.com/embed/8ISwMYS_KkA"
-                  controls
-                  frameborder="0"
-                  allow="autoplay; encrypted-media"
-                  allowfullscreen
-                  title="video"
-                />
-              )}
-              <AboutMe>{myData.aboutYou}</AboutMe>
-            </VideoContent>
-            <Profile>{myData.desc}</Profile>
+            <div>
+              <Nav>
+                <NavHolder
+                  bg={about ? "bg" : ""}
+                  onClick={() => {
+                    setAbout(true);
+                    setMyGallary(false);
+                    console.log("Click");
+                  }}
+                >
+                  <NavIcon3 />
+                  <Title cap fs>
+                    About Me
+                  </Title>
+                </NavHolder>
 
-            <About>My Promise to Learning</About>
-            <VideoContent>
-              <DetailProfile>{myData.promise}</DetailProfile>
-            </VideoContent>
+                <NavHolder
+                  bg={myGallary ? "bg" : ""}
+                  onClick={() => {
+                    setAbout(false);
+                    setMyGallary(true);
+                  }}
+                >
+                  <NavIcon />
+                  <Title cap fs>
+                    Gallary
+                  </Title>
+                </NavHolder>
+              </Nav>
+            </div>
 
-            <About>Certifications Gotten</About>
-            <VideoContent>
-              <CertContent>
-                <Cert>
-                  <CertLogo src={azura} />
-                  <Text>Microsoft Azure Certificate</Text>
-                </Cert>
-                <Result>Yet to Obtain</Result>
-              </CertContent>
-              <CertContent>
-                <Cert>
-                  <CertLogo src={ibm} />
-                  <Text>IBM Data Structure & Algorithm Certificate</Text>
-                </Cert>
-                <Result>Yet to Obtain</Result>
-              </CertContent>
-              <CertContent>
-                <Cert>
-                  <CertLogo src={open} />
-                  <Text>
-                    OpenJS Node.js Application Developer (JSNAD) certificate
-                  </Text>
-                </Cert>
-                <Result>Yet to Obtain</Result>
-              </CertContent>
-              <CertContent>
-                <Cert>
-                  <CertLogo src={save} />
-                  <Text>Certified React Developer</Text>
-                </Cert>
-                <Result>Yet to Obtain</Result>
-              </CertContent>
-            </VideoContent>
+            {about ? (
+              <div>
+                <About>Know me Better</About>
+                <VideoContent>
+                  {myData.video ? (
+                    <Video
+                      src={`https://www.youtube.com/embed/${
+                        myData.video?.split("/")[3]
+                      }`}
+                      controls
+                      frameborder="0"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      title="video"
+                    />
+                  ) : (
+                    <Video
+                      src="https://www.youtube.com/embed/8ISwMYS_KkA"
+                      controls
+                      frameborder="0"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                      title="video"
+                    />
+                  )}
+
+                  <AboutMe>{myData.aboutYou}</AboutMe>
+                </VideoContent>
+                <Profile>{myData.desc}</Profile>
+                <About>My Promise to Learning</About>
+                <VideoContent>
+                  <DetailProfile>{myData.promise}</DetailProfile>
+                </VideoContent>
+
+                <About>Certifications Gotten</About>
+                <VideoContent>
+                  <CertContent>
+                    <Cert>
+                      <CertLogo src={azura} />
+                      <Text>Microsoft Azure Certificate</Text>
+                    </Cert>
+                    <Result>Yet to Obtain</Result>
+                  </CertContent>
+                  <CertContent>
+                    <Cert>
+                      <CertLogo src={ibm} />
+                      <Text>IBM Data Structure & Algorithm Certificate</Text>
+                    </Cert>
+                    <Result>Yet to Obtain</Result>
+                  </CertContent>
+                  <CertContent>
+                    <Cert>
+                      <CertLogo src={open} />
+                      <Text>
+                        OpenJS Node.js Application Developer (JSNAD) certificate
+                      </Text>
+                    </Cert>
+                    <Result>Yet to Obtain</Result>
+                  </CertContent>
+                  <CertContent>
+                    <Cert>
+                      <CertLogo src={save} />
+                      <Text>Certified React Developer</Text>
+                    </Cert>
+                    <Result>Yet to Obtain</Result>
+                  </CertContent>
+                </VideoContent>
+              </div>
+            ) : myGallary ? (
+              <div>
+                <PostImages>
+                  {myGallaryData?.gallary?.map((props) => (
+                    <ImagePost src={props.image} key={props._id} />
+                    // <div>New</div>
+                  ))}
+                </PostImages>
+              </div>
+            ) : null}
           </Card2>
           <View>
             <Card1>
@@ -600,6 +644,12 @@ const ImagePost = styled.img`
   height: 175px;
   object-fit: cover;
   margin: 5px;
+  @media screen and (max-width: 450px) {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    margin: 5px;
+  }
 `;
 
 const PostImages = styled.div`
@@ -1106,7 +1156,7 @@ const Card2 = styled.div`
   margin: 20px;
   width: 600px;
   background-color: white;
-  min-height: 700px;
+  min-height: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
