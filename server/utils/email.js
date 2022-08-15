@@ -14,6 +14,7 @@ oAuth.setCredentials({ refresh_token: GOOGLE_REFRESHTOKEN });
 
 // const url = "http://localhost:3000";
 const url = "https://codelab-student.web.app";
+const server = "https://studentbe1.herokuapp.com";
 
 const verifiedUser = async (email, user, value, token) => {
   try {
@@ -124,7 +125,7 @@ const resetUserPassword = async (email, user, value) => {
       from: "no-reply✉️  <skuulkude@gmail.com>",
       to: email,
       subject: "Password Reset Request",
-      html: ` <h3>
+      html: ` <p>
             There is an attent to change your password, 
             
             
@@ -138,7 +139,7 @@ const resetUserPassword = async (email, user, value) => {
             Use this <strong><a
             href="${url}/api/user/change/${user}/${value}"
             >Link to</a></strong> completely change your account password 
-        </h3>`,
+        </p>`,
     };
 
     const result = transporter.sendMail(mailOptions);

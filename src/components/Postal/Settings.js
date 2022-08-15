@@ -17,6 +17,7 @@ import EnterProject from "./SettingsInfo/EnterProject";
 import LearningScreen from "./SettingsInfo/LearningScreen";
 import { BsArrowDownSquare } from "react-icons/bs";
 import GallaryScreen from "./SettingsInfo/GallaryScreen";
+import PixGallaryScreen from "./SettingsInfo/PixGallary";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -30,7 +31,7 @@ const Settings = () => {
   const [software, setSoftware] = useState(false);
   const [assign, setAssign] = useState(true);
   const [gallary, setGallary] = useState(false);
-
+  const [pix, setPix] = useState(false);
   const [toggled, setToggled] = useState(false);
 
   return (
@@ -68,6 +69,8 @@ const Settings = () => {
               <LearningScreen />
             ) : gallary ? (
               <GallaryScreen />
+            ) : pix ? (
+              <PixGallaryScreen />
             ) : null}
           </CardWrapper>
         </PointedHolder>
@@ -79,10 +82,33 @@ const Settings = () => {
     return (
       <Holder>
         <TextCode>Your Secret: {user.secret}</TextCode>
+
+        <div>
+          {user.admin ? (
+            <Button
+              bg={pix ? "darkorange" : "#09386d"}
+              onClick={() => {
+                setPix(true);
+                setAssign(false);
+                setAvatar(false);
+                setPersonal(false);
+                setProject(false);
+                setInterest(false);
+                setSoftware(false);
+                setToggled(false);
+                setGallary(false);
+              }}
+            >
+              upload pix
+            </Button>
+          ) : null}
+        </div>
+
         <Button
           bg={assign ? "darkorange" : "#09386d"}
           onClick={() => {
             setAssign(true);
+            setPix(false);
             setAvatar(false);
             setPersonal(false);
             setProject(false);
@@ -99,6 +125,7 @@ const Settings = () => {
           bg={gallary ? "darkorange" : "#09386d"}
           onClick={() => {
             setAvatar(false);
+            setPix(false);
             setAssign(false);
             setPersonal(false);
             setProject(false);
@@ -115,6 +142,7 @@ const Settings = () => {
           bg={avatar ? "darkorange" : "#09386d"}
           onClick={() => {
             setAvatar(true);
+            setPix(false);
             setAssign(false);
             setPersonal(false);
             setProject(false);
@@ -130,6 +158,7 @@ const Settings = () => {
           bg={personal ? "darkorange" : "#09386d"}
           onClick={() => {
             setAvatar(false);
+            setPix(false);
             setAssign(false);
             setPersonal(true);
             setProject(false);
@@ -145,6 +174,7 @@ const Settings = () => {
           bg={project ? "darkorange" : "#09386d"}
           onClick={() => {
             setAvatar(false);
+            setPix(false);
             setPersonal(false);
             setAssign(false);
             setProject(true);
@@ -160,6 +190,7 @@ const Settings = () => {
           bg={interest ? "darkorange" : "#09386d"}
           onClick={() => {
             setAvatar(false);
+            setPix(false);
             setPersonal(false);
             setAssign(false);
             setProject(false);
@@ -176,6 +207,7 @@ const Settings = () => {
           onClick={() => {
             setAvatar(false);
             setPersonal(false);
+            setPix(false);
             setAssign(false);
             setProject(false);
             setInterest(false);

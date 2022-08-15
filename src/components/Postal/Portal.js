@@ -72,13 +72,13 @@ const Portal = () => {
                   )}
                 </ImageHolder>
                 <Name>{props.userName}</Name>
-                <NewText>My Choice Interest Area:</NewText>
+                <NewText>Top 3 Soft Skill Learnt:</NewText>
                 {props.interest ? (
                   <PortalInterest key={props._id} props={props} bg="#EFF6FF" />
                 ) : (
                   <div>no</div>
                 )}
-                <NewText>My Most preferred Software:</NewText>
+                <NewText>Top 3 Technical Skill Learnt:</NewText>
                 <Interest>
                   <SoftwareCourse key={props._id} props={props} bg="#EFFFF3" />
                 </Interest>

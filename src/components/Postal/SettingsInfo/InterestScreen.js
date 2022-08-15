@@ -79,11 +79,11 @@ const InterestedCourse = () => {
       {loading ? <LoadingState /> : null}
       <Card>
         <Form onSubmit={onSubmit}>
-          <Text>Updating Personal info</Text>
+          <Text>Adding Soft Skill Learnt</Text>
           <InputHolder>
-            <Blocker>Most Interested Course</Blocker>
+            <Blocker>Most Interested Soft Skill Learnt</Blocker>
             <Input
-              placeholder="Enter Your Most Interested Course"
+              placeholder="Enter Your Most Interested Soft Skill Learnt"
               {...register("title")}
             />
           </InputHolder>
@@ -91,7 +91,7 @@ const InterestedCourse = () => {
 
           <br />
           <Button type="submit" bg="darkorange">
-            Add This interest
+            Add This Soft Skill
           </Button>
         </Form>
       </Card>

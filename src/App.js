@@ -15,11 +15,9 @@ import ResetConfirm from "./components/Register/REsetConfirmed";
 import ResetScreen from "./components/Register/ResetScreen";
 import SignIn from "./components/Register/SignIn";
 import ScrollToTop from "./components/ToTop";
-import { io } from "socket.io-client";
 import StackedEnter from "./components/Postal/SettingsInfo/StackEntered";
 import LearningScreen from "./components/Postal/LearningScreen";
-
-const socket = io("http://localhost:2400");
+import GallaryScreen from "./components/Postal/GallaryScreen";
 
 const App = () => {
   return (
@@ -32,6 +30,7 @@ const App = () => {
             path="/detail/:id/learning/:props"
             element={<LearningScreen />}
           />
+          <Route path="/gallary" element={<GallaryScreen />} />
           <Route path="/detail/:id" element={<StudentDetail />} />
           <Route path="/stack/:id" element={<StackedEnter />} />
           <Route path="/about" element={<About />} />

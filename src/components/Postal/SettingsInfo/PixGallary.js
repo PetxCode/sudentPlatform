@@ -10,16 +10,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoadingState from "../../LoadingState";
+import logo from "../logo.png";
+
 const url = "https://studentbe1.herokuapp.com";
 
-const EnterSoftware = () => {
+const PixGallaryScreen = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const yupSchema = yup.object({
-    title: yup.string().required("Field must be filled"),
-  });
+  const yupSchema = yup.object({});
 
   const {
     handleSubmit,
@@ -31,22 +31,39 @@ const EnterSoftware = () => {
 
   const [userData, setUserData] = useState([]);
 
-  const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+  const [image, setImage] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const onHandleImage = (e) => {
+    const file = e.target.files[0];
+    const save = URL.createObjectURL(file);
+    setImage(save);
+    setAvatar(file);
+  };
+
+  const onSubmit = handleSubmit(async () => {
     setLoading(true);
+    const formData = new FormData();
+
+    formData.append("avatar", avatar);
+
+    const config = {
+      "content-type": "multipart/form-data",
+    };
+
     await axios
-      .post(`${url}/api/software/${user._id}/create`, data)
+      .post(`${url}/api/picture/create`, formData, config)
       .then((res) => {
         console.log(res.data.data);
 
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "New Software added successfully",
+          title: "Your image has been added to your Gallery successfully",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
-          navigate("/portal");
+          //   navigate("/portal");
         });
         setLoading(false);
       })
@@ -64,14 +81,14 @@ const EnterSoftware = () => {
   });
 
   const getUserData = async () => {
-    await axios.get(`${url}/api/interest/${user._id}`).then((res) => {
+    await axios.get(`${url}/api/user/${user._id}`).then((res) => {
       setUserData(res.data.data);
+      console.log(userData);
     });
   };
 
   useEffect(() => {
     getUserData();
-    console.log(userData);
   }, []);
 
   return (
@@ -79,19 +96,30 @@ const EnterSoftware = () => {
       {loading ? <LoadingState /> : null}
       <Card>
         <Form onSubmit={onSubmit}>
-          <Text>Add New Technical Skill Learnt</Text>
-          <InputHolder>
-            <Blocker>Technical Skill Learnt</Blocker>
-            <Input
-              placeholder="Enter Your Most Interesting Technical Skill Learnt"
-              {...register("title")}
-            />
-          </InputHolder>
-          <Error>{errors.title?.message}</Error>
+          <Text>Updating Display Picture</Text>
 
           <br />
+
+          {
+            <div>
+              {image === "" ? (
+                <ImageChoose src={logo} bg />
+              ) : (
+                <ImageChoose src={image} />
+              )}
+            </div>
+          }
+
+          <ImageInput
+            id="pix"
+            type="file"
+            accept="image/*"
+            onChange={onHandleImage}
+          />
+          <ImageLabel htmlFor="pix">Choose an Image</ImageLabel>
+
           <Button type="submit" bg="darkorange">
-            Add This Core Skill
+            Add to Gallary
           </Button>
         </Form>
       </Card>
@@ -99,7 +127,41 @@ const EnterSoftware = () => {
   );
 };
 
-export default EnterSoftware;
+export default PixGallaryScreen;
+
+const ImageLabel = styled.label`
+  margin: 10px 0;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: #004080;
+  color: white;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: all 350ms;
+  margin-top: 10px;
+
+  :hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+`;
+
+const ImageChoose = styled.img`
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  overflow: hidden;
+  object-fit: ${({ bg }) => (bg ? "contain" : "cover")};
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+`;
+
+const ImageInput = styled.input`
+  display: none;
+`;
 
 const Container = styled.div`
   width: 70%;
@@ -165,6 +227,10 @@ const Card = styled.div`
   width: 400px;
   min-height: 300px;
   border-radius: 5px;
+
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 
 const Span = styled(Link)`
@@ -185,6 +251,7 @@ const Text = styled.div`
   margin-top: 50px;
   margin-bottom: 20px;
   font-weight: 700;
+  text-align: center;
 `;
 
 const Image = styled.img`

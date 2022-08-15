@@ -40,7 +40,7 @@ const PasswordReset = () => {
 
     setLoading(true);
     await axios
-      .post(`http://localhost:2400/api/user/change/${id}/${token}`, {
+      .post(`${url}/api/user/change/${id}/${token}`, {
         password,
       })
       .then((res) => {

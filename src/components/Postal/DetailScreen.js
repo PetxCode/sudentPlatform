@@ -346,7 +346,7 @@ const StudentDetail = () => {
               </Label>
 
               <Label>
-                <LabelTitle>Skills Learnt:</LabelTitle>
+                <LabelTitle>Soft Skills:</LabelTitle>
                 <LabelData>
                   <PortalInterest
                     props={myData}
@@ -1259,7 +1259,7 @@ const Card2 = styled.div`
 const Card3 = styled.div`
   margin: 20px;
   width: 300px;
-  height: 500px;
+  height: 600px;
   background-color: lightblue;
   border-radius: 5px;
   display: flex;

@@ -56,6 +56,9 @@ const Header = () => {
               <Nav to="/portal">
                 <span>Portal</span>
               </Nav>
+              <Nav to="/gallary">
+                <span>Gallary</span>
+              </Nav>
             </Navigation>
           </Holder>
 

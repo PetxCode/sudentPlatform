@@ -59,6 +59,17 @@ const SiderBar = ({ setToggled }) => {
               Portal
             </Span>
           </Nav>
+          <Nav>
+            <Span
+              to="/gallary"
+              id="sidebar"
+              onClick={() => {
+                setToggled(false);
+              }}
+            >
+              Gallary
+            </Span>
+          </Nav>
           {user ? (
             <Nav>
               <Span

@@ -40,7 +40,7 @@ const LearningScreen = () => {
             <Focus>{props.desc}</Focus>
             <SubT>Learning use case</SubT>
             <Focus>{props.useCase}</Focus>
-
+            <Space />
             <Div>
               {moment(props.createdAt).format("MMMM Do YYYY | h:mm:ss a")}
             </Div>
@@ -54,11 +54,17 @@ const LearningScreen = () => {
 
 export default LearningScreen;
 
+const Space = styled.div`
+  flex: 1;
+  /* margin-bottom: 10px; */
+`;
+
 const Div = styled.div`
   font-size: 10px;
   text-transform: uppercase;
   color: #004080;
   font-weight: 700;
+  margin: 10px 0;
 `;
 
 const SubT = styled.div`
