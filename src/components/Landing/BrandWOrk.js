@@ -6,6 +6,7 @@ import pix2 from "./log/b1.svg";
 import pix3 from "./log/b2.svg";
 import pix4 from "./log/b3.svg";
 import pix5 from "./log/b4.svg";
+import SliderComp from "./SliderComp";
 
 const BrandWOrk = () => {
   return (
@@ -15,7 +16,6 @@ const BrandWOrk = () => {
           We wish to have trained over <span>1,000</span> Youths, to become
           FullStack Engineers that are Global Talents.
         </Text>
-
         <Brands>
           {" "}
           <Brand src={pix5} />
@@ -25,6 +25,7 @@ const BrandWOrk = () => {
           <Brand src={pix} style={{ objectFit: "cover" }} />
           <Brand src={pix4} />
         </Brands>
+        <SliderComp />
       </Wrapper>
     </Contianer>
   );
@@ -79,4 +80,6 @@ const Contianer = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 50px;
+  margin-bottom: 70px;
+  position: relative;
 `;

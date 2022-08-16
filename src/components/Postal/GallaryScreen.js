@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import LoadingState from "../LoadingState";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const socket = io("https://studentbe1.herokuapp.com");
 const url = "https://studentbe1.herokuapp.com";
@@ -75,18 +76,23 @@ const GallaryScreen = () => {
 
       <Wrapper>
         {userData?.map((props) => (
-          <Card key={props._id}>
-            {user.admin ? (
-              <Icon
-                onClick={() => {
-                  deleteUserData(props._id);
-                  console.log("Click");
-                }}
-              />
-            ) : null}
+          <div>
+            <Card key={props._id}>
+              {user.admin ? (
+                <Icon
+                  onClick={() => {
+                    deleteUserData(props._id);
+                    console.log("Click");
+                  }}
+                />
+              ) : null}
 
-            <Image src={props.image} />
-          </Card>
+              <Image src={props.image} />
+            </Card>
+            <DivaBest>
+              {moment(props.createdAt).format("MMMM Do YYYY | h:mm:ss a")}
+            </DivaBest>
+          </div>
         ))}
       </Wrapper>
       <Powered />
@@ -95,6 +101,19 @@ const GallaryScreen = () => {
 };
 
 export default GallaryScreen;
+
+const DivaBest = styled.div`
+  text-align: center;
+  font-size: 10px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #004080;
+
+  @media screen and (max-width: 600px) {
+    font-size: 7px;
+  }
+`;
 
 const Icon = styled(AiFillCloseCircle)`
   font-size: 20px;
@@ -150,6 +169,11 @@ const Card = styled.div`
   :hover {
     transform: scale(1.02);
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 150px;
+    height: 150px;
   }
 `;
 

@@ -55,7 +55,6 @@ const PixGallaryScreen = () => {
       .post(`${url}/api/picture/create`, formData, config)
       .then((res) => {
         console.log(res.data.data);
-
         Swal.fire({
           position: "center",
           icon: "success",

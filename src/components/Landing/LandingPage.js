@@ -5,6 +5,7 @@ import OurStacks from "./OurStacks";
 import PeopleTalks from "./PeopleTalk";
 import Powered from "./Powered";
 import ShowCase from "./ShowCase";
+import SliderComp from "./SliderComp";
 import Tracks from "./Tracks";
 
 const LandingPage = () => {
