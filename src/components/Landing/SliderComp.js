@@ -33,9 +33,9 @@ const SliderComp = () => {
               <Holder>
                 {/* <Tag>Ongoing</Tag> */}
                 <Stack>
-                  FullStack Software <span>Engineering</span>
+                  FullStack Software<span> Engineering</span>
                 </Stack>
-                <Para>Over 865 hours of rigorious Training</Para>
+                <Para>With over 865 hours of rigorious Training</Para>
                 <Para1>
                   Our programmes focus on building the skillsets, through
                   real-time project based learning, to get you ready to
@@ -44,9 +44,9 @@ const SliderComp = () => {
               </Holder>
               <Holder>
                 <Stack>
-                  Zero to Mastery in <span>FrontEnd</span> Engineering
+                  Zero to Mastery in<span> FrontEnd</span> Engineering
                 </Stack>
-                <Para>Over 865 hours of rigorious Training</Para>
+                <Para>With over 865 hours of rigorious Training</Para>
                 <Para1>
                   Our programmes focus on building the skillsets, through
                   real-time project based learning, to get you ready to
@@ -57,7 +57,7 @@ const SliderComp = () => {
                 <Stack>
                   Complete <span>BackEnd</span> proficiency
                 </Stack>
-                <Para>Over 865 hours of rigorious Training</Para>
+                <Para>With over 865 hours of rigorious Training</Para>
                 <Para1>
                   Our programmes focus on building the skillsets, through
                   real-time project based learning, to get you ready to
@@ -66,9 +66,9 @@ const SliderComp = () => {
               </Holder>
               <Holder>
                 <Stack>
-                  Building <span>transformational</span> Leaders
+                  Building<span> transformed</span> Leaders
                 </Stack>
-                <Para>Over 865 hours of rigorious Training</Para>
+                <Para>With over 865 hours of rigorious Training</Para>
                 <Para1>
                   Building practical, technical and soft skills combined with
                   network, relationship building and transformational leadership
@@ -98,10 +98,22 @@ const Para1 = styled.div`
   margin-top: 10px;
   text-transform: uppercase;
   opacity: 0.6;
+  /* color: black; */
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+  }
 `;
 
 const Para = styled.div`
   color: white;
+  line-height: 1;
+  font-size: 13px;
+  width: 90%;
+
+  @media screen and (max-width: 600px) {
+    font-size: 11px;
+  }
 `;
 
 const Stack = styled.div`
@@ -112,11 +124,21 @@ const Stack = styled.div`
   max-width: 600px;
   line-height: 1;
   margin-bottom: 5px;
+  width: 95%;
 
   span {
     margin: 0 5px;
+    /* color: #1e1f21; */
     color: darkorange;
     font-weight: 900;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 18px;
   }
 `;
 
@@ -134,6 +156,7 @@ const SliderSide = styled(Slider)`
   justify-content: center;
 `;
 const DDiv = styled.div`
+  margin-top: 10px;
   width: 90%;
   display: flex;
   align-items: center;
@@ -150,15 +173,21 @@ const Card = styled.div`
 const Wrapper = styled.div`
   width: 90%;
   max-width: 800px;
-  height: 200px;
-  background-color: #125b6a;
+  min-height: 200px;
+  /* background-color: #125b6a; */
+  background-color: #742e9d;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `;
 const Container = styled.div`
+  margin-top: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
   position: absolute;
   bottom: -120px;
+
+  @media screen and (max-width: 600px) {
+    bottom: -150px;
+  }
 `;

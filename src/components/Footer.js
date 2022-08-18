@@ -13,8 +13,8 @@ const Footer = () => {
   return (
     <Container>
       <Wrapper>
-        <Places title="orige" />
-        <Places title="wilmer" />
+        <Places title="Oregie" />
+        <Places title="Wilmer" />
         {/* <Places title="ojo road" /> */}
 
         <br />

@@ -18,6 +18,7 @@ import LearningScreen from "./SettingsInfo/LearningScreen";
 import { BsArrowDownSquare } from "react-icons/bs";
 import GallaryScreen from "./SettingsInfo/GallaryScreen";
 import PixGallaryScreen from "./SettingsInfo/PixGallary";
+import AddNewCandidate from "../Polls/AddCandidate";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -33,6 +34,7 @@ const Settings = () => {
   const [gallary, setGallary] = useState(false);
   const [pix, setPix] = useState(false);
   const [toggled, setToggled] = useState(false);
+  const [candidate, setCandidate] = useState(false);
 
   return (
     <Container>
@@ -71,6 +73,8 @@ const Settings = () => {
               <GallaryScreen />
             ) : pix ? (
               <PixGallaryScreen />
+            ) : candidate ? (
+              <AddNewCandidate />
             ) : null}
           </CardWrapper>
         </PointedHolder>
@@ -97,9 +101,32 @@ const Settings = () => {
                 setSoftware(false);
                 setToggled(false);
                 setGallary(false);
+                setCandidate(false);
               }}
             >
               upload pix
+            </Button>
+          ) : null}
+        </div>
+
+        <div>
+          {user.admin ? (
+            <Button
+              bg={candidate ? "darkorange" : "#09386d"}
+              onClick={() => {
+                setPix(false);
+                setAssign(false);
+                setAvatar(false);
+                setPersonal(false);
+                setProject(false);
+                setInterest(false);
+                setSoftware(false);
+                setToggled(false);
+                setGallary(false);
+                setCandidate(true);
+              }}
+            >
+              add candidate
             </Button>
           ) : null}
         </div>
@@ -116,6 +143,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(false);
+            setCandidate(false);
           }}
         >
           Add your Learnings
@@ -133,6 +161,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(true);
+            setCandidate(false);
           }}
         >
           Share a Memory
@@ -150,6 +179,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(false);
+            setCandidate(false);
           }}
         >
           Update Avatar
@@ -166,6 +196,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(false);
+            setCandidate(false);
           }}
         >
           Update Personal Info
@@ -182,6 +213,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(false);
+            setCandidate(false);
           }}
         >
           Add Project
@@ -198,6 +230,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(false);
+            setCandidate(false);
           }}
         >
           Add Soft Skill
@@ -214,6 +247,7 @@ const Settings = () => {
             setSoftware(true);
             setToggled(false);
             setGallary(false);
+            setCandidate(false);
           }}
         >
           Add Core Skill

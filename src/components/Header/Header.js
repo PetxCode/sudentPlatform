@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../State/GlobalState";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu, GiVote } from "react-icons/gi";
 import { FaRegWindowClose } from "react-icons/fa";
 import SiderBar from "./SiderBar";
 
@@ -74,6 +74,9 @@ const Header = () => {
                 </div>
                 <Setting to="/setting">
                   <AiFillSetting />
+                </Setting>
+                <Setting to="/vote">
+                  <GiVote />
                 </Setting>
                 <ButtonNav
                   onClick={async () => {

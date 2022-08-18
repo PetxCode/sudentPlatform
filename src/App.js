@@ -18,6 +18,7 @@ import ScrollToTop from "./components/ToTop";
 import StackedEnter from "./components/Postal/SettingsInfo/StackEntered";
 import LearningScreen from "./components/Postal/LearningScreen";
 import GallaryScreen from "./components/Postal/GallaryScreen";
+import VoteOurCeleb from "./components/Polls/VoteOurCeleb";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
       <ScrollToTop>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/vote" element={<VoteOurCeleb />} />
           <Route
             path="/detail/:id/learning/:props"
             element={<LearningScreen />}

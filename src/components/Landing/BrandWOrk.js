@@ -82,4 +82,8 @@ const Contianer = styled.div`
   padding-bottom: 50px;
   margin-bottom: 70px;
   position: relative;
+
+  @media screen and (max-width: 600px) {
+    margin-bottom: 120px;
+  }
 `;

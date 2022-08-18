@@ -27,8 +27,51 @@ app.use("/api/project", require("./router/projectRoute"));
 app.use("/api/learning", require("./router/learningRoute"));
 app.use("/api/gallary", require("./router/galleryRoute"));
 app.use("/api/picture", require("./router/pictureRoute"));
+app.use("/api/voteIntructor", require("./router/voteRouter"));
+app.use("/api/voteStudent", require("./router/voteStudentRouter"));
 
 const db = mongoose.connection;
+
+db.on("open", () => {
+  const observer = db.collection("voteinstructors").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      io.emit("instructorsData");
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("voteinstructors").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "update") {
+      console.log(change);
+      io.emit("instructorsVote");
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("votestudents").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      io.emit("studentsData");
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("votestudents").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "update") {
+      io.emit("studentsVote");
+    }
+  });
+});
 
 db.on("open", () => {
   const observer = db.collection("users").watch();
@@ -70,7 +113,6 @@ db.on("open", () => {
         image: change.fullDocument.image,
         createAt: change.fullDocument.createAt,
       };
-
       io.emit("newData", newData);
     }
   });
