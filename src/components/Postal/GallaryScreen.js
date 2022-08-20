@@ -89,7 +89,8 @@ const GallaryScreen = () => {
 
               <Image src={props.image} />
             </Card>
-            <DivaBest>
+            <DivaBest>{props.title}</DivaBest>
+            <DivaBest bg="5px">
               {moment(props.createdAt).format("MMMM Do YYYY | h:mm:ss a")}
             </DivaBest>
           </div>
@@ -105,7 +106,7 @@ export default GallaryScreen;
 const DivaBest = styled.div`
   text-align: center;
   font-size: 10px;
-  margin-bottom: 5px;
+  margin-bottom: ${({ bg }) => bg};
   font-weight: 700;
   text-transform: uppercase;
   color: #004080;

@@ -12,16 +12,59 @@ const ResultScreen = () => {
   const user = useSelector((state) => state.user);
   const [stateData, setStateData] = useState([]);
   const [stateDataII, setStateDataII] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
+  const [displayed, setDisplayed] = useState([]);
+  const [displayedII, setDisplayedII] = useState([]);
+  const [sortedDataII, setSortedDataII] = useState([]);
 
   const fetchData = async () => {
-    await axios.get(`${url}/api/voteStudent`).then((res) => {
+    await axios.get(`${url}/api/voteStudent/viewAll`).then((res) => {
       setStateData(res.data.data);
     });
   };
 
   const fetchDataII = async () => {
-    await axios.get(`${url}/api/voteIntructor`).then((res) => {
+    await axios.get(`${url}/api/voteIntructor/viewAll`).then((res) => {
       setStateDataII(res.data.data);
+    });
+  };
+
+  const sortData = (props) => {
+    return (a, b) => {
+      if (a[props] > b[props]) {
+        return -1;
+      } else {
+        return 0;
+      }
+    };
+  };
+
+  const displayedInstructorData = () => {
+    stateDataII.forEach((el) => {
+      const pass = { ...el, voter: el.user.length };
+      return displayedII.push(pass);
+    });
+    setSortedData(displayedII.sort(sortData("voter")));
+  };
+
+  const displayedStudentData = () => {
+    stateData.forEach((el) => {
+      const pass = { ...el, voter: el.user.length };
+      return displayed.push(pass);
+    });
+    setSortedDataII(displayed.sort(sortData("voter")));
+  };
+
+  const TestCase = () => {
+    stateData.forEach((el) => {
+      const pass = { ...el, voter: el.user.length };
+      return displayed.push(pass);
+    });
+  };
+  const TestCaseII = () => {
+    stateDataII.forEach((el) => {
+      const pass = { ...el, voter: el.user.length };
+      return displayedII.push(pass);
     });
   };
 
@@ -29,35 +72,59 @@ const ResultScreen = () => {
     fetchData();
     fetchDataII();
 
+    // TestCase();
+    // TestCaseII();
+
+    displayedInstructorData();
+    displayedStudentData();
+
     socket.on("instructorsData", () => {
-      fetchDataII();
+      displayedInstructorData();
     });
 
     socket.on("studentsData", () => {
-      fetchData();
+      displayedStudentData();
     });
-  }, []);
+
+    // console.log("sorted data found: ", sortedDataII);
+    // console.log("data found: ", stateData);
+  }, [stateDataII, stateData]);
 
   return (
     <Container>
       <MainTitle>Our Celebrities of the Week</MainTitle>
 
       <Wrapper>
-        {stateDataII?.map((props) => (
-          <Card>
-            <Image src={props.image} />
-            <Title>{props.name}</Title>
-            <Position>Best Instructor of the Week</Position>
-            <Position tt>{props.course}</Position>
-          </Card>
+        {sortedData?.map((props, i) => (
+          <div key={props._id}>
+            {i < 1 ? (
+              <Card key={props._id}>
+                <Image src={props.image} />
+                <Title>{props.name}</Title>
+                <Position>Best Instructor of the Week</Position>
+                <Position tt>{props.course}</Position> <br />
+                <Position>
+                  Total Votes Gotten: <span>{props.user.length}</span>
+                </Position>
+              </Card>
+            ) : null}
+          </div>
         ))}
 
-        {stateData?.map((props) => (
-          <Card>
-            <Image src={props.image} />
-            <Title>{props.name}</Title>
-            <Position>Best Student of the Week</Position>
-          </Card>
+        {sortedDataII?.map((props, i) => (
+          <div key={props._id}>
+            {i < 1 ? (
+              <Card key={props._id}>
+                <Image src={props.image} />
+                <Title>{props.name}</Title>
+                <Position>Best Student of the Week</Position>
+                <br />
+                <Position>
+                  Total Votes gotten: <span>{props.user.length}</span>
+                </Position>
+              </Card>
+            ) : null}
+          </div>
         ))}
       </Wrapper>
     </Container>
@@ -72,6 +139,12 @@ const MainTitle = styled.div`
   font-weight: 900;
   text-transform: uppercase;
   margin-bottom: 30px;
+
+  @media screen and (max-width: 500px) {
+    font-size: 25px;
+    line-height: 1.1;
+    width: 90%;
+  }
 `;
 
 const Image = styled.img`
@@ -86,6 +159,15 @@ const Position = styled.div`
   text-align: center;
   font-size: 12px;
   text-transform: ${({ tt }) => (tt ? "uppercase" : "normal")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    color: red;
+    font-weight: 700;
+    margin-left: 5px;
+  }
 `;
 
 const Title = styled.div`

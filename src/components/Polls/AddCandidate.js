@@ -9,6 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoadingState from "../LoadingState";
+import pix from "./logo.png";
+
 const url = "https://studentbe1.herokuapp.com";
 
 const AddNewCandidate = () => {
@@ -180,7 +182,7 @@ const AddNewCandidate = () => {
                       {image === "" ? (
                         <>
                           {userData.avatar ? (
-                            <ImageChoose src={userData.avatar} />
+                            <ImageChoose src={pix} />
                           ) : (
                             // <ImageChoose src={pix} bg />
                             <div>change</div>
@@ -240,7 +242,7 @@ const AddNewCandidate = () => {
                         {image === "" ? (
                           <>
                             {userData.avatar ? (
-                              <ImageChoose src={userData.avatar} />
+                              <ImageChoose src={pix} />
                             ) : (
                               // <ImageChoose src={pix} bg />
                               <div>change</div>

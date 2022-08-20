@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import p from "./p.jpg";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import InfoProps from "../Postal/InfoProps";
 
 const socket = io("https://studentbe1.herokuapp.com");
 const url = "https://studentbe1.herokuapp.com";
@@ -257,6 +255,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
+  text-align: center;
   padding: 10px 20px;
   background-color: ${({ bg }) => (bg ? "darkorange" : "transperent")};
   color: ${({ bg }) => (bg ? "white" : "black")};
@@ -264,7 +263,7 @@ const Header = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   margin: 10px;
-
+  line-height: 1;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 
@@ -272,6 +271,11 @@ const Header = styled.div`
   :hover {
     cursor: pointer;
     transform: scale(1.02);
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+    font-size: 12px;
   }
 `;
 const Switcher = styled.div`

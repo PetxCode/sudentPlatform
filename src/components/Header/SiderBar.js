@@ -70,6 +70,20 @@ const SiderBar = ({ setToggled }) => {
               Gallary
             </Span>
           </Nav>
+
+          {user ? (
+            <Nav>
+              <Span
+                to="/vote"
+                onClick={() => {
+                  setToggled(false);
+                }}
+              >
+                Vote
+              </Span>
+            </Nav>
+          ) : null}
+
           {user ? (
             <Nav>
               <Span
