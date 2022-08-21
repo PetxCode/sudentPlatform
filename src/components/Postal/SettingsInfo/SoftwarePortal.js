@@ -22,7 +22,7 @@ const SoftwarePortal = ({ props, bg, color }) => {
     <div>
       <Interest>
         {stateData?.software?.map((props) => (
-          <Interested bg={bg} color={color}>
+          <Interested bg={bg} color={color} key={props._id}>
             {props.title}
           </Interested>
         ))}

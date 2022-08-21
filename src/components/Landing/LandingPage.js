@@ -17,7 +17,7 @@ const LandingPage = () => {
       <BrandWOrk />
       <ResultScreen />
       <GoalScreen />
-      {/* <DaterScreen /> */}
+      <DaterScreen />
       <Tracks />
       <ShowCase />
       <Powered />

@@ -20,7 +20,7 @@ const getEvent = async (req, res) => {
 
 const createEvent = async (req, res) => {
   try {
-    const { title, desc, date, month, time } = req.body;
+    const { title, desc, date, month, time, year } = req.body;
 
     const pix = await eventModel.create({
       title,
@@ -28,6 +28,7 @@ const createEvent = async (req, res) => {
       date,
       month,
       time,
+      year,
     });
     res.status(200).json({ message: "gotten", data: pix });
   } catch (error) {
@@ -49,6 +50,45 @@ const editEvent = async (req, res) => {
           date,
           month,
           time,
+          year,
+        },
+        { new: true }
+      );
+      res.status(200).json({ message: "Edited", data: pix });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const doneEvent = async (req, res) => {
+  try {
+    const pixID = await eventModel.findById(req.params.id);
+
+    if (pixID) {
+      const pix = await eventModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          done: true,
+        },
+        { new: true }
+      );
+      res.status(200).json({ message: "Edited", data: pix });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const unDoneEvent = async (req, res) => {
+  try {
+    const pixID = await eventModel.findById(req.params.id);
+
+    if (pixID) {
+      const pix = await eventModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          done: false,
         },
         { new: true }
       );
@@ -80,4 +120,6 @@ module.exports = {
   getEvent,
   getEvents,
   editEvent,
+  unDoneEvent,
+  doneEvent,
 };

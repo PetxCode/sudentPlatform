@@ -17,6 +17,12 @@ const eventModel = mongoose.Schema(
     time: {
       type: String,
     },
+    year: {
+      type: String,
+    },
+    done: {
+      type: Boolean,
+    },
   },
   { timestamps: true }
 );

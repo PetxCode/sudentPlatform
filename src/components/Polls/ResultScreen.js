@@ -1,32 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import p from "./p.jpg";
 import { io } from "socket.io-client";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 const url = "https://studentbe1.herokuapp.com";
 const socket = io("https://studentbe1.herokuapp.com");
 
 const ResultScreen = () => {
-  const user = useSelector((state) => state.user);
-  const [stateData, setStateData] = useState([]);
-  const [stateDataII, setStateDataII] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [sortedDataII, setSortedDataII] = useState([]);
-
-  const fetchData = async () => {
-    await axios.get(`${url}/api/voteStudent/viewAll`).then((res) => {
-      setStateData(res.data.data);
-    });
-  };
-
-  const fetchDataII = async () => {
-    await axios.get(`${url}/api/voteIntructor/viewAll`).then((res) => {
-      setStateDataII(res.data.data);
-      console.log(stateDataII);
-    });
-  };
 
   const sortData = (props) => {
     return (a, b) => {
@@ -38,19 +20,21 @@ const ResultScreen = () => {
     };
   };
 
-  const displayed = () => {
-    setSortedData(stateData.sort(sortData("voter")));
+  const fetchData = async () => {
+    await axios.get(`${url}/api/voteStudent/viewAll`).then((res) => {
+      setSortedData(res.data.data.sort(sortData("voter")));
+    });
   };
 
-  const displayedII = () => {
-    setSortedDataII(stateDataII.sort(sortData("voter")));
+  const fetchDataII = async () => {
+    await axios.get(`${url}/api/voteIntructor/viewAll`).then((res) => {
+      setSortedDataII(res.data.data.sort(sortData("voter")));
+    });
   };
 
   useEffect(() => {
     fetchData();
     fetchDataII();
-    displayedII();
-    displayed();
 
     socket.on("instructorsData", () => {
       fetchDataII();
@@ -59,7 +43,15 @@ const ResultScreen = () => {
     socket.on("studentsData", () => {
       fetchData();
     });
-  }, [stateData, stateDataII]);
+
+    socket.on("studentsVote", () => {
+      fetchData();
+    });
+
+    socket.on("instructorsVote", () => {
+      fetchDataII();
+    });
+  }, []);
 
   return (
     <Container>

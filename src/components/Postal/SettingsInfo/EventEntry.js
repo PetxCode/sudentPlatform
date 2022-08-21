@@ -23,7 +23,9 @@ const EnterEvent = () => {
     title: yup.string().required("Field must be filled"),
     date: yup.string().required("Field must be filled"),
     desc: yup.string().required("Field must be filled"),
-    // capture: yup.string().required("Field must be filled"),
+    month: yup.string().required("Field must be filled"),
+    time: yup.string().required("Field must be filled"),
+    year: yup.string().required("Field must be filled"),
   });
 
   const {
@@ -37,7 +39,7 @@ const EnterEvent = () => {
   const [userData, setUserData] = useState([]);
 
   const onSubmit = handleSubmit(async (data) => {
-    const { title, desc, date } = data;
+    const { title, desc, date, time, month, year } = data;
 
     setLoading(true);
     await axios
@@ -45,6 +47,9 @@ const EnterEvent = () => {
         title,
         desc,
         date,
+        time,
+        month,
+        year,
         // capture: builtFor,
       })
 
@@ -54,11 +59,11 @@ const EnterEvent = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "New Project added successfully",
+          title: "New Event added successfully",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
-          navigate("/portal");
+          // navigate("/portal");
         });
         setLoading(false);
       })
@@ -94,13 +99,13 @@ const EnterEvent = () => {
           <Text>Add New Event</Text>
 
           <InputHolder>
-            <Blocker>Project Title</Blocker>
+            <Blocker>Event Title</Blocker>
             <Input placeholder="Title this Project" {...register("title")} />
           </InputHolder>
           <Error>{errors.title?.message}</Error>
 
           <InputHolder>
-            <Blocker>Brief description </Blocker>
+            <Blocker>Brief description of the Event</Blocker>
             <InputArea
               placeholder="Enter a Brief description about this Event"
               {...register("desc")}
@@ -109,10 +114,40 @@ const EnterEvent = () => {
           <Error>{errors.desc?.message}</Error>
 
           <InputHolder>
+            <Blocker>Enter Event Month</Blocker>
+            <Input
+              placeholder="Enter Event Month eg: February"
+              {...register("month")}
+            />
+          </InputHolder>
+          <Error>{errors.month?.message}</Error>
+
+          <InputHolder>
             <Blocker>Enter Event Date</Blocker>
-            <Input placeholder="Enter Event Date" {...register("date")} />
+            <Input
+              placeholder="Enter Event Date eg: Saturday 10th,"
+              {...register("date")}
+            />
           </InputHolder>
           <Error>{errors.date?.message}</Error>
+
+          <InputHolder>
+            <Blocker>Enter Event Time</Blocker>
+            <Input
+              placeholder="Enter Event Time eg: 10:00am"
+              {...register("time")}
+            />
+          </InputHolder>
+          <Error>{errors.time?.message}</Error>
+
+          <InputHolder>
+            <Blocker>Enter Event Year</Blocker>
+            <Input
+              placeholder="Enter Event Year eg: 2022"
+              {...register("year")}
+            />
+          </InputHolder>
+          <Error>{errors.year?.message}</Error>
 
           <br />
           <Button type="submit" bg="darkorange">

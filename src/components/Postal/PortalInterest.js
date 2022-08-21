@@ -6,7 +6,6 @@ const url = "https://studentbe1.herokuapp.com";
 
 const PortalInterest = ({ props, bg, color }) => {
   const [stateData, setStateData] = useState({});
-  console.log(props);
   const fetchData = async () => {
     await axios.get(`${url}/api/interest/${props._id}/limit`).then((res) => {
       setStateData(res.data.data);

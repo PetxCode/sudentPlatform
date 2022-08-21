@@ -109,7 +109,7 @@ const VoteOurCeleb = () => {
         {student ? (
           <Wrapper>
             {stateData?.map((props) => (
-              <Card>
+              <Card key={props._id}>
                 <Image src={props.image} />
                 <Title>{props.name}</Title>
                 <Position>Best Student of the Week</Position>
@@ -145,7 +145,7 @@ const VoteOurCeleb = () => {
         ) : instructor ? (
           <Wrapper>
             {stateDataII?.map((props) => (
-              <Card>
+              <Card key={props._id}>
                 <Image src={props.image} />
                 <Title>{props.name}</Title>
                 <Position>Best Instructor of the Week</Position>

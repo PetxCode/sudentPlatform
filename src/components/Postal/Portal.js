@@ -18,7 +18,6 @@ const url = "https://studentbe1.herokuapp.com";
 const socket = io("https://studentbe1.herokuapp.com");
 
 const Portal = () => {
-  console.log("check: ", navigator.onLine);
   const user = useSelector((state) => state.user);
   const [stateData, setStateData] = useState([]);
 

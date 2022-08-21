@@ -11,9 +11,19 @@ const GoalScreen = () => {
           <Title>2026 Game Plan</Title>
         </ImageHolder>
         <SubTitle>
-          Proprietary technologies, new business models and stakeholder
-          alliances enable us to continue to generate long-term value in the
-          energy transition.
+          For there to be significant change(Positive) across any community, Two
+          Generation most be able to see themeselves and meet up with each
+          other...
+          <br />
+          <br />
+          The Older bring WISDOM and SKILL, while the Younger bring STRENGTH and
+          TENACITY, these are the elements needed to transform any community for
+          GOOD.
+          <br />
+          <br />
+          For us: We are using Transformational Leadership as an element to
+          change the Ajegunle community for GOOD, using Software Engineering as
+          a Tool to Achieve our lofty Goal for the community...!
         </SubTitle>
       </Header>
       <br />
@@ -82,10 +92,11 @@ const ValueHolder = styled.div`
 
 const Value = styled.div`
   font-size: 60px;
-  font-weight: 500;
+  font-weight: 700;
   margin: 0;
   line-height: 0;
-
+  color: #004080;
+  letter-spacing: 0px;
   background: green;
 `;
 
@@ -121,14 +132,19 @@ const Hold = styled.div`
 const SubTitle = styled.div`
   font-size: 20px;
   line-height: 1.2;
+  width: 85%;
+  text-align: center;
 
   @media screen and (max-width: 600px) {
     font-size: 15px;
+    width: 90%;
   }
 `;
 
 const Title = styled.div`
   font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
 `;
 
 const Line = styled.div`
