@@ -13,8 +13,6 @@ const ResultScreen = () => {
   const [stateData, setStateData] = useState([]);
   const [stateDataII, setStateDataII] = useState([]);
   const [sortedData, setSortedData] = useState([]);
-  const [displayed, setDisplayed] = useState([]);
-  const [displayedII, setDisplayedII] = useState([]);
   const [sortedDataII, setSortedDataII] = useState([]);
 
   const fetchData = async () => {
@@ -26,6 +24,7 @@ const ResultScreen = () => {
   const fetchDataII = async () => {
     await axios.get(`${url}/api/voteIntructor/viewAll`).then((res) => {
       setStateDataII(res.data.data);
+      console.log(stateDataII);
     });
   };
 
@@ -39,63 +38,35 @@ const ResultScreen = () => {
     };
   };
 
-  const displayedInstructorData = () => {
-    stateDataII.forEach((el) => {
-      const pass = { ...el, voter: el.user.length };
-      return displayedII.push(pass);
-    });
-    setSortedData(displayedII.sort(sortData("voter")));
+  const displayed = () => {
+    setSortedData(stateData.sort(sortData("voter")));
   };
 
-  const displayedStudentData = () => {
-    stateData.forEach((el) => {
-      const pass = { ...el, voter: el.user.length };
-      return displayed.push(pass);
-    });
-    setSortedDataII(displayed.sort(sortData("voter")));
-  };
-
-  const TestCase = () => {
-    stateData.forEach((el) => {
-      const pass = { ...el, voter: el.user.length };
-      return displayed.push(pass);
-    });
-  };
-  const TestCaseII = () => {
-    stateDataII.forEach((el) => {
-      const pass = { ...el, voter: el.user.length };
-      return displayedII.push(pass);
-    });
+  const displayedII = () => {
+    setSortedDataII(stateDataII.sort(sortData("voter")));
   };
 
   useEffect(() => {
     fetchData();
     fetchDataII();
-
-    // TestCase();
-    // TestCaseII();
-
-    displayedInstructorData();
-    displayedStudentData();
+    displayedII();
+    displayed();
 
     socket.on("instructorsData", () => {
-      displayedInstructorData();
+      fetchDataII();
     });
 
     socket.on("studentsData", () => {
-      displayedStudentData();
+      fetchData();
     });
-
-    // console.log("sorted data found: ", sortedDataII);
-    // console.log("data found: ", stateData);
-  }, [stateDataII, stateData]);
+  }, [stateData, stateDataII]);
 
   return (
     <Container>
       <MainTitle>Our Celebrities of the Week</MainTitle>
 
       <Wrapper>
-        {sortedData?.map((props, i) => (
+        {sortedDataII?.map((props, i) => (
           <div key={props._id}>
             {i < 1 ? (
               <Card key={props._id}>
@@ -111,7 +82,7 @@ const ResultScreen = () => {
           </div>
         ))}
 
-        {sortedDataII?.map((props, i) => (
+        {sortedData?.map((props, i) => (
           <div key={props._id}>
             {i < 1 ? (
               <Card key={props._id}>
