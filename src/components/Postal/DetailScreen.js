@@ -331,10 +331,6 @@ const StudentDetail = () => {
             ) : myStat ? (
               <div>
                 <div>
-                  {/* <div style={{ fontSize: "40px", color: "red" }}>11</div> */}
-                </div>
-                {/* {myStatData?.stat?.map((props) => // ))}( */}
-                <div>
                   <StatScreen
                   // key={props._id} props={props}
                   />
@@ -682,6 +678,14 @@ const StudentDetail = () => {
                     // <div>New</div>
                   ))}
                 </PostImages>
+              </div>
+            ) : myStat ? (
+              <div>
+                <div>
+                  <StatScreen
+                  // key={props._id} props={props}
+                  />
+                </div>
               </div>
             ) : null}
           </Card2>

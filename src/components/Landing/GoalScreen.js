@@ -63,7 +63,8 @@ const GoalScreen = () => {
         <NewLine />
         <br />
         <Goal>
-          <Value>{title}</Value>
+          {/* <Value>{title}</Value> */}
+          <TitleData>{title}</TitleData>
           <ValueHolder>
             <ValueFig>{newTitle}</ValueFig>
             <ValueFig>{newTitle2}</ValueFig>
@@ -77,7 +78,25 @@ const GoalScreen = () => {
 
 export default GoalScreen;
 
-const Div = styled.div``;
+const Div = styled.div`
+  /* font-weight: 700;
+  margin: 0;
+  color: #004080;
+  letter-spacing: 0px;
+  background: green;
+  line-height: 1.2px;
+  text-decoration: none; */
+`;
+
+const TitleData = styled.div`
+  font-size: 60px;
+  font-weight: 700;
+  margin: 0;
+  color: #004080;
+  letter-spacing: 0px;
+  line-height: 1.2px;
+  text-decoration: none;
+`;
 
 const ValueFig = styled.div`
   margin: 0 5px;
@@ -94,11 +113,11 @@ const Value = styled.div`
   font-size: 60px;
   font-weight: 700;
   margin: 0;
-  line-height: 0;
   color: #004080;
   letter-spacing: 0px;
   background: green;
   line-height: 1.2px;
+  text-decoration: none;
 `;
 
 const Goal = styled.div`

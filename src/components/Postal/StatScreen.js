@@ -38,7 +38,7 @@ const StatScreen = () => {
               <Holder key={props._id}>
                 <Diva>Week {i + 5} </Diva>
                 <Row>
-                  <Chart h={`${props.sum * 40}px`} c="#D61C4E" />
+                  <Chart1 h={`${props.sum * 40}px`} c="#D61C4E" />
                 </Row>
               </Holder>
             ))}
@@ -138,6 +138,12 @@ const Row = styled.div`
   display: flex;
   justify-content: center;
   align-items: baseline;
+`;
+
+const Chart1 = styled.div`
+  width: 20px;
+  height: ${({ h }) => h};
+  background-color: ${({ c }) => c};
 `;
 
 const Chart = styled.div`
