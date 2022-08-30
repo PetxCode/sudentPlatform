@@ -24,9 +24,12 @@ import { io } from "socket.io-client";
 import Swal from "sweetalert2";
 import LoadingState from "../LoadingState";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { BiStats } from "react-icons/bi";
+import { ImStatsDots } from "react-icons/im";
 import { BsGrid3X3, BsBookmark, BsPersonBoundingBox } from "react-icons/bs";
 import { FiSettings } from "react-icons/fi";
 import { MdSlowMotionVideo } from "react-icons/md";
+import StatScreen from "./StatScreen";
 
 const url = "https://studentbe1.herokuapp.com";
 const socket = io("https://studentbe1.herokuapp.com");
@@ -41,6 +44,7 @@ const StudentDetail = () => {
   const [loading, setLoading] = useState(false);
 
   const [stacked, setStacked] = useState("");
+  const [myStatData, setMyStatStat] = useState({});
 
   const fetchDataDetail = async (id) => {
     await axios.get(`${url}/api/project/${id}`).then((res) => {
@@ -51,6 +55,12 @@ const StudentDetail = () => {
   const fetchGallaryataDetail = async (id) => {
     await axios.get(`${url}/api/gallary/${id}`).then((res) => {
       setMyGallaryData(res.data.data);
+    });
+  };
+
+  const fetchStat = async (id) => {
+    await axios.get(`${url}/api/stat/${id}`).then((res) => {
+      setMyStatStat(res.data.data);
     });
   };
 
@@ -111,12 +121,18 @@ const StudentDetail = () => {
     setStacked("");
   };
 
+  const [myStat, setMyStat] = useState(false);
   const [about, setAbout] = useState(true);
   const [myGallary, setMyGallary] = useState(false);
 
   useEffect(() => {
     fetchDataDetail(id);
     fetchGallaryataDetail(id);
+    fetchStat(id);
+
+    socket.on("stat", (newData) => {
+      fetchStat(id);
+    });
 
     socket.on("addGallary", (newData) => {
       fetchGallaryataDetail(id);
@@ -187,11 +203,24 @@ const StudentDetail = () => {
             <div>
               <Nav>
                 <NavHolder
+                  bg={myStat ? "bg" : ""}
+                  onClick={() => {
+                    setAbout(false);
+                    setMyGallary(false);
+                    setMyStat(true);
+                  }}
+                >
+                  <NavIcon4 />
+                  <Title cap fs>
+                    My Stat
+                  </Title>
+                </NavHolder>
+                <NavHolder
                   bg={about ? "bg" : ""}
                   onClick={() => {
                     setAbout(true);
                     setMyGallary(false);
-                    console.log("Click");
+                    setMyStat(false);
                   }}
                 >
                   <NavIcon3 />
@@ -205,6 +234,7 @@ const StudentDetail = () => {
                   onClick={() => {
                     setAbout(false);
                     setMyGallary(true);
+                    setMyStat(false);
                   }}
                 >
                   <NavIcon />
@@ -297,6 +327,18 @@ const StudentDetail = () => {
                     </DivaVA>
                   ))}
                 </PostImages>
+              </div>
+            ) : myStat ? (
+              <div>
+                <div>
+                  {/* <div style={{ fontSize: "40px", color: "red" }}>11</div> */}
+                </div>
+                {/* {myStatData?.stat?.map((props) => // ))}( */}
+                <div>
+                  <StatScreen
+                  // key={props._id} props={props}
+                  />
+                </div>
               </div>
             ) : null}
           </Card2>
@@ -514,6 +556,19 @@ const StudentDetail = () => {
           <Card2>
             <div>
               <Nav>
+                <NavHolder
+                  bg={myStat ? "bg" : ""}
+                  onClick={() => {
+                    setAbout(false);
+                    setMyGallary(false);
+                    setMyStat(true);
+                  }}
+                >
+                  <NavIcon4 />
+                  <Title cap fs>
+                    My Stat
+                  </Title>
+                </NavHolder>
                 <NavHolder
                   bg={about ? "bg" : ""}
                   onClick={() => {
@@ -748,6 +803,11 @@ const Title = styled.div`
   font-size: ${({ fs }) => (fs ? "10px" : "12px")};
   font-weight: ${({ fs }) => (fs ? "500" : "normal")};
   color: ${({ fs }) => (fs ? "lightgray" : "black")};
+`;
+
+const NavIcon4 = styled(ImStatsDots)`
+  font-size: 10px;
+  margin-right: 3px;
 `;
 
 const NavIcon3 = styled(BsPersonBoundingBox)`

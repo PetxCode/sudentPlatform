@@ -19,6 +19,17 @@ const VoteOurCeleb = () => {
   const [stateDataStudent, setStateDataStudent] = useState([]);
   const [stateDataStudentII, setStateDataStudentII] = useState([]);
 
+  const [studentToggled, setStudentToggled] = useState(false);
+  const [instructorToggled, setInstructorToggled] = useState(false);
+
+  const onStudentToggled = () => {
+    setStudentToggled(!studentToggled);
+  };
+
+  const onInstructorToggled = () => {
+    setInstructorToggled(!instructorToggled);
+  };
+
   const resetData = async () => {
     await axios.delete(`${url}/api/voteIntructor/deleteAll`);
     await axios.delete(`${url}/api/voteStudent/deleteAll`);

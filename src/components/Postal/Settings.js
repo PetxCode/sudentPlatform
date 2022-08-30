@@ -20,6 +20,7 @@ import GallaryScreen from "./SettingsInfo/GallaryScreen";
 import PixGallaryScreen from "./SettingsInfo/PixGallary";
 import AddNewCandidate from "../Polls/AddCandidate";
 import EnterEvent from "./SettingsInfo/EventEntry";
+import LearningStat from "./SettingsInfo/LearningStat";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -37,6 +38,7 @@ const Settings = () => {
   const [toggled, setToggled] = useState(false);
   const [candidate, setCandidate] = useState(false);
   const [event, setEvent] = useState(false);
+  const [stat, setStat] = useState(false);
 
   return (
     <Container>
@@ -79,6 +81,8 @@ const Settings = () => {
               <AddNewCandidate />
             ) : event ? (
               <EnterEvent />
+            ) : stat ? (
+              <LearningStat />
             ) : null}
           </CardWrapper>
         </PointedHolder>
@@ -91,6 +95,27 @@ const Settings = () => {
       <Holder>
         <TextCode>Your Secret: {user.secret}</TextCode>
 
+        <div>
+          <Button
+            bg={stat ? "darkorange" : "#09386d"}
+            onClick={() => {
+              setPix(false);
+              setAssign(false);
+              setAvatar(false);
+              setPersonal(false);
+              setProject(false);
+              setInterest(false);
+              setSoftware(false);
+              setToggled(false);
+              setGallary(false);
+              setCandidate(false);
+              setStat(true);
+              setEvent(false);
+            }}
+          >
+            Add Learning Stat
+          </Button>
+        </div>
         <div>
           {user.admin ? (
             <Button
@@ -106,6 +131,7 @@ const Settings = () => {
                 setToggled(false);
                 setGallary(false);
                 setCandidate(false);
+                setStat(false);
                 setEvent(true);
               }}
             >
@@ -129,6 +155,7 @@ const Settings = () => {
                 setToggled(false);
                 setGallary(false);
                 setCandidate(false);
+                setStat(false);
                 setEvent(false);
               }}
             >
@@ -152,6 +179,7 @@ const Settings = () => {
                 setToggled(false);
                 setGallary(false);
                 setCandidate(true);
+                setStat(false);
                 setEvent(false);
               }}
             >
@@ -172,6 +200,7 @@ const Settings = () => {
             setSoftware(false);
             setToggled(false);
             setGallary(false);
+            setStat(false);
             setEvent(false);
             setCandidate(false);
           }}
@@ -192,6 +221,7 @@ const Settings = () => {
             setToggled(false);
             setGallary(true);
             setCandidate(false);
+            setStat(false);
             setEvent(false);
           }}
         >
@@ -209,6 +239,7 @@ const Settings = () => {
             setInterest(false);
             setSoftware(false);
             setToggled(false);
+            setStat(false);
             setGallary(false);
             setCandidate(false);
             setEvent(false);
@@ -227,6 +258,7 @@ const Settings = () => {
             setInterest(false);
             setSoftware(false);
             setToggled(false);
+            setStat(false);
             setGallary(false);
             setCandidate(false);
             setEvent(false);
@@ -244,6 +276,7 @@ const Settings = () => {
             setProject(true);
             setInterest(false);
             setSoftware(false);
+            setStat(false);
             setToggled(false);
             setGallary(false);
             setCandidate(false);
@@ -259,6 +292,7 @@ const Settings = () => {
             setPix(false);
             setPersonal(false);
             setAssign(false);
+            setStat(false);
             setProject(false);
             setInterest(true);
             setSoftware(false);
@@ -276,6 +310,7 @@ const Settings = () => {
             setAvatar(false);
             setPersonal(false);
             setPix(false);
+            setStat(false);
             setAssign(false);
             setProject(false);
             setInterest(false);

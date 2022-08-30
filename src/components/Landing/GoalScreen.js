@@ -98,6 +98,7 @@ const Value = styled.div`
   color: #004080;
   letter-spacing: 0px;
   background: green;
+  line-height: 1.2px;
 `;
 
 const Goal = styled.div`
@@ -130,7 +131,7 @@ const Hold = styled.div`
 `;
 
 const SubTitle = styled.div`
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.2;
   width: 85%;
   text-align: center;
@@ -145,6 +146,11 @@ const Title = styled.div`
   font-size: 30px;
   text-transform: uppercase;
   font-weight: 700;
+
+  @media screen and (max-width: 600px) {
+    line-height: 1;
+    font-size: 20px;
+  }
 `;
 
 const Line = styled.div`
@@ -163,6 +169,7 @@ const ImageHolder = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  align-items: center;
 `;
 
 const Header = styled.div`

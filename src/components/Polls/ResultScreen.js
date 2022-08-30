@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { io } from "socket.io-client";
 import axios from "axios";
+import GraphChat from "./GraphChat";
+import GraphChatII from "./GraphChatII";
 
 const url = "https://studentbe1.herokuapp.com";
 const socket = io("https://studentbe1.herokuapp.com");
@@ -67,7 +69,9 @@ const ResultScreen = () => {
                 <Position>Best Instructor of the Week</Position>
                 <Position tt>{props.course}</Position> <br />
                 <Position>
-                  Total Votes Gotten: <span>{props.user.length}</span>
+                  <span>Instructor's Voting Result</span>
+                  <Br />
+                  <GraphChatII />
                 </Position>
               </Card>
             ) : null}
@@ -83,7 +87,9 @@ const ResultScreen = () => {
                 <Position>Best Student of the Week</Position>
                 <br />
                 <Position>
-                  Total Votes gotten: <span>{props.user.length}</span>
+                  <span>Student's Voting Result </span>
+                  <Br />
+                  <GraphChat />
                 </Position>
               </Card>
             ) : null}
@@ -95,6 +101,10 @@ const ResultScreen = () => {
 };
 
 export default ResultScreen;
+
+const Br = styled.div`
+  margin-bottom: 5px;
+`;
 
 const MainTitle = styled.div`
   font-size: 30px;
@@ -125,11 +135,13 @@ const Position = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  text-transform: ${({ tt }) => (tt ? "uppercase" : "normal")};
 
   span {
     color: red;
     font-weight: 700;
-    margin-left: 5px;
+    font-size: 12px;
   }
 `;
 

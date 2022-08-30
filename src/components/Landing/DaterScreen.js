@@ -55,7 +55,7 @@ const DaterScreen = () => {
       <br />
 
       <CardHolder>
-        <Div>Event for this Month</Div>
+        <Div>Activities/Events to spice up learning</Div>
       </CardHolder>
 
       <Wrap>
@@ -104,15 +104,24 @@ const Wrap = styled.div`
 `;
 
 const Desc = styled.div`
-  font-weight: 600;
-  line-height: 1.2;
-  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 13px;
   margin-top: 20px;
   margin-bottom: 60px;
+  @media screen and (max-width: 600px) {
+    font-size: 13px;
+  }
 `;
 
 const Title = styled.div`
   font-weight: 700;
+  line-height: 1;
+
+  @media screen and (max-width: 600px) {
+    font-size: 15px;
+    line-height: 1;
+  }
 `;
 
 const NewLine = styled.div`
@@ -135,6 +144,10 @@ const Out = styled.div`
 const Day = styled.div`
   font-size: 12px;
   text-transform: uppercase;
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+  }
 `;
 
 const DateCall = styled.div``;
@@ -167,6 +180,8 @@ const Div = styled.div`
   color: white;
   background: darkorange;
   border-radius: 20px;
+  text-align: center;
+  line-height: 1.2;
 `;
 
 const Card = styled.div`
@@ -181,6 +196,10 @@ const Card = styled.div`
   transition: all 350ms;
   :hover {
     transform: scale(1.02);
+  }
+
+  @media screen and (max-width: 600px) {
+    min-width: 260px;
   }
 `;
 
