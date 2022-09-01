@@ -159,7 +159,7 @@ const Settings = () => {
                 setEvent(false);
               }}
             >
-              upload pix
+              Class Moments
             </Button>
           ) : null}
         </div>

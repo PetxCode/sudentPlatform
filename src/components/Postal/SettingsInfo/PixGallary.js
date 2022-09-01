@@ -19,7 +19,9 @@ const PixGallaryScreen = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const yupSchema = yup.object({});
+  const yupSchema = yup.object({
+    title: yup.string().required("Field must be filled"),
+  });
 
   const {
     handleSubmit,
@@ -41,11 +43,13 @@ const PixGallaryScreen = () => {
     setAvatar(file);
   };
 
-  const onSubmit = handleSubmit(async () => {
+  const onSubmit = handleSubmit(async (data) => {
+    const { title } = data;
     setLoading(true);
     const formData = new FormData();
 
     formData.append("avatar", avatar);
+    formData.append("title", title);
 
     const config = {
       "content-type": "multipart/form-data",
@@ -95,7 +99,7 @@ const PixGallaryScreen = () => {
       {loading ? <LoadingState /> : null}
       <Card>
         <Form onSubmit={onSubmit}>
-          <Text>Updating Display Picture</Text>
+          <Text>Sharing special class Memories</Text>
 
           <br />
 
@@ -117,8 +121,14 @@ const PixGallaryScreen = () => {
           />
           <ImageLabel htmlFor="pix">Choose an Image</ImageLabel>
 
+          <InputHolder>
+            <Blocker>Title</Blocker>
+            <Input placeholder="Title" {...register("title")} />
+          </InputHolder>
+          <Error>{errors.title?.message}</Error>
+
           <Button type="submit" bg="darkorange">
-            Add to Gallary
+            Add to Class Memory
           </Button>
         </Form>
       </Card>

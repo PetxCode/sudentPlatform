@@ -21,7 +21,7 @@ const GallaryScreen = () => {
   const [loading, setLoading] = useState(false);
 
   const yupSchema = yup.object({
-    title: yup.string().required("Field must be filled"),
+    // title: yup.string().required("Field must be filled"),
   });
 
   const {
@@ -50,7 +50,7 @@ const GallaryScreen = () => {
     const formData = new FormData();
 
     formData.append("avatar", avatar);
-    formData.append("title", title);
+    // formData.append("title", title);
 
     const config = {
       "content-type": "multipart/form-data",
@@ -101,7 +101,7 @@ const GallaryScreen = () => {
       {loading ? <LoadingState /> : null}
       <Card>
         <Form onSubmit={onSubmit}>
-          <Text>Updating Display Picture</Text>
+          <Text>Sharing my special Memory</Text>
 
           <br />
 
@@ -123,14 +123,8 @@ const GallaryScreen = () => {
           />
           <ImageLabel htmlFor="pix">Choose an Image</ImageLabel>
 
-          <InputHolder>
-            <Blocker>Title</Blocker>
-            <Input placeholder="Title" {...register("titel")} />
-          </InputHolder>
-          <Error>{errors.title?.message}</Error>
-
           <Button type="submit" bg="darkorange">
-            Add to Class Memory
+            Add to my special Memory
           </Button>
         </Form>
       </Card>

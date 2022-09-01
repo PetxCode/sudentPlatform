@@ -10,7 +10,8 @@ import LoadingState from "../LoadingState";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const url = "https://studentbe1.herokuapp.com";
+// const url = "https://studentbe1.herokuapp.com";
+const url = "http://localhost:2400";
 
 const PasswordReset = () => {
   const { id, token } = useParams();
@@ -34,18 +35,15 @@ const PasswordReset = () => {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log("data: ", data);
     const { password } = data;
     console.log("password-data: ", password);
 
     setLoading(true);
     await axios
       .post(`${url}/api/user/change/${id}/${token}`, {
-        password,
+        password: "Petxcanadi@2022",
       })
       .then((res) => {
-        console.log(res.data.data);
-
         Swal.fire({
           position: "center",
           icon: "success",
