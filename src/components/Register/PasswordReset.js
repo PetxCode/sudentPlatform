@@ -10,8 +10,8 @@ import LoadingState from "../LoadingState";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-// const url = "https://studentbe1.herokuapp.com";
-const url = "http://localhost:2400";
+const url = "https://studentbe1.herokuapp.com";
+// const url = "http://localhost:2400";
 
 const PasswordReset = () => {
   const { id, token } = useParams();
@@ -45,7 +45,7 @@ const PasswordReset = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Password changed, you can now sign-in",
+          title: "Password changed, Now you can sign-in",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
@@ -66,7 +66,11 @@ const PasswordReset = () => {
       });
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // if (id && token) {
+    //   axios.get(`${url}/api/user/${id}/${token}`);
+    // }
+  }, []);
 
   return (
     <Container>
