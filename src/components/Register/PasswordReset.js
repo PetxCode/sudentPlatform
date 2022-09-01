@@ -34,15 +34,13 @@ const PasswordReset = () => {
     resolver: yupResolver(yupSchema),
   });
 
-  const onSubmit = handleSubmit(async (data) => {
-    const { password } = data;
-    console.log("password-data: ", password);
+  const onSubmit = handleSubmit(async (value) => {
+    console.log(value);
+    const newURL = `${url}/api/user/change/${id}/${token}`;
 
     setLoading(true);
     await axios
-      .post(`${url}/api/user/change/${id}/${token}`, {
-        password: "Petxcanadi@2022",
-      })
+      .post(newURL, value)
       .then((res) => {
         Swal.fire({
           position: "center",
@@ -68,11 +66,7 @@ const PasswordReset = () => {
       });
   });
 
-  useEffect(() => {
-    if (id && token) {
-      axios.get(`${url}/api/user/${id}/${token}`);
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Container>
