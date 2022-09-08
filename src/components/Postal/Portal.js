@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import isOnline from "is-online";
 import DoorDashFavorite from "./NetworkLoading";
+import { AiFillCloseSquare } from "react-icons/ai";
 
 const url = "https://studentbe1.herokuapp.com";
 
@@ -25,6 +26,12 @@ const Portal = () => {
 
   const fetchData = async () => {
     await axios.get(`${url}/api/user`).then((res) => {
+      setStateData(res.data.data);
+    });
+  };
+
+  const deleteData = async (id) => {
+    await axios.get(`${url}/api/user/${id}`).then((res) => {
       setStateData(res.data.data);
     });
   };
@@ -62,6 +69,13 @@ const Portal = () => {
             stateData?.map((props, i) => (
               <Card to={`/detail/${props._id}`} key={props._id}>
                 <ImageHolder>
+                  {/* <Divaa
+                    onClick={() => {
+                      deleteData(props._id);
+                    }}
+                  >
+                    <AiFillCloseSquare />
+                  </Divaa> */}
                   {props.online && props.online ? <OnlineDot /> : <Dot />}
 
                   {props.avatar ? (
@@ -96,6 +110,17 @@ const Portal = () => {
 };
 
 export default Portal;
+
+const Divaa = styled.div`
+  position: absolute;
+  color: red;
+  transition: all 350ms;
+
+  :hover {
+    cursor: cell;
+    transform: scale(1.04);
+  }
+`;
 
 const ImageHolder = styled.div`
   position: relative;

@@ -21,6 +21,9 @@ import img17 from "./Logo/css.png";
 import img18 from "./Logo/html.svg";
 import img19 from "./Logo/sty.png";
 import img20 from "./Logo/logo.png";
+import img21 from "./Logo/ts.png";
+import img22 from "./Logo/ml5.png";
+import img23 from "./Logo/ml55.png";
 
 const OurStacks = () => {
   return (
@@ -41,10 +44,12 @@ const OurStacks = () => {
           <LogoBuild title="Firebase" pix={img5} ob />
           <LogoBuild title="Miro" pix={img6} />
           <LogoBuild title="Heroku" pix={img7} ob />
-          <LogoBuild title="Javascript" pix={img8} ob />
+          <LogoBuild title="TypeScript" pix={img21} ob />
+          <LogoBuild title="JavaScript" pix={img8} ob />
           <LogoBuild title="Figma" pix={img10} />
           <LogoBuild title="Keras" pix={img11} />
           <LogoBuild title="TensorFlow" pix={img9} />
+          <LogoBuild title="Friendly Machine Learning(ML5.js)" pix={img22} />
           <LogoBuild title="SocketIO" pix={img12} />
           <LogoBuild title="webRTC" pix={img13} ob />
           <LogoBuild title="Vercel" pix={img14} ob />

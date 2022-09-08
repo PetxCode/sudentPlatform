@@ -45,7 +45,7 @@ const PasswordReset = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Password changed, Now you can sign-in",
+          title: "Password changed, Now you now sign-in",
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
