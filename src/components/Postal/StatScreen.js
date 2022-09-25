@@ -4,12 +4,15 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+
 const url = "https://studentbe1.herokuapp.com";
+// const url = "http://localhost:2400";
 const socket = io("https://studentbe1.herokuapp.com");
 
 const StatScreen = () => {
   const { id } = useParams();
   const [myStatData, setMyStatStat] = useState({});
+  const [myStatData2, setMyStatStat2] = useState({});
 
   const [first, setFirst] = useState(true);
   const [second, setSecond] = useState(false);
@@ -21,36 +24,42 @@ const StatScreen = () => {
     });
   };
 
+  const fetchStat2 = async (id) => {
+    await axios.get(`${url}/api/stat2/${id}`).then((res) => {
+      setMyStatStat2(res.data.data);
+    });
+  };
+
   useEffect(() => {
     fetchStat(id);
+    fetchStat2(id);
 
-    socket.on("stat", (newData) => {
+    socket.on("stat2", (newData) => {
       fetchStat(id);
     });
 
-    console.log("stat data: ", myStatData);
-  }, [myStatData]);
+    console.log("stat data: ", myStatData2);
+  }, []);
 
   return (
     <Container>
-      <Div>Average(Weekly) Performance</Div>
-      <Wrapper>
-        <Wrap>
-          <View>
-            {myStatData?.stat?.map((props, i) => (
-              <Holder key={props._id}>
-                <Diva>Week {i + 5} </Diva>
-                <Row>
-                  <Chart1 h={`${props.sum * 40}px`} c="#D61C4E" />
-                </Row>
-              </Holder>
-            ))}
-          </View>
-        </Wrap>
-      </Wrapper>
-
       {first ? (
         <Session>
+          <Div>Average(Weekly) Performance</Div>
+          <Wrapper>
+            <Wrap>
+              <View>
+                {myStatData?.stat?.map((props, i) => (
+                  <Holder key={props._id}>
+                    <Diva>Week {i + 5} </Diva>
+                    <Row>
+                      <Chart1 h={`${props.sum * 40}px`} c="#D61C4E" />
+                    </Row>
+                  </Holder>
+                ))}
+              </View>
+            </Wrap>
+          </Wrapper>
           <Div>First Phase Weekly Performance</Div>
           <Data>
             <Arrange>
@@ -100,47 +109,52 @@ const StatScreen = () => {
         </Session>
       ) : second ? (
         <Session>
+          <Div>Average(Weekly) Performance</Div>
+          <Wrapper>
+            <Wrap>
+              <View>
+                {myStatData2?.stat2?.map((props, i) => (
+                  <Holder key={props._id}>
+                    <Diva>Week {i + 7} </Diva>
+                    <Row>
+                      <Chart1 h={`${props.sum * 40}px`} c="#D61C4E" />
+                    </Row>
+                  </Holder>
+                ))}
+              </View>
+            </Wrap>
+          </Wrapper>
           <Div>Second Phase Weekly Performance</Div>
-          {/* <Data>
+          <Data>
             <Arrange>
-              <Title>JavaScript</Title>
-              <Box bg="#89CFFD" />
-            </Arrange>
-            <Arrange>
-              <Title>HTML/CSS</Title>
-              <Box bg="#FBDF07" />
-            </Arrange>
-            <Arrange>
-              <Title>UI/UX</Title>
+              <Title>Algorithms/Data-Structure</Title>
               <Box bg="#FF7F3F" />
             </Arrange>
             <Arrange>
-              <Title>Design Thinking</Title>
+              <Title>BackEnd(NodeJS)</Title>
               <Box bg="#F94892" />
             </Arrange>
             <Arrange>
-              <Title>Project Management</Title>
+              <Title>FrontEnd(ReactJS)</Title>
               <Box bg="#781C68" />
             </Arrange>
             <Arrange>
               <Title>Transformational Leadership</Title>
               <Box bg="#319DA0" />
             </Arrange>
-          </Data> */}
-          <Div bg>No data yet </Div>
+          </Data>
+          {/* <Div bg>No data yet </Div> */}
           <Wrapper>
             <Wrap>
               <View>
-                {myStatData?.stat1?.map((props, i) => (
+                {myStatData2?.stat2?.map((props, i) => (
                   <Holder key={props._id}>
-                    <Diva>Week {i + 8} </Diva>
+                    <Diva>Week {i + 7} </Diva>
                     <Row>
-                      <Chart h={`${props.rate * 40}px`} c="#89CFFD" />
-                      <Chart h={`${props.rate1 * 40}px`} c="#FBDF07" />
-                      <Chart h={`${props.rate2 * 40}px`} c="#FF7F3F" />
-                      <Chart h={`${props.rate3 * 40}px`} c="#F94892" />
-                      <Chart h={`${props.rate4 * 40}px`} c="#781C68" />
-                      <Chart h={`${props.rate5 * 40}px`} c="#319DA0" />
+                      <Chart h={`${props.rate * 40}px`} c="#FF7F3F" />
+                      <Chart h={`${props.rate1 * 40}px`} c="#F94892" />
+                      <Chart h={`${props.rate2 * 40}px`} c="#781C68" />
+                      <Chart h={`${props.rate3 * 40}px`} c="#319DA0" />
                     </Row>
                   </Holder>
                 ))}
@@ -181,9 +195,9 @@ const StatScreen = () => {
           <Wrapper>
             <Wrap>
               <View>
-                {myStatData?.stat2?.map((props, i) => (
+                {myStatData?.stat1?.map((props, i) => (
                   <Holder key={props._id}>
-                    <Diva>Week {i + 26} </Diva>
+                    <Diva>Week {i + 8} </Diva>
                     <Row>
                       <Chart h={`${props.rate * 40}px`} c="#89CFFD" />
                       <Chart h={`${props.rate1 * 40}px`} c="#FBDF07" />

@@ -31,9 +31,14 @@ const VoteOurCeleb = () => {
   };
 
   const resetData = async () => {
-    await axios.delete(`${url}/api/voteIntructor/deleteAll`);
-    await axios.delete(`${url}/api/voteStudent/deleteAll`);
+    await axios.delete(
+      `https://studentbe1.herokuapp.com/api/voteIntructor/deleteAll`
+    );
+    await axios.delete(
+      `https://studentbe1.herokuapp.com/api/voteStudent/deleteAll`
+    );
   };
+
   const instructorVote = async (voteID) => {
     await axios.patch(`${url}/api/voteIntructor/${voteID}/${user?._id}/vote`);
   };
@@ -106,9 +111,16 @@ const VoteOurCeleb = () => {
         </Header>
         {user.admin ? (
           <Header
-            onClick={() => {
-              resetData();
+            onClick={async () => {
+              // resetData();
+              await axios.delete(
+                `https://studentbe1.herokuapp.com/api/voteIntructor/deleteAll`
+              );
+              await axios.delete(
+                `https://studentbe1.herokuapp.com/api/voteStudent/deleteAll`
+              );
               window.location.reload();
+              console.log("Delete these files");
             }}
           >
             Reset DataBase

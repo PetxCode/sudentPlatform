@@ -20,14 +20,12 @@ const LearningStat = () => {
   const [loading, setLoading] = useState(false);
 
   const [builtFor, setBuiltFor] = useState("web");
-
+  console.log(user._id);
   const yupSchema = yup.object({
     rating: yup.number().required("Field must be filled"),
     rating1: yup.number().required("Field must be filled"),
     rating2: yup.number().required("Field must be filled"),
     rating3: yup.number().required("Field must be filled"),
-    rating4: yup.number().required("Field must be filled"),
-    rating5: yup.number().required("Field must be filled"),
   });
 
   const {
@@ -42,30 +40,22 @@ const LearningStat = () => {
   const [userData, setUserData] = useState([]);
 
   const onSubmit = handleSubmit(async (data) => {
-    const { rating, rating1, rating2, rating3, rating4, rating5 } = data;
-
     console.log(data);
-    console.log(rating + rating2);
+    const { rating, rating1, rating2, rating3 } = data;
 
     setLoading(true);
     await axios
-      .post(`${url}/api/stat/${user._id}/create`, {
+      .post(`${url}/api/stat2/${user._id}/create`, {
         rate: rating,
-        course: "JavaScript",
+        course: "Algorithms/Data-Structure",
 
         rate1: rating1,
-        course1: "UI/UX",
+        course1: "BackEnd(NodeJS)",
 
         rate2: rating2,
-        course2: "HTML/CSS",
+        course2: "FrontEnd(ReactJS)",
 
         rate3: rating3,
-        course3: "Design Thinking",
-
-        rate4: rating4,
-        course4: "Project Management",
-
-        rate5: rating5,
         course5: "Transformational Leadership",
       })
 
@@ -115,8 +105,9 @@ const LearningStat = () => {
       <Card>
         <Form onSubmit={onSubmit}>
           <Text>Rate your Learnings for the Week</Text>
+          <TextSub>(Welcome to the second phase of Learning!)</TextSub>
           <InputHolder>
-            <Blocker>JavaScript</Blocker>
+            <Blocker>Algorithms/Data-Structure</Blocker>
             <Rower>
               <Row>
                 <RowTitle>1</RowTitle>
@@ -142,7 +133,7 @@ const LearningStat = () => {
           </InputHolder>
           <Error>{errors.rating?.message}</Error>
           <InputHolder>
-            <Blocker>HTML/CSS</Blocker>
+            <Blocker>BackEnd(NodeJS)</Blocker>
             <Rower>
               <Row>
                 <RowTitle>1</RowTitle>
@@ -168,7 +159,7 @@ const LearningStat = () => {
           </InputHolder>{" "}
           <Error>{errors.rating1?.message}</Error>
           <InputHolder>
-            <Blocker>UI/UX</Blocker>
+            <Blocker>FrontEnd(ReactJS)</Blocker>
             <Rower>
               <Row>
                 <RowTitle>1</RowTitle>
@@ -194,7 +185,7 @@ const LearningStat = () => {
           </InputHolder>{" "}
           <Error>{errors.rating2?.message}</Error>
           <InputHolder>
-            <Blocker>Design Thinking</Blocker>
+            <Blocker>Transformational Leadership</Blocker>
             <Rower>
               <Row>
                 <RowTitle>1</RowTitle>
@@ -219,58 +210,6 @@ const LearningStat = () => {
             </Rower>
           </InputHolder>
           <Error>{errors.rating3?.message}</Error>
-          <InputHolder>
-            <Blocker>Transformational Leadership</Blocker>
-            <Rower>
-              <Row>
-                <RowTitle>1</RowTitle>
-                <RowInput type="radio" value="1" {...register("rating4")} />
-              </Row>
-              <Row>
-                <RowTitle>2</RowTitle>
-                <RowInput type="radio" value="2" {...register("rating4")} />
-              </Row>
-              <Row>
-                <RowTitle>3</RowTitle>
-                <RowInput type="radio" value="3" {...register("rating4")} />
-              </Row>
-              <Row>
-                <RowTitle>4</RowTitle>
-                <RowInput value="4" type="radio" {...register("rating4")} />
-              </Row>
-              <Row>
-                <RowTitle>5</RowTitle>
-                <RowInput value="5" type="radio" {...register("rating4")} />
-              </Row>
-            </Rower>
-          </InputHolder>
-          <Error>{errors.rating4?.message}</Error>
-          <InputHolder>
-            <Blocker>Project Management</Blocker>
-            <Rower>
-              <Row>
-                <RowTitle>1</RowTitle>
-                <RowInput type="radio" value="1" {...register("rating5")} />
-              </Row>
-              <Row>
-                <RowTitle>2</RowTitle>
-                <RowInput type="radio" value="2" {...register("rating5")} />
-              </Row>
-              <Row>
-                <RowTitle>3</RowTitle>
-                <RowInput type="radio" value="3" {...register("rating5")} />
-              </Row>
-              <Row>
-                <RowTitle>4</RowTitle>
-                <RowInput value="4" type="radio" {...register("rating5")} />
-              </Row>
-              <Row>
-                <RowTitle>5</RowTitle>
-                <RowInput value="5" type="radio" {...register("rating5")} />
-              </Row>
-            </Rower>
-          </InputHolder>
-          <Error>{errors.rating5?.message}</Error>
           <br />
           <Button
             type="submit"
@@ -290,6 +229,12 @@ const LearningStat = () => {
 export default LearningStat;
 
 const RowInput = styled.input``;
+
+const TextSub = styled.div`
+  font-size: 12px;
+  margin-bottom: 20px;
+  font-weight: 500;
+`;
 
 const Row = styled.div`
   display: flex;
@@ -419,7 +364,6 @@ const Text = styled.div`
   font-size: 18px;
   text-transform: uppercase;
   margin-top: 50px;
-  margin-bottom: 20px;
   font-weight: 700;
 `;
 

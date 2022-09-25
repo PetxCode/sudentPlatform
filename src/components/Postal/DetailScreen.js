@@ -45,6 +45,7 @@ const StudentDetail = () => {
 
   const [stacked, setStacked] = useState("");
   const [myStatData, setMyStatStat] = useState({});
+  const [myStatData2, setMyStatStat2] = useState({});
 
   const fetchDataDetail = async (id) => {
     await axios.get(`${url}/api/project/${id}`).then((res) => {
@@ -61,6 +62,12 @@ const StudentDetail = () => {
   const fetchStat = async (id) => {
     await axios.get(`${url}/api/stat/${id}`).then((res) => {
       setMyStatStat(res.data.data);
+    });
+  };
+
+  const fetchStat2 = async (id) => {
+    await axios.get(`${url}/api/stat2/${id}`).then((res) => {
+      setMyStatStat2(res.data.data);
     });
   };
 
@@ -129,8 +136,13 @@ const StudentDetail = () => {
     fetchDataDetail(id);
     fetchGallaryataDetail(id);
     fetchStat(id);
+    fetchStat2(id);
 
     socket.on("stat", (newData) => {
+      fetchStat(id);
+    });
+
+    socket.on("stat2", (newData) => {
       fetchStat(id);
     });
 
@@ -571,6 +583,7 @@ const StudentDetail = () => {
                     setAbout(true);
                     setMyGallary(false);
                     console.log("Click");
+                    setMyStat(false);
                   }}
                 >
                   <NavIcon3 />

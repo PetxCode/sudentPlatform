@@ -66,8 +66,8 @@ const Header = () => {
             {user ? (
               <Div>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  {userData.avatar ? (
-                    <Profile src={userData.avatar} />
+                  {userData?.avatar ? (
+                    <Profile src={userData?.avatar} />
                   ) : (
                     <AvatarText>{user.email.charAt(0)}</AvatarText>
                   )}
