@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoadingState from "../../LoadingState";
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const InterestedCourse = () => {
   const user = useSelector((state) => state.user);

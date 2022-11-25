@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { createUser } from "../State/GlobalState";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const SignIn = () => {
   const { id, token } = useParams();

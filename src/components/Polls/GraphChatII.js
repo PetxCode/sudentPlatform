@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { io } from "socket.io-client";
 import axios from "axios";
 import InfoProps from "../Postal/InfoProps";
-const url = "https://studentbe1.herokuapp.com";
-const socket = io("https://studentbe1.herokuapp.com");
+const url = "https://student-be.onrender.com";
+const socket = io("https://student-be.onrender.com");
 
 const GraphChatII = () => {
   const [sortedData, setSortedData] = useState([]);

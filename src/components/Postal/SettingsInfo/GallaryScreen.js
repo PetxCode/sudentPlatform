@@ -12,8 +12,8 @@ import { useSelector } from "react-redux";
 import LoadingState from "../../LoadingState";
 import logo from "../logo.png";
 
-const url = "https://studentbe1.herokuapp.com";
-// const url = "http://localhost:2400";
+const url = "https://student-be.onrender.com";
+// const url = "https://studentbe1.herokuapp.com";
 
 const GallaryScreen = () => {
   const user = useSelector((state) => state.user);

@@ -6,7 +6,7 @@ import arr from "./cup.svg";
 import InfoProps from "./InfoProps";
 import axios from "axios";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const DetailedInfo = ({ props }) => {
   const id = props._id;

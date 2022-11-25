@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const LearningScreen = () => {
   const { id } = useParams();

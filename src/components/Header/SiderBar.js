@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { removeUser } from "../State/GlobalState";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const SiderBar = ({ setToggled }) => {
   const navigate = useNavigate();

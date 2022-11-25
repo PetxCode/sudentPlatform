@@ -3,8 +3,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("https://studentbe1.herokuapp.com");
-const url = "https://studentbe1.herokuapp.com";
+const socket = io("https://student-be.onrender.com");
+const url = "https://student-be.onrender.com";
 
 const StackView = ({ props }) => {
   const [stateData, setStateData] = useState({});

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 const HeroPage = () => {
   const user = useSelector((state) => state.user);
 

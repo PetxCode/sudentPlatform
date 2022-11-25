@@ -14,9 +14,9 @@ import isOnline from "is-online";
 import DoorDashFavorite from "./NetworkLoading";
 import { AiFillCloseSquare } from "react-icons/ai";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
-const socket = io("https://studentbe1.herokuapp.com");
+const socket = io("https://student-be.onrender.com");
 
 const Portal = () => {
   const user = useSelector((state) => state.user);

@@ -188,17 +188,17 @@ db.on("open", () => {
   });
 });
 
-io.on("connection", (socket) => {
-  // console.log("a user connected", socket.id);
+// io.on("connection", (socket) => {
+//   // console.log("a user connected", socket.id);
 
-  socket.on("disconnect", () => {
-    console.log("user has been disconnected");
-  });
+//   socket.on("disconnect", () => {
+//     console.log("user has been disconnected");
+//   });
 
-  socket.emit("chat message", (text) => {
-    console.log(text);
-  });
-});
+//   socket.emit("chat message", (text) => {
+//     console.log(text);
+//   });
+// });
 
 server.listen(process.env.PORT || 2400, () => {
   console.log("server is now running");

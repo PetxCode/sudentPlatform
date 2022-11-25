@@ -31,8 +31,8 @@ import { FiSettings } from "react-icons/fi";
 import { MdSlowMotionVideo } from "react-icons/md";
 import StatScreen from "./StatScreen";
 
-const url = "https://studentbe1.herokuapp.com";
-const socket = io("https://studentbe1.herokuapp.com");
+const url = "https://student-be.onrender.com";
+const socket = io("https://student-be.onrender.com");
 
 const StudentDetail = () => {
   const user = useSelector((state) => state.user);

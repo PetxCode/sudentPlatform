@@ -5,9 +5,9 @@ import { io } from "socket.io-client";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 // const url = "http://localhost:2400";
-const socket = io("https://studentbe1.herokuapp.com");
+const socket = io("https://student-be.onrender.com");
 
 const StatScreen = () => {
   const { id } = useParams();

@@ -11,7 +11,7 @@ import { GiHamburgerMenu, GiVote } from "react-icons/gi";
 import { FaRegWindowClose } from "react-icons/fa";
 import SiderBar from "./SiderBar";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const Header = () => {
   const navigate = useNavigate();

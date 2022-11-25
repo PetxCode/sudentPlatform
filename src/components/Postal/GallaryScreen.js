@@ -12,8 +12,8 @@ import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import moment from "moment";
 
-const socket = io("https://studentbe1.herokuapp.com");
-const url = "https://studentbe1.herokuapp.com";
+const socket = io("https://student-be.onrender.com");
+const url = "https://student-be.onrender.com";
 
 const GallaryScreen = () => {
   const user = useSelector((state) => state.user);

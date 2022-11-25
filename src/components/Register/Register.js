@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 import LoadingState from "../LoadingState";
 import { useNavigate } from "react-router-dom";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const Register = () => {
   const navigate = useNavigate();

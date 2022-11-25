@@ -5,8 +5,8 @@ import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-const socket = io("https://studentbe1.herokuapp.com");
-const url = "https://studentbe1.herokuapp.com";
+const socket = io("https://student-be.onrender.com");
+const url = "https://student-be.onrender.com";
 
 const VoteOurCeleb = () => {
   const [instructor, setInstructor] = useState(true);
@@ -32,10 +32,10 @@ const VoteOurCeleb = () => {
 
   const resetData = async () => {
     await axios.delete(
-      `https://studentbe1.herokuapp.com/api/voteIntructor/deleteAll`
+      `https://student-be.onrender.com/api/voteIntructor/deleteAll`
     );
     await axios.delete(
-      `https://studentbe1.herokuapp.com/api/voteStudent/deleteAll`
+      `https://student-be.onrender.com/api/voteStudent/deleteAll`
     );
   };
 
@@ -114,10 +114,10 @@ const VoteOurCeleb = () => {
             onClick={async () => {
               // resetData();
               await axios.delete(
-                `https://studentbe1.herokuapp.com/api/voteIntructor/deleteAll`
+                `https://student-be.onrender.com/api/voteIntructor/deleteAll`
               );
               await axios.delete(
-                `https://studentbe1.herokuapp.com/api/voteStudent/deleteAll`
+                `https://student-be.onrender.com/api/voteStudent/deleteAll`
               );
               window.location.reload();
               console.log("Delete these files");

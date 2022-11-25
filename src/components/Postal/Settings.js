@@ -22,7 +22,7 @@ import AddNewCandidate from "../Polls/AddCandidate";
 import EnterEvent from "./SettingsInfo/EventEntry";
 import LearningStat from "./SettingsInfo/LearningStat";
 
-const url = "https://studentbe1.herokuapp.com";
+const url = "https://student-be.onrender.com";
 
 const Settings = () => {
   const user = useSelector((state) => state.user);
